@@ -1,6 +1,11 @@
 ---
 import ButtonLink from '@/components/ui/ButtonLink.astro';
 import { profile } from '@/data/profile';
+import { resume } from '@/data/resume';
+import { withBasePath } from '@/lib/urls';
+
+const resumePage = withBasePath('resume/');
+const resumePdf = withBasePath('resume/milad-seyfi-resume.pdf');
 ---
 
 <section class="contact-section" id="contact" aria-labelledby="contact-heading">
@@ -10,23 +15,31 @@ import { profile } from '@/data/profile';
         <span aria-hidden="true">//</span> Contact
       </p>
       <h2 id="contact-heading">{profile.contact.heading}</h2>
-      <p>{profile.contact.summary}</p>
+      <p class="contact__summary">{profile.contact.summary}</p>
+      <ul class="contact__topics" aria-label="Consulting enquiry topics">
+        {profile.contact.topics.map((topic) => (
+          <li>{topic}</li>
+        ))}
+      </ul>
     </div>
     <div class="contact__actions">
-      {profile.contact.email ? (
-        <ButtonLink href={`mailto:${profile.contact.email}`}>Email Milad</ButtonLink>
+      {resume.contact.linkedin ? (
+        <ButtonLink href={resume.contact.linkedin} external>
+          Connect on LinkedIn
+        </ButtonLink>
+      ) : resume.contact.email ? (
+        <ButtonLink href={`mailto:${resume.contact.email}`}>Email Milad</ButtonLink>
       ) : (
         <span class="button button--disabled" aria-disabled="true">
-          Contact details pending verification
+          Contact channel pending verification
         </span>
       )}
-      {profile.contact.resumeUrl ? (
-        <ButtonLink href={profile.contact.resumeUrl} variant="secondary">
-          View résumé
-        </ButtonLink>
-      ) : (
-        <span class="contact__note">Résumé link will be added after verification.</span>
-      )}
+      <ButtonLink href={resumePage} variant="secondary">
+        View Resume
+      </ButtonLink>
+      <ButtonLink href={resumePdf} variant="quiet" download="milad-seyfi-resume.pdf">
+        Download PDF
+      </ButtonLink>
     </div>
   </div>
 </section>

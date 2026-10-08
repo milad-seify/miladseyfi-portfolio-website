@@ -15,7 +15,9 @@ const { Content } = await render(post);
 <ContentLayout
   title={post.data.title}
   description={post.data.description}
-  eyebrow={`Article · ${formatDate(post.data.publishedAt)}`}
+  eyebrow={
+    post.data.publishedAt ? `Article · ${formatDate(post.data.publishedAt)}` : 'Article draft'
+  }
 >
   <Content />
 </ContentLayout>

@@ -1,6 +1,8 @@
 ---
 import SectionHeading from '@/components/ui/SectionHeading.astro';
 import { profile } from '@/data/profile';
+import { resume } from '@/data/resume';
+import { formatResumeDateRange } from '@/lib/resume';
 ---
 
 <section
@@ -10,28 +12,46 @@ import { profile } from '@/data/profile';
 >
   <div class="experience reveal">
     <SectionHeading
+      id="experience-heading"
       eyebrow="Experience"
       heading={profile.experience.heading}
       description={profile.experience.note}
     />
     <div class="timeline">
-      {profile.experience.items.map((item) => (
+      {resume.experience.map((item) => (
         <article class="timeline__item">
           <div class="timeline__rail">
             <span></span>
           </div>
-          <p class="timeline__period">{item.period}</p>
+          <p class="timeline__period">{formatResumeDateRange(item.startDate, item.endDate)}</p>
           <div>
             <h3>{item.role}</h3>
             <p class="timeline__org">{item.organization}</p>
-            <p>{item.description}</p>
+            <p>{item.summary}</p>
+            <ul class="experience__highlights">
+              {item.highlights.map((highlight) => (
+                <li>{highlight}</li>
+              ))}
+            </ul>
             <ul class="tag-list" aria-label="Practice areas">
-              {item.tags.map((tag) => (
+              {item.skills.map((tag) => (
                 <li>{tag}</li>
               ))}
             </ul>
           </div>
         </article>
+      ))}
+      {resume.education.map((education, index) => (
+        <aside class="education-card" aria-labelledby={`education-heading-${index}`}>
+          <p class="timeline__period">Education</p>
+          <h3 id={`education-heading-${index}`}>
+            {education.degree} in {education.field}
+          </h3>
+          <p>
+            {education.institution}
+            {education.status ? ` · ${education.status}` : ''}
+          </p>
+        </aside>
       ))}
     </div>
   </div>

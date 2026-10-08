@@ -10,13 +10,15 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/check-build.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "lint": "astro check",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "validate": "astro check && prettier --check . && astro build"
+    "resume:check": "node scripts/check-resume.mjs",
+    "resume:pdf": "astro build && node scripts/generate-resume-pdf.mjs",
+    "validate": "node scripts/check-resume.mjs && astro check && prettier --check . && astro build && node scripts/check-build.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.4",

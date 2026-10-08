@@ -1,0 +1,73 @@
+---
+import { profile } from '@/data/profile';
+import { resume } from '@/data/resume';
+import { withBasePath } from '@/lib/urls';
+import '@/styles/resume.css';
+
+const title = `${resume.identity.name} — Resume`;
+const siteOrigin = Astro.site ?? Astro.url.origin;
+const canonical = new URL(Astro.url.pathname, siteOrigin);
+const siteHome = new URL(withBasePath(), siteOrigin);
+const socialImage = new URL(withBasePath(profile.site.socialImage), siteOrigin);
+const sameAs = [resume.contact.linkedin, resume.contact.github, resume.contact.website].filter(
+  (url): url is string => Boolean(url),
+);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  url: canonical.href,
+  mainEntity: {
+    '@type': 'Person',
+    name: resume.identity.name,
+    jobTitle: resume.identity.professionalHeadline,
+    description: resume.identity.summary,
+    url: siteHome.href,
+    ...(resume.contact.email ? { email: resume.contact.email } : {}),
+    ...(sameAs.length > 0 ? { sameAs } : {}),
+  },
+};
+---
+
+<!doctype html>
+<html lang={profile.site.locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={resume.identity.summary} />
+    <meta name="theme-color" content="#f5f7fa" />
+    <link rel="canonical" href={canonical} />
+    {resume.contact.linkedin && <link rel="me" href={resume.contact.linkedin} />}
+    <link rel="icon" type="image/svg+xml" href={withBasePath('favicon.svg')} />
+    <link rel="manifest" href={withBasePath('site.webmanifest')} />
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={resume.identity.summary} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content={`${resume.identity.name} — ${resume.identity.professionalHeadline}`}
+    />
+    <meta property="og:site_name" content={resume.identity.name} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={resume.identity.summary} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta
+      name="twitter:image:alt"
+      content={`${resume.identity.name} — ${resume.identity.professionalHeadline}`}
+    />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="resume-skip-link" href="#resume-content">
+      Skip to resume
+    </a>
+    <slot />
+  </body>
+</html>

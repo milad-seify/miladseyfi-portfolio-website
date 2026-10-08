@@ -5,7 +5,7 @@ import { profile } from '@/data/profile';
 
 <section class="section shell" id="about" aria-labelledby="about-heading">
   <div class="about reveal">
-    <SectionHeading eyebrow="About" heading={profile.about.heading} />
+    <SectionHeading id="about-heading" eyebrow="About" heading={profile.about.heading} />
     <div class="about__body">
       {profile.about.paragraphs.map((paragraph) => (
         <p>{paragraph}</p>

@@ -1,6 +1,8 @@
 ---
 import Wordmark from '@/components/ui/Wordmark.astro';
 import { profile } from '@/data/profile';
+import { resume } from '@/data/resume';
+import { withBasePath } from '@/lib/urls';
 import '@/styles/global.css';
 
 interface Props {
@@ -8,6 +10,7 @@ interface Props {
   description?: string;
   image?: string;
   type?: 'website' | 'article';
+  robots?: string;
 }
 
 const {
@@ -15,19 +18,38 @@ const {
   description = profile.site.description,
   image = profile.site.socialImage,
   type = 'website',
+  robots,
 } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
-const socialImage = new URL(
-  `${import.meta.env.BASE_URL}${image.replace(/^\//, '')}`,
-  Astro.site ?? Astro.url.origin,
+const siteOrigin = Astro.site ?? Astro.url.origin;
+const canonical = new URL(Astro.url.pathname, siteOrigin);
+const siteHome = new URL(withBasePath(), siteOrigin);
+const socialImage = new URL(withBasePath(image), siteOrigin);
+const sameAs = [resume.contact.linkedin, resume.contact.github, resume.contact.website].filter(
+  (url): url is string => Boolean(url),
 );
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: profile.identity.name,
-  jobTitle: profile.identity.role,
-  url: canonical.origin,
-  knowsAbout: profile.expertise.map((item) => item.title),
+  name: resume.identity.name,
+  jobTitle: resume.identity.professionalHeadline,
+  description: resume.identity.summary,
+  url: siteHome.href,
+  knowsAbout: resume.skillGroups.flatMap((group) => group.skills),
+  hasOccupation: resume.experience.map((experience) => ({
+    '@type': 'Occupation',
+    name: experience.role,
+    description: experience.summary,
+    occupationLocation: experience.locations?.map((location) => ({
+      '@type': 'City',
+      name: location,
+    })),
+  })),
+  affiliation: resume.education.map((education) => ({
+    '@type': 'EducationalOrganization',
+    name: education.institution,
+  })),
+  ...(resume.contact.email ? { email: resume.contact.email } : {}),
+  ...(sameAs.length > 0 ? { sameAs } : {}),
 };
 ---
 
@@ -39,19 +61,32 @@ const jsonLd = {
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content={profile.site.themeColor} />
     <meta name="description" content={description} />
+    {robots && <meta name="robots" content={robots} />}
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
-    <link rel="manifest" href={`${import.meta.env.BASE_URL}site.webmanifest`} />
+    {resume.contact.linkedin && <link rel="me" href={resume.contact.linkedin} />}
+    <link rel="icon" type="image/svg+xml" href={withBasePath('favicon.svg')} />
+    <link rel="manifest" href={withBasePath('site.webmanifest')} />
     <meta property="og:type" content={type} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={socialImage} />
-    <meta property="og:site_name" content={profile.identity.name} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content={`${resume.identity.name} — ${resume.identity.professionalHeadline}`}
+    />
+    <meta property="og:site_name" content={resume.identity.name} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
+    <meta
+      name="twitter:image:alt"
+      content={`${resume.identity.name} — ${resume.identity.professionalHeadline}`}
+    />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
     <title>{title}</title>
   </head>
@@ -66,25 +101,25 @@ const jsonLd = {
           <ul>
             {profile.navigation.map((item) => (
               <li>
-                <a href={`${import.meta.env.BASE_URL}${item.href}`}>{item.label}</a>
+                <a href={withBasePath(item.href)}>{item.label}</a>
               </li>
             ))}
           </ul>
-          <a class="nav-cta" href={`${import.meta.env.BASE_URL}#contact`}>
+          <a class="nav-cta" href={withBasePath('#contact')}>
             Let’s talk <span aria-hidden="true">↗</span>
           </a>
         </nav>
         <details class="mobile-nav">
-          <summary aria-label="Open navigation">
+          <summary aria-label="Toggle navigation">
             <span></span>
             <span></span>
             <span></span>
           </summary>
           <nav aria-label="Mobile navigation">
             {profile.navigation.map((item) => (
-              <a href={`${import.meta.env.BASE_URL}${item.href}`}>{item.label}</a>
+              <a href={withBasePath(item.href)}>{item.label}</a>
             ))}
-            <a href={`${import.meta.env.BASE_URL}#contact`}>Let’s talk</a>
+            <a href={withBasePath('#contact')}>Let’s talk</a>
           </nav>
         </details>
       </div>
@@ -97,7 +132,7 @@ const jsonLd = {
         <Wordmark />
         <p>Architecture for systems—and teams—that need to last.</p>
         <p>
-          © {new Date().getUTCFullYear()} {profile.identity.name}
+          © {new Date().getUTCFullYear()} {resume.identity.name}
         </p>
       </div>
     </footer>

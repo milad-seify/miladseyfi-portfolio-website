@@ -4,7 +4,7 @@ export const byOrder = (a: CollectionEntry<'projects'>, b: CollectionEntry<'proj
   a.data.order - b.data.order;
 
 export const byNewest = (a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) =>
-  b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf();
+  (b.data.publishedAt?.valueOf() ?? 0) - (a.data.publishedAt?.valueOf() ?? 0);
 
 export const isPublished = <T extends { data: { draft: boolean } }>(entry: T) =>
   import.meta.env.DEV || !entry.data.draft;

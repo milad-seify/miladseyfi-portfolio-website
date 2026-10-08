@@ -2,16 +2,17 @@
 import ButtonLink from '@/components/ui/ButtonLink.astro';
 import Icon from '@/components/ui/Icon.astro';
 import { profile } from '@/data/profile';
+import { resume } from '@/data/resume';
 ---
 
 <section class="hero shell" aria-labelledby="hero-title">
   <div class="hero__copy">
     <p class="hero__status">
       <span></span>
-      {profile.hero.eyebrow}
+      {resume.identity.professionalHeadline}
     </p>
     <h1 id="hero-title">{profile.hero.title}</h1>
-    <p class="hero__summary">{profile.hero.summary}</p>
+    <p class="hero__summary">{resume.identity.summary}</p>
     <div class="hero__actions">
       <ButtonLink href="#work">Explore selected work</ButtonLink>
       <ButtonLink href="#contact" variant="secondary">
@@ -19,18 +20,12 @@ import { profile } from '@/data/profile';
       </ButtonLink>
     </div>
     <dl class="hero__signals" aria-label="Core practice areas">
-      <div>
-        <dt>Focus</dt>
-        <dd>Architecture & delivery</dd>
-      </div>
-      <div>
-        <dt>Systems</dt>
-        <dd>Cloud-native & private cloud</dd>
-      </div>
-      <div>
-        <dt>Approach</dt>
-        <dd>Pragmatic & operations-led</dd>
-      </div>
+      {resume.careerHighlights.map((highlight) => (
+        <div>
+          <dt>{highlight.label}</dt>
+          <dd>{highlight.value}</dd>
+        </div>
+      ))}
     </dl>
   </div>
 

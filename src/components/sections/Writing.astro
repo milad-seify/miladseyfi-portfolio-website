@@ -2,7 +2,9 @@
 import type { CollectionEntry } from 'astro:content';
 import Icon from '@/components/ui/Icon.astro';
 import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { profile } from '@/data/profile';
 import { formatDate } from '@/lib/content';
+import { withBasePath } from '@/lib/urls';
 
 interface Props {
   posts: CollectionEntry<'posts'>[];
@@ -13,19 +15,21 @@ const { posts } = Astro.props;
 <section class="section shell" id="writing" aria-labelledby="writing-heading">
   <div class="reveal">
     <SectionHeading
+      id="writing-heading"
       eyebrow="Notes & articles"
-      heading="Thinking in public, carefully."
-      description="Field notes on cloud architecture, platform engineering, and the decisions behind reliable systems."
+      heading={profile.writingIntro.heading}
+      description={profile.writingIntro.description}
     />
     {posts.length > 0 ? (
       <div class="writing-list">
         {posts.map((post) => (
           <article>
             <p>
-              {formatDate(post.data.publishedAt)} · {post.data.tags.join(' / ')}
+              {post.data.publishedAt ? `${formatDate(post.data.publishedAt)} · ` : ''}
+              {post.data.tags.join(' / ')}
             </p>
             <h3>
-              <a href={`${import.meta.env.BASE_URL}posts/${post.id}/`}>{post.data.title}</a>
+              <a href={withBasePath(`posts/${post.id}/`)}>{post.data.title}</a>
             </h3>
             <span>{post.data.description}</span>
             <Icon name="arrow" size={20} />
@@ -35,7 +39,7 @@ const { posts } = Astro.props;
     ) : (
       <div class="writing-empty">
         <p class="eyebrow">EDITORIAL_QUEUE / 00</p>
-        <p>First articles are in review. No placeholder publication claims are shown.</p>
+        <p>Articles will appear here after editorial review.</p>
       </div>
     )}
   </div>

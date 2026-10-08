@@ -1,23 +1,18 @@
+import { resume } from './resume';
+
 export interface LinkItem {
   label: string;
   href: string;
 }
 
 export const profile = {
-  identity: {
-    name: 'Milad Seyfi',
-    role: 'Cloud Architect & DevOps Consultant',
-    initials: 'MS',
-    location: 'Location available on request',
-    availability: 'Availability to be confirmed',
-  },
   site: {
-    title: 'Milad Seyfi — Cloud Architect & DevOps Consultant',
+    title: `${resume.identity.name} — ${resume.identity.professionalHeadline}`,
     description:
-      'Cloud architecture, platform engineering, and DevOps consulting across OpenStack, Ceph, Kubernetes, and infrastructure automation.',
+      'Cloud architecture, platform engineering, and DevOps consulting across private cloud, Kubernetes, storage, and infrastructure automation.',
     locale: 'en',
     themeColor: '#07111f',
-    socialImage: '/og-image.svg',
+    socialImage: '/og-image.png',
   },
   navigation: [
     { label: 'About', href: '#about' },
@@ -27,106 +22,86 @@ export const profile = {
     { label: 'Writing', href: '#writing' },
   ] satisfies LinkItem[],
   hero: {
-    eyebrow: 'Cloud systems · Platforms · Delivery',
-    title: 'Infrastructure that is clear, resilient, and ready to evolve.',
-    summary:
-      'I connect cloud architecture with hands-on platform engineering—helping teams turn complex infrastructure into dependable systems and sound technical decisions.',
+    title: 'Cloud architecture for infrastructure that has to work.',
   },
   about: {
-    heading: 'Engineering depth, architecture perspective.',
+    heading: 'Engineering depth, moving toward architecture.',
     paragraphs: [
-      'My work sits where infrastructure engineering, platform operations, and technical strategy meet. I focus on systems that teams can understand, operate, and improve over time.',
-      'The practice spans private cloud, distributed storage, container platforms, delivery automation, and the business constraints that shape architecture. Specific experience history and credentials will be added after verification.',
+      'My work connects infrastructure design to implementation, day-two operations, and the teams responsible for the platform.',
+      'I approach reliability, repeatability, operational ownership, and clear technical documentation as architecture concerns—not follow-up tasks.',
     ],
     principles: [
-      { value: '01', label: 'Design for operability' },
-      { value: '02', label: 'Automate the repeatable' },
-      { value: '03', label: 'Make trade-offs explicit' },
+      { value: '01', label: 'Make constraints explicit' },
+      { value: '02', label: 'Design for day-two operations' },
+      { value: '03', label: 'Automate repeatable work' },
     ],
   },
   experience: {
-    heading: 'Selected experience',
-    note: 'Verified roles, organizations, and dates will be published here.',
-    items: [
-      {
-        period: 'Details pending',
-        role: 'Cloud architecture & platform engineering',
-        organization: 'Organization to be confirmed',
-        description:
-          'Scope placeholder covering architecture, delivery, reliability, and technical leadership. Replace with verified employment details before launch.',
-        tags: ['Architecture', 'Platforms', 'Operations'],
-      },
-    ],
+    heading: 'Infrastructure engineering at production scale.',
+    note: 'A concise career view; implementation detail belongs in the selected case studies.',
   },
-  expertise: [
-    {
-      index: '01',
-      title: 'Cloud Architecture',
-      description:
-        'Architecture shaped around constraints, failure modes, operations, and sustainable ownership.',
-      tags: ['Private cloud', 'Hybrid patterns', 'Architecture reviews'],
-    },
-    {
-      index: '02',
-      title: 'OpenStack & Ceph',
-      description:
-        'Compute, networking, and distributed storage considered as one operational system.',
-      tags: ['OpenStack', 'Ceph', 'Capacity & resilience'],
-    },
-    {
-      index: '03',
-      title: 'Kubernetes & Platforms',
-      description:
-        'Platform foundations that give product teams a coherent path from source to production.',
-      tags: ['Kubernetes', 'Platform engineering', 'Developer experience'],
-    },
-    {
-      index: '04',
-      title: 'DevOps & Automation',
-      description:
-        'Delivery systems and infrastructure automation that reduce drift and shorten feedback loops.',
-      tags: ['CI/CD', 'IaC', 'Observability'],
-    },
-  ],
+  expertiseIntro: {
+    heading: 'Cloud systems viewed as operating platforms.',
+    description:
+      'Related technologies are grouped by the architecture and operational problems they solve.',
+  },
+  workIntro: {
+    heading: 'Selected infrastructure work.',
+    description:
+      'Verified engineering work across private cloud, distributed storage, Kubernetes platforms, and infrastructure automation. Confidential details are omitted.',
+  },
+  servicesIntro: {
+    heading: 'Consulting grounded in operating experience.',
+    description:
+      'Architecture and implementation support for organizations building or improving private-cloud and platform infrastructure.',
+  },
   services: [
     {
-      title: 'Architecture advisory',
+      title: 'Cloud Architecture Consulting',
       description:
-        'Independent reviews, target architecture, trade-off analysis, and pragmatic roadmaps.',
-      deliverables: ['Discovery workshop', 'Decision record', 'Prioritized roadmap'],
+        'Architecture review, infrastructure design, modernization planning, and technical decision support.',
+      deliverables: ['Architecture review', 'Decision record', 'Modernization roadmap'],
     },
     {
-      title: 'Platform assessment',
+      title: 'OpenStack & Private Cloud',
       description:
-        'A focused examination of reliability, operability, delivery flow, and technical risk.',
-      deliverables: ['Current-state map', 'Risk register', 'Improvement plan'],
+        'Design, deployment, modernization, and operational architecture for OpenStack infrastructure.',
+      deliverables: ['Platform design', 'Migration approach', 'Operations model'],
     },
     {
-      title: 'Delivery enablement',
+      title: 'Kubernetes & Platform Engineering',
       description:
-        'Hands-on help turning an agreed platform direction into repeatable infrastructure and workflows.',
-      deliverables: ['Reference patterns', 'Automation baseline', 'Team handover'],
+        'Kubernetes architecture, Cluster API lifecycle management, and internal platform design.',
+      deliverables: ['Platform architecture', 'Lifecycle design', 'API boundaries'],
+    },
+    {
+      title: 'Infrastructure Automation',
+      description:
+        'Terraform, Ansible, AWX, GitOps, and repeatable infrastructure delivery workflows.',
+      deliverables: ['Automation design', 'Workflow baseline', 'Source-of-truth model'],
+    },
+    {
+      title: 'Cloud Storage Architecture',
+      description:
+        'Ceph architecture, OpenStack storage integration, storage tiers, and operational design.',
+      deliverables: ['Storage topology', 'Pool strategy', 'Integration review'],
+    },
+    {
+      title: 'Observability & Reliability',
+      description:
+        'Monitoring and logging architecture for cloud, network, hardware, and platform operations.',
+      deliverables: ['Visibility assessment', 'Signal design', 'Operational runbook'],
     },
   ],
-  stack: [
-    { group: 'Cloud & compute', items: ['OpenStack', 'KVM', 'Linux', 'Networking'] },
-    {
-      group: 'Storage & data',
-      items: ['Ceph', 'Object storage', 'Block storage', 'Backup design'],
-    },
-    { group: 'Containers', items: ['Kubernetes', 'Helm', 'Container runtimes', 'GitOps patterns'] },
-    { group: 'Automation', items: ['Ansible', 'Terraform', 'CI/CD', 'Infrastructure as Code'] },
-    {
-      group: 'Operations',
-      items: ['Observability', 'SRE practices', 'Capacity planning', 'Incident learning'],
-    },
-  ],
+  writingIntro: {
+    heading: 'Technical notes, without the noise.',
+    description:
+      'Working notes on cloud architecture, Kubernetes platforms, automation, and infrastructure operations.',
+  },
   contact: {
-    heading: 'Let’s make the complex legible.',
+    heading: 'Bring the platform problem.',
     summary:
-      'For cloud architecture, platform engineering, or infrastructure delivery conversations, use the verified contact channel once published.',
-    email: undefined as string | undefined,
-    socials: [] as LinkItem[],
-    resumeUrl: undefined as string | undefined,
+      'For private-cloud architecture, Kubernetes platforms, storage, automation, or infrastructure modernization, connect with me on LinkedIn.',
+    topics: ['Architecture review', 'Platform modernization', 'Delivery support'],
   },
 } as const;

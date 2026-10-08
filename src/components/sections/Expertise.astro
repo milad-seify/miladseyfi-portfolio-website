@@ -1,23 +1,25 @@
 ---
 import SectionHeading from '@/components/ui/SectionHeading.astro';
 import { profile } from '@/data/profile';
+import { resume } from '@/data/resume';
 ---
 
 <section class="section shell" id="expertise" aria-labelledby="expertise-heading">
   <div class="reveal">
     <SectionHeading
+      id="expertise-heading"
       eyebrow="Expertise"
-      heading="From infrastructure layer to operating model."
-      description="Technical depth is most useful when it improves reliability, delivery, and decision quality together."
+      heading={profile.expertiseIntro.heading}
+      description={profile.expertiseIntro.description}
     />
     <div class="expertise-grid">
-      {profile.expertise.map((item) => (
+      {resume.skillGroups.map((item, index) => (
         <article class="expertise-card">
-          <span class="expertise-card__index">{item.index}</span>
+          <span class="expertise-card__index">{String(index + 1).padStart(2, '0')}</span>
           <h3>{item.title}</h3>
-          <p>{item.description}</p>
+          <p>{item.summary}</p>
           <ul class="tag-list">
-            {item.tags.map((tag) => (
+            {item.skills.slice(0, 4).map((tag) => (
               <li>{tag}</li>
             ))}
           </ul>

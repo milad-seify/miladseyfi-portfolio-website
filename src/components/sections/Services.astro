@@ -7,9 +7,10 @@ import { profile } from '@/data/profile';
 <section class="section shell" id="services" aria-labelledby="services-heading">
   <div class="reveal">
     <SectionHeading
+      id="services-heading"
       eyebrow="Consulting"
-      heading="Focused help at consequential moments."
-      description="Engagements can begin with a review, a concrete platform problem, or a decision that needs independent technical scrutiny."
+      heading={profile.servicesIntro.heading}
+      description={profile.servicesIntro.description}
     />
     <div class="services-grid">
       {profile.services.map((service, index) => (

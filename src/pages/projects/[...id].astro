@@ -15,8 +15,8 @@ const { Content } = await render(project);
 <ContentLayout title={project.data.title} description={project.data.summary} eyebrow="Case study">
   <dl class="content-meta">
     <div>
-      <dt>Year</dt>
-      <dd>{project.data.year}</dd>
+      <dt>Context</dt>
+      <dd>{project.data.context}</dd>
     </div>
     <div>
       <dt>Role</dt>
@@ -27,5 +27,6 @@ const { Content } = await render(project);
       <dd>{project.data.challenge}</dd>
     </div>
   </dl>
+  <p class="content-highlight">{project.data.highlight}</p>
   <Content />
 </ContentLayout>

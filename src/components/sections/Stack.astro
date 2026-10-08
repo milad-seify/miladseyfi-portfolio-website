@@ -1,21 +1,22 @@
 ---
 import SectionHeading from '@/components/ui/SectionHeading.astro';
-import { profile } from '@/data/profile';
+import { resume } from '@/data/resume';
 ---
 
 <section class="section section--bordered shell" id="stack" aria-labelledby="stack-heading">
   <div class="stack reveal">
     <SectionHeading
+      id="stack-heading"
       eyebrow="Technology stack"
-      heading="Tools in service of systems."
-      description="A working vocabulary across the infrastructure lifecycle—not a checklist of logos."
+      heading="Tools, platforms, and control planes."
+      description="Technologies used across architecture, provisioning, automation, and operations."
     />
     <div class="stack__matrix">
-      {profile.stack.map((group) => (
+      {resume.skillGroups.map((group) => (
         <div class="stack__row">
-          <h3>{group.group}</h3>
+          <h3>{group.title}</h3>
           <ul>
-            {group.items.map((item) => (
+            {group.skills.map((item) => (
               <li>{item}</li>
             ))}
           </ul>

@@ -5,10 +5,11 @@ interface Props {
   href: string;
   variant?: 'primary' | 'secondary' | 'quiet';
   external?: boolean;
+  download?: boolean | string;
   class?: string;
 }
 
-const { href, variant = 'primary', external = false, class: className } = Astro.props;
+const { href, variant = 'primary', external = false, download, class: className } = Astro.props;
 ---
 
 <a
@@ -16,6 +17,7 @@ const { href, variant = 'primary', external = false, class: className } = Astro.
   {href}
   target={external ? '_blank' : undefined}
   rel={external ? 'noreferrer' : undefined}
+  {download}
 >
   <slot />
   <Icon name={external ? 'external' : 'arrow'} size={17} />

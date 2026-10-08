@@ -1,11 +1,10 @@
 ---
-title: Platform decisions should expose their trade-offs
-description: A draft article placeholder about making infrastructure choices reviewable and durable.
-publishedAt: 2026-01-01
+title: Make platform trade-offs explicit
+description: Notes on documenting infrastructure decisions so implementation and operations follow the same reasoning.
 tags:
   - Architecture
   - Platform engineering
 draft: true
 ---
 
-This article is a content placeholder and is excluded from production until reviewed.
+Draft outline. TODO: review the argument, add verified examples, and approve before publication.

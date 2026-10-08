@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import ButtonLink from '@/components/ui/ButtonLink.astro';
+import { withBasePath } from '@/lib/urls';
 
 interface Props {
   title: string;
@@ -12,7 +13,7 @@ const { title, description, eyebrow } = Astro.props;
 
 <BaseLayout title={`${title} — Milad Seyfi`} description={description} type="article">
   <article class="content-page shell">
-    <ButtonLink href={import.meta.env.BASE_URL} variant="quiet">
+    <ButtonLink href={withBasePath()} variant="quiet">
       Back to overview
     </ButtonLink>
     <header>

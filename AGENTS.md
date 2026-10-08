@@ -19,3 +19,10 @@ This is a static Astro 7 portfolio for Milad Seyfi. Prefer the smallest change t
 - Do not invent credentials, employers, outcomes, client names, dates, or metrics. Keep explicit placeholders until verified.
 - Preserve `prefers-reduced-motion`, keyboard focus, readable contrast, and responsive behavior.
 - Do not add `public/CNAME` until the production domain is confirmed.
+
+## Updating professional information
+
+1. Update `src/data/resume.ts`; it is authoritative for identity, career history, education, skills, verified metrics, projects, certifications, and contact links.
+2. Do not duplicate factual career data in components or `src/data/profile.ts`; keep `profile.ts` for website positioning and presentation copy.
+3. Run `pnpm resume:check`, then `pnpm validate`.
+4. Run `pnpm resume:pdf` when the downloadable resume should be republished.
