@@ -1,0 +1,105 @@
+---
+import Wordmark from '@/components/ui/Wordmark.astro';
+import { profile } from '@/data/profile';
+import '@/styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+}
+
+const {
+  title = profile.site.title,
+  description = profile.site.description,
+  image = profile.site.socialImage,
+  type = 'website',
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
+const socialImage = new URL(
+  `${import.meta.env.BASE_URL}${image.replace(/^\//, '')}`,
+  Astro.site ?? Astro.url.origin,
+);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.identity.name,
+  jobTitle: profile.identity.role,
+  url: canonical.origin,
+  knowsAbout: profile.expertise.map((item) => item.title),
+};
+---
+
+<!doctype html>
+<html lang={profile.site.locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content={profile.site.themeColor} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <link rel="manifest" href={`${import.meta.env.BASE_URL}site.webmanifest`} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:site_name" content={profile.identity.name} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">
+      Skip to content
+    </a>
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <Wordmark />
+        <nav class="desktop-nav" aria-label="Primary navigation">
+          <ul>
+            {profile.navigation.map((item) => (
+              <li>
+                <a href={`${import.meta.env.BASE_URL}${item.href}`}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+          <a class="nav-cta" href={`${import.meta.env.BASE_URL}#contact`}>
+            Let’s talk <span aria-hidden="true">↗</span>
+          </a>
+        </nav>
+        <details class="mobile-nav">
+          <summary aria-label="Open navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+          </summary>
+          <nav aria-label="Mobile navigation">
+            {profile.navigation.map((item) => (
+              <a href={`${import.meta.env.BASE_URL}${item.href}`}>{item.label}</a>
+            ))}
+            <a href={`${import.meta.env.BASE_URL}#contact`}>Let’s talk</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main-content">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="shell site-footer__inner">
+        <Wordmark />
+        <p>Architecture for systems—and teams—that need to last.</p>
+        <p>
+          © {new Date().getUTCFullYear()} {profile.identity.name}
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

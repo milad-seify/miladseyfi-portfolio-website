@@ -1,0 +1,13 @@
+---
+import { profile } from '@/data/profile';
+---
+
+<a class="wordmark" href={import.meta.env.BASE_URL} aria-label={`${profile.identity.name}, home`}>
+  <span class="wordmark__mark" aria-hidden="true">
+    {profile.identity.initials}
+  </span>
+  <span class="wordmark__text">
+    <strong>{profile.identity.name}</strong>
+    <small>Cloud · Platform · DevOps</small>
+  </span>
+</a>

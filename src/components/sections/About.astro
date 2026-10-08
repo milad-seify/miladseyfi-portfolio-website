@@ -1,0 +1,23 @@
+---
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { profile } from '@/data/profile';
+---
+
+<section class="section shell" id="about" aria-labelledby="about-heading">
+  <div class="about reveal">
+    <SectionHeading eyebrow="About" heading={profile.about.heading} />
+    <div class="about__body">
+      {profile.about.paragraphs.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
+    </div>
+    <ol class="principles">
+      {profile.about.principles.map((principle) => (
+        <li>
+          <span>{principle.value}</span>
+          {principle.label}
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

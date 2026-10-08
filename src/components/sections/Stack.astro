@@ -1,0 +1,26 @@
+---
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { profile } from '@/data/profile';
+---
+
+<section class="section section--bordered shell" id="stack" aria-labelledby="stack-heading">
+  <div class="stack reveal">
+    <SectionHeading
+      eyebrow="Technology stack"
+      heading="Tools in service of systems."
+      description="A working vocabulary across the infrastructure lifecycle—not a checklist of logos."
+    />
+    <div class="stack__matrix">
+      {profile.stack.map((group) => (
+        <div class="stack__row">
+          <h3>{group.group}</h3>
+          <ul>
+            {group.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,29 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ButtonLink from '@/components/ui/ButtonLink.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow: string;
+}
+const { title, description, eyebrow } = Astro.props;
+---
+
+<BaseLayout title={`${title} — Milad Seyfi`} description={description} type="article">
+  <article class="content-page shell">
+    <ButtonLink href={import.meta.env.BASE_URL} variant="quiet">
+      Back to overview
+    </ButtonLink>
+    <header>
+      <p class="eyebrow">
+        <span aria-hidden="true">//</span> {eyebrow}
+      </p>
+      <h1>{title}</h1>
+      <p>{description}</p>
+    </header>
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

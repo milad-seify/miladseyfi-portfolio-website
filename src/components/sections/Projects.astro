@@ -1,0 +1,55 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from '@/components/ui/Icon.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+
+interface Props {
+  projects: CollectionEntry<'projects'>[];
+}
+const { projects } = Astro.props;
+---
+
+<section class="section section--tinted" id="work" aria-labelledby="work-heading">
+  <div class="shell reveal">
+    <SectionHeading
+      eyebrow="Selected work"
+      heading="Case studies grounded in real constraints."
+      description="Engagement details are published only after they are verified and safe to share."
+    />
+    {projects.length > 0 ? (
+      <div class="project-grid">
+        {projects.map((project) => (
+          <article class="project-card">
+            <div class="project-card__meta">
+              <span>{project.data.year}</span>
+              <span>{project.data.role}</span>
+            </div>
+            <h3>
+              <a href={`${import.meta.env.BASE_URL}projects/${project.id}/`}>
+                {project.data.title}
+              </a>
+            </h3>
+            <p>{project.data.summary}</p>
+            <ul class="tag-list">
+              {project.data.technologies.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+            <a class="text-link" href={`${import.meta.env.BASE_URL}projects/${project.id}/`}>
+              Read case study <Icon name="arrow" size={16} />
+            </a>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="empty-state">
+        <span class="empty-state__code">CASE_STUDIES / IN_REVIEW</span>
+        <h3>Verified project stories are being prepared.</h3>
+        <p>
+          This section will document constraints, decisions, implementation, and outcomes without
+          exposing confidential client information.
+        </p>
+      </div>
+    )}
+  </div>
+</section>

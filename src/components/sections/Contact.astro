@@ -1,0 +1,32 @@
+---
+import ButtonLink from '@/components/ui/ButtonLink.astro';
+import { profile } from '@/data/profile';
+---
+
+<section class="contact-section" id="contact" aria-labelledby="contact-heading">
+  <div class="shell contact reveal">
+    <div>
+      <p class="eyebrow">
+        <span aria-hidden="true">//</span> Contact
+      </p>
+      <h2 id="contact-heading">{profile.contact.heading}</h2>
+      <p>{profile.contact.summary}</p>
+    </div>
+    <div class="contact__actions">
+      {profile.contact.email ? (
+        <ButtonLink href={`mailto:${profile.contact.email}`}>Email Milad</ButtonLink>
+      ) : (
+        <span class="button button--disabled" aria-disabled="true">
+          Contact details pending verification
+        </span>
+      )}
+      {profile.contact.resumeUrl ? (
+        <ButtonLink href={profile.contact.resumeUrl} variant="secondary">
+          View résumé
+        </ButtonLink>
+      ) : (
+        <span class="contact__note">Résumé link will be added after verification.</span>
+      )}
+    </div>
+  </div>
+</section>

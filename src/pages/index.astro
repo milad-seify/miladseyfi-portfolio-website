@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import About from '@/components/sections/About.astro';
+import Contact from '@/components/sections/Contact.astro';
+import Experience from '@/components/sections/Experience.astro';
+import Expertise from '@/components/sections/Expertise.astro';
+import Hero from '@/components/sections/Hero.astro';
+import Projects from '@/components/sections/Projects.astro';
+import Services from '@/components/sections/Services.astro';
+import Stack from '@/components/sections/Stack.astro';
+import Writing from '@/components/sections/Writing.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { byNewest, byOrder, isPublished } from '@/lib/content';
+
+const projects = (await getCollection('projects')).filter(isPublished).sort(byOrder);
+const posts = (await getCollection('posts')).filter(isPublished).sort(byNewest);
+---
+
+<BaseLayout>
+  <Hero />
+  <About />
+  <Experience />
+  <Expertise />
+  <Projects projects={projects} />
+  <Services />
+  <Stack />
+  <Writing posts={posts} />
+  <Contact />
+</BaseLayout>

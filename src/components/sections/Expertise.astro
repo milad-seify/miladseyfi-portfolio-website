@@ -1,0 +1,28 @@
+---
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { profile } from '@/data/profile';
+---
+
+<section class="section shell" id="expertise" aria-labelledby="expertise-heading">
+  <div class="reveal">
+    <SectionHeading
+      eyebrow="Expertise"
+      heading="From infrastructure layer to operating model."
+      description="Technical depth is most useful when it improves reliability, delivery, and decision quality together."
+    />
+    <div class="expertise-grid">
+      {profile.expertise.map((item) => (
+        <article class="expertise-card">
+          <span class="expertise-card__index">{item.index}</span>
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+          <ul class="tag-list">
+            {item.tags.map((tag) => (
+              <li>{tag}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

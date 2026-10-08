@@ -1,0 +1,38 @@
+---
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { profile } from '@/data/profile';
+---
+
+<section
+  class="section section--bordered shell"
+  id="experience"
+  aria-labelledby="experience-heading"
+>
+  <div class="experience reveal">
+    <SectionHeading
+      eyebrow="Experience"
+      heading={profile.experience.heading}
+      description={profile.experience.note}
+    />
+    <div class="timeline">
+      {profile.experience.items.map((item) => (
+        <article class="timeline__item">
+          <div class="timeline__rail">
+            <span></span>
+          </div>
+          <p class="timeline__period">{item.period}</p>
+          <div>
+            <h3>{item.role}</h3>
+            <p class="timeline__org">{item.organization}</p>
+            <p>{item.description}</p>
+            <ul class="tag-list" aria-label="Practice areas">
+              {item.tags.map((tag) => (
+                <li>{tag}</li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

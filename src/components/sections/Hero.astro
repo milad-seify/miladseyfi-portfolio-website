@@ -1,0 +1,76 @@
+---
+import ButtonLink from '@/components/ui/ButtonLink.astro';
+import Icon from '@/components/ui/Icon.astro';
+import { profile } from '@/data/profile';
+---
+
+<section class="hero shell" aria-labelledby="hero-title">
+  <div class="hero__copy">
+    <p class="hero__status">
+      <span></span>
+      {profile.hero.eyebrow}
+    </p>
+    <h1 id="hero-title">{profile.hero.title}</h1>
+    <p class="hero__summary">{profile.hero.summary}</p>
+    <div class="hero__actions">
+      <ButtonLink href="#work">Explore selected work</ButtonLink>
+      <ButtonLink href="#contact" variant="secondary">
+        Start a conversation
+      </ButtonLink>
+    </div>
+    <dl class="hero__signals" aria-label="Core practice areas">
+      <div>
+        <dt>Focus</dt>
+        <dd>Architecture & delivery</dd>
+      </div>
+      <div>
+        <dt>Systems</dt>
+        <dd>Cloud-native & private cloud</dd>
+      </div>
+      <div>
+        <dt>Approach</dt>
+        <dd>Pragmatic & operations-led</dd>
+      </div>
+    </dl>
+  </div>
+
+  <div class="hero__visual" aria-hidden="true">
+    <div class="orb orb--one"></div>
+    <div class="orb orb--two"></div>
+    <div class="architecture-map">
+      <div class="architecture-map__topline">
+        <span>PLATFORM_TOPOLOGY</span>
+        <span class="live-dot">STABLE</span>
+      </div>
+      <div class="node node--cloud">
+        <Icon name="cloud" size={24} />
+        <span>Cloud layer</span>
+      </div>
+      <div class="connector connector--one"></div>
+      <div class="node node--platform">
+        <Icon name="layers" size={24} />
+        <span>Platform</span>
+      </div>
+      <div class="connector connector--two"></div>
+      <div class="node node--automation">
+        <Icon name="terminal" size={24} />
+        <span>Automation</span>
+      </div>
+      <div class="node node--storage">
+        <Icon name="storage" size={24} />
+        <span>Storage</span>
+      </div>
+      <div class="map-metrics">
+        <span>
+          <i></i>OBSERVABLE
+        </span>
+        <span>
+          <i></i>REPEATABLE
+        </span>
+        <span>
+          <i></i>OPERABLE
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
