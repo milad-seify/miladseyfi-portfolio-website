@@ -19,8 +19,10 @@ const { photo, locale } = Astro.props;
     <Image
       src={photo.src}
       alt={photo.alt[locale]}
-      widths={[480, 720, 960]}
-      sizes="(min-width: 1024px) 32vw, 100vw"
+      widths={[360, 480, 720, 960]}
+      sizes="(min-width: 1024px) 32vw, calc(100vw - 2.2rem)"
+      format="webp"
+      quality={82}
       loading="lazy"
       decoding="async"
     />
