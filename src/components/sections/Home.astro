@@ -32,6 +32,6 @@ const posts = (await getCollection('posts'))
   <Experience {locale} />
   <Services {locale} />
   <Stack {locale} />
-  {posts.length > 0 && <Writing {posts} {locale} />}
+  <Writing {posts} {locale} />
   <Contact {locale} />
 </BaseLayout>

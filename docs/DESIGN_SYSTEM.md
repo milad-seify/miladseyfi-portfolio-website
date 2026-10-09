@@ -1,12 +1,12 @@
 # Design System
 
-The visual language combines restrained technical editorial composition with cloud control-plane cues: near-black graphite fields, cool slate surfaces, electric-cyan signals, faint violet ambience, topology lines, and confident asymmetry. The interface should feel calm and precise, never like a monitoring dashboard.
+The visual language is an editorial portfolio crossed with technical architecture: periwinkle-blue fields, warm cream surfaces, coral signals, large Persian-first typography, asymmetric composition, and thin structural rules. Infrastructure appears through relationships and diagrams, not dashboard styling.
 
 ## Tokens
 
 All tokens live in `src/styles/global.css` and are exposed to Tailwind through `@theme`:
 
-- Color: graphite page/surface layers, cool slate lines and text, cyan as the dominant signal, and blue-violet only for ambient depth.
+- Color: `#526594` blue, `#F3E8D6` cream, `#FF5A50` coral, and derived tones defined in `global.css`. Coral is the signature signal; cream and blue form the large page fields.
 - Type: self-hosted Estedad for Persian, system sans for English, and system monospace for labels/technical details.
 - Layout: `--container`, section spacing, radii, shadows, and transition timings.
 
@@ -16,11 +16,12 @@ Use semantic token names. Components must not define a competing palette.
 
 - One primary action per visual group; secondary actions use quieter treatments.
 - Prefer typography, rules, and spatial hierarchy over containers. Reserve bordered panels for a genuine interface or form boundary.
-- Keep gradients and glow local to focal points. Do not use them as default section or card treatments.
-- Use technical coordinates and grid lines sparingly; content hierarchy must remain the primary visual system.
-- Uppercase monospace eyebrow labels establish rhythm; headings remain sentence case.
+- Do not use glass, glow, gradient text, neon, or generic dark-dashboard treatments.
+- Use coral for large display text, fields, rules, and states. Small text uses accessible cream, deep-blue, or `--coral-ink` rather than raw coral.
+- Use borders, architectural lines, and coordinates sparingly; typography and color fields provide the hierarchy.
+- Technical labels are small supporting details, not the dominant voice.
 - Give each major section its own composition; do not repeat equal card grids or a single heading/layout formula.
-- Treat the topology object, large display type, and sparse infrastructure metadata as recurring identity devices rather than dashboard decoration.
+- Treat the coral connector, topology object, oversized name, and project numbering as recurring authored details.
 - Decorative SVGs are hidden from assistive technology. Meaningful icons require accessible text.
 - Focus indicators must remain visible on every interactive element.
 - Motion communicates entrance, topology state, or interaction feedback only. Keep it subtle, CSS-driven, and disabled under `prefers-reduced-motion`.

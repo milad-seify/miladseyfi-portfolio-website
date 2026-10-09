@@ -69,10 +69,6 @@ const jsonLd = {
       name: location,
     })),
   })),
-  affiliation: resume.education.map((education) => ({
-    '@type': 'EducationalOrganization',
-    name: education.institution,
-  })),
   ...(resume.contact.email ? { email: resume.contact.email } : {}),
   ...(sameAs.length > 0 ? { sameAs } : {}),
 };

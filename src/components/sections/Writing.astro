@@ -12,8 +12,8 @@ const { posts, locale } = Astro.props;
 const copy = getDictionary(locale).writing;
 ---
 
-<section class="section shell" id="writing" aria-labelledby="writing-heading">
-  <div class="reveal">
+<section class="section writing-section" id="writing" aria-labelledby="writing-heading">
+  <div class="shell reveal">
     <SectionHeading
       id="writing-heading"
       eyebrow={copy.eyebrow}

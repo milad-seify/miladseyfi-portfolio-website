@@ -1,6 +1,6 @@
 export const profile = {
   site: {
-    themeColor: '#05070b',
+    themeColor: '#526594',
     socialImage: '/og-image.png',
   },
 } as const;

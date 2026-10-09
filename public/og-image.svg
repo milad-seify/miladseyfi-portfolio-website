@@ -1,20 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <defs>
-    <radialGradient id="glow"><stop stop-color="#275e75" stop-opacity=".45"/><stop offset="1" stop-color="#05070b" stop-opacity="0"/></radialGradient>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#8eb2ce" stroke-opacity=".08"/></pattern>
-  </defs>
-  <rect width="1200" height="630" fill="#05070b"/>
-  <rect width="1200" height="630" fill="url(#grid)"/>
-  <circle cx="950" cy="140" r="430" fill="url(#glow)"/>
-  <g transform="translate(80 74)">
-    <rect width="64" height="64" rx="15" fill="#101721" stroke="#55e6ff" stroke-opacity=".5"/>
-    <text x="32" y="40" fill="#55e6ff" font-family="monospace" font-size="20" font-weight="700" text-anchor="middle">MS</text>
-    <text x="88" y="26" fill="#edf7ff" font-family="Arial, sans-serif" font-size="25" font-weight="700">Milad Seyfi</text>
-    <text x="88" y="53" fill="#93a8bd" font-family="monospace" font-size="14" letter-spacing="2">CLOUD · PLATFORM · DEVOPS</text>
+  <rect width="1200" height="630" fill="#526594"/>
+  <rect x="840" width="360" height="630" fill="#FF5A50"/>
+  <path d="M80 74h240" stroke="#F3E8D6" stroke-width="2"/>
+  <path d="M840 112H648v132h192M840 386H694v132h146" fill="none" stroke="#F3E8D6" stroke-opacity=".72"/>
+  <circle cx="648" cy="244" r="8" fill="#FF5A50"/>
+  <circle cx="694" cy="518" r="8" fill="#F3E8D6"/>
+  <g transform="translate(80 102)">
+    <rect width="64" height="64" fill="#FF5A50"/>
+    <text x="32" y="41" fill="#FFFFFF" font-family="monospace" font-size="20" font-weight="700" text-anchor="middle">MS</text>
+    <text x="88" y="27" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="26" font-weight="700">Milad Seyfi</text>
+    <text x="88" y="54" fill="#F3E8D6" font-family="Arial, sans-serif" font-size="14" letter-spacing="1.5">CLOUD ARCHITECT · DEVOPS CONSULTANT</text>
   </g>
-  <text x="80" y="305" fill="#edf7ff" font-family="Arial, sans-serif" font-size="64" font-weight="700" letter-spacing="-3">Cloud Architect &amp;</text>
-  <text x="80" y="380" fill="#edf7ff" font-family="Arial, sans-serif" font-size="64" font-weight="700" letter-spacing="-3">DevOps Consultant</text>
-  <text x="80" y="465" fill="#93a8bd" font-family="Arial, sans-serif" font-size="24">Architecture for resilient systems and effective teams.</text>
-  <path d="M80 535h1040" stroke="#202a36"/>
-  <text x="80" y="574" fill="#55e6ff" font-family="monospace" font-size="14" letter-spacing="2">OPENSTACK / CEPH / KUBERNETES / AUTOMATION</text>
+  <text x="80" y="320" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="66" font-weight="700" letter-spacing="-3">Cloud architecture for</text>
+  <text x="80" y="395" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="66" font-weight="700" letter-spacing="-3">infrastructure that works.</text>
+  <text x="80" y="484" fill="#F3E8D6" font-family="Arial, sans-serif" font-size="23">OpenStack / Ceph / Kubernetes / Automation</text>
+  <text x="882" y="568" fill="#293654" font-family="monospace" font-size="13" font-weight="700" letter-spacing="2">ARCHITECTURE / OPERATIONS</text>
 </svg>
