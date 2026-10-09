@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('../assets/fonts/Vazirmatn.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 :root {
   color-scheme: light;
   --resume-ink: #142131;
@@ -26,6 +34,17 @@ html {
   line-height: 1.48;
 }
 
+html[lang='fa'] {
+  font-family: 'Vazirmatn', Tahoma, Arial, sans-serif;
+  line-height: 1.65;
+}
+
+html[lang='fa'] h1,
+html[lang='fa'] h2,
+html[lang='fa'] h3 {
+  letter-spacing: 0;
+}
+
 body {
   margin: 0;
   padding: 1.5rem;
@@ -39,7 +58,7 @@ a {
 .resume-skip-link {
   position: fixed;
   top: 0.75rem;
-  left: 0.75rem;
+  inset-inline-start: 0.75rem;
   z-index: 10;
   padding: 0.65rem 0.9rem;
   background: var(--resume-ink);
@@ -112,7 +131,7 @@ a {
   color: var(--resume-muted);
   font-size: 0.72rem;
   font-style: normal;
-  text-align: right;
+  text-align: end;
 }
 
 .resume-summary,
@@ -210,7 +229,7 @@ a {
   color: var(--resume-muted) !important;
   font-size: 0.66rem !important;
   font-weight: 600 !important;
-  text-align: right;
+  text-align: end;
 }
 
 .resume-entry > p,
@@ -228,7 +247,7 @@ a {
   display: grid;
   gap: 0.35rem;
   margin: 0.75rem 0 0;
-  padding-left: 1.05rem;
+  padding-inline-start: 1.05rem;
   color: var(--resume-muted);
   font-size: 0.7rem;
 }
@@ -242,7 +261,7 @@ a {
 .resume-callout {
   margin-top: 0.85rem;
   padding: 0.7rem 0.8rem;
-  border-left: 2px solid var(--resume-accent);
+  border-inline-start: 2px solid var(--resume-accent);
   background: #f2f7f8;
   font-size: 0.72rem;
   break-inside: avoid;
@@ -309,7 +328,7 @@ a {
   .resume-contact,
   .resume-entry__meta {
     justify-items: start;
-    text-align: left;
+    text-align: start;
   }
 
   .resume-metrics,

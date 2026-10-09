@@ -1,0 +1,31 @@
+---
+import { getDictionary, getLocalePath, type Locale } from '@/i18n/config';
+
+interface Props {
+  locale: Locale;
+  routePath?: string;
+}
+
+const { locale, routePath = '' } = Astro.props;
+const dictionary = getDictionary(locale);
+---
+
+<nav class="language-switcher" aria-label={dictionary.language.switchLabel}>
+  <a
+    href={getLocalePath('fa', routePath)}
+    lang="fa"
+    dir="rtl"
+    aria-current={locale === 'fa' ? 'page' : undefined}
+  >
+    فارسی
+  </a>
+  <span aria-hidden="true">|</span>
+  <a
+    href={getLocalePath('en', routePath)}
+    lang="en"
+    dir="ltr"
+    aria-current={locale === 'en' ? 'page' : undefined}
+  >
+    EN
+  </a>
+</nav>

@@ -1,26 +1,34 @@
 ---
 import ButtonLink from '@/components/ui/ButtonLink.astro';
 import Icon from '@/components/ui/Icon.astro';
-import { profile } from '@/data/profile';
-import { resume } from '@/data/resume';
+import TechnicalTerm from '@/components/ui/TechnicalTerm.astro';
+import { getDictionary, type Locale } from '@/i18n/config';
+import { getLocalizedResume } from '@/i18n/resume';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = getDictionary(locale).hero;
+const localizedResume = getLocalizedResume(locale);
 ---
 
 <section class="hero shell" aria-labelledby="hero-title">
   <div class="hero__copy">
     <p class="hero__status">
       <span></span>
-      {resume.identity.professionalHeadline}
+      {copy.status}
     </p>
-    <h1 id="hero-title">{profile.hero.title}</h1>
-    <p class="hero__summary">{resume.identity.summary}</p>
+    <h1 id="hero-title">{copy.title}</h1>
+    <p class="hero__summary">{copy.summary}</p>
     <div class="hero__actions">
-      <ButtonLink href="#work">Explore selected work</ButtonLink>
+      <ButtonLink href="#work">{copy.workCta}</ButtonLink>
       <ButtonLink href="#contact" variant="secondary">
-        Start a conversation
+        {copy.contactCta}
       </ButtonLink>
     </div>
-    <dl class="hero__signals" aria-label="Core practice areas">
-      {resume.careerHighlights.map((highlight) => (
+    <dl class="hero__signals" aria-label={copy.metricsLabel}>
+      {localizedResume.careerHighlights.map((highlight) => (
         <div>
           <dt>{highlight.label}</dt>
           <dd>{highlight.value}</dd>
@@ -34,36 +42,47 @@ import { resume } from '@/data/resume';
     <div class="orb orb--two"></div>
     <div class="architecture-map">
       <div class="architecture-map__topline">
-        <span>PLATFORM_TOPOLOGY</span>
-        <span class="live-dot">STABLE</span>
+        <span>{copy.topology}</span>
+        <span class="live-dot">{copy.stable}</span>
       </div>
       <div class="node node--cloud">
         <Icon name="cloud" size={24} />
-        <span>Cloud layer</span>
+        <span>
+          <TechnicalTerm>{copy.cloud}</TechnicalTerm>
+        </span>
       </div>
       <div class="connector connector--one"></div>
       <div class="node node--platform">
         <Icon name="layers" size={24} />
-        <span>Platform</span>
+        <span>
+          <TechnicalTerm>{copy.platform}</TechnicalTerm>
+        </span>
       </div>
       <div class="connector connector--two"></div>
       <div class="node node--automation">
         <Icon name="terminal" size={24} />
-        <span>Automation</span>
+        <span>
+          <TechnicalTerm>{copy.automation}</TechnicalTerm>
+        </span>
       </div>
       <div class="node node--storage">
         <Icon name="storage" size={24} />
-        <span>Storage</span>
+        <span>
+          <TechnicalTerm>{copy.storage}</TechnicalTerm>
+        </span>
       </div>
       <div class="map-metrics">
         <span>
-          <i></i>OBSERVABLE
+          <i></i>
+          {copy.observable}
         </span>
         <span>
-          <i></i>REPEATABLE
+          <i></i>
+          {copy.repeatable}
         </span>
         <span>
-          <i></i>OPERABLE
+          <i></i>
+          {copy.operable}
         </span>
       </div>
     </div>

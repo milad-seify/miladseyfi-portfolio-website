@@ -1,0 +1,179 @@
+---
+import ResumeLayout from '@/layouts/ResumeLayout.astro';
+import TechnicalTerm from '@/components/ui/TechnicalTerm.astro';
+import { resume } from '@/data/resume';
+import { getDictionary, getLocalePath, type Locale } from '@/i18n/config';
+import { getLocalizedResume } from '@/i18n/resume';
+import { formatResumeDateRange } from '@/lib/resume';
+import { withBasePath } from '@/lib/urls';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = getDictionary(locale).resume;
+const localizedResume = getLocalizedResume(locale);
+const pdfPath = withBasePath(`resume/milad-seyfi-resume-${locale}.pdf`);
+const homePath = getLocalePath(locale);
+const contactLinks = [
+  resume.contact.email && { label: resume.contact.email, href: `mailto:${resume.contact.email}` },
+  resume.contact.website && { label: 'Website', href: resume.contact.website },
+  resume.contact.linkedin && { label: 'LinkedIn', href: resume.contact.linkedin },
+  resume.contact.github && { label: 'GitHub', href: resume.contact.github },
+  resume.contact.telegram && { label: 'Telegram', href: resume.contact.telegram },
+  resume.contact.whatsapp && { label: 'WhatsApp', href: resume.contact.whatsapp },
+].filter((item): item is { label: string; href: string } => Boolean(item));
+---
+
+<ResumeLayout {locale}>
+  <nav class="resume-toolbar" aria-label={copy.actions}>
+    <a href={homePath}>
+      {locale === 'fa' ? '→' : '←'} {copy.back}
+    </a>
+    <a href={pdfPath} download={`milad-seyfi-resume-${locale}.pdf`}>
+      {copy.download}
+    </a>
+  </nav>
+
+  <main class="resume-sheet" id="resume-content">
+    <header class="resume-header">
+      <div>
+        <p class="resume-kicker">{copy.title}</p>
+        <h1>{localizedResume.identity.name}</h1>
+        <p class="resume-headline">{localizedResume.identity.professionalHeadline}</p>
+      </div>
+      {contactLinks.length > 0 && (
+        <address class="resume-contact">
+          {contactLinks.map((item) => (
+            <a href={item.href}>{item.label}</a>
+          ))}
+        </address>
+      )}
+    </header>
+
+    <section class="resume-summary" aria-labelledby="summary-heading">
+      <h2 id="summary-heading">{copy.profile}</h2>
+      <p>{localizedResume.identity.summary}</p>
+      <dl class="resume-metrics" aria-label={copy.highlights}>
+        {localizedResume.careerHighlights.map((highlight) => (
+          <div>
+            <dt>
+              <bdi dir="ltr">{highlight.value}</bdi>
+            </dt>
+            <dd>{highlight.label}</dd>
+            <dd class="resume-metric__detail">{highlight.detail}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <section class="resume-section" aria-labelledby="experience-heading">
+      <h2 id="experience-heading">{copy.experience}</h2>
+      {localizedResume.experience.map((experience) => (
+        <article class="resume-entry">
+          <header class="resume-entry__header">
+            <div>
+              <h3>{experience.role}</h3>
+              <p>
+                <TechnicalTerm>{experience.organization}</TechnicalTerm>
+              </p>
+            </div>
+            <div class="resume-entry__meta">
+              <time>{formatResumeDateRange(experience.startDate, experience.endDate, locale)}</time>
+              {experience.locations && <span>{experience.locations.join(' · ')}</span>}
+            </div>
+          </header>
+          <p>{experience.summary}</p>
+          <ul class="resume-list">
+            {experience.responsibilities.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+          <div class="resume-callout">
+            <strong>{copy.selectedResults}</strong>
+            <ul>
+              {experience.highlights.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </section>
+
+    <section class="resume-section" aria-labelledby="projects-heading">
+      <h2 id="projects-heading">{copy.projects}</h2>
+      <div class="resume-projects">
+        {localizedResume.selectedProjects.map((project) => (
+          <article class="resume-project">
+            <h3>
+              <a href={getLocalePath(locale, `projects/${project.id}/`)}>{project.title}</a>
+            </h3>
+            <p>{project.summary}</p>
+            <ul>
+              {project.contributions.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+            {project.verifiedResult && <strong>{project.verifiedResult}</strong>}
+            <p class="resume-project__tech">
+              {project.technologies.map((item, index) => (
+                <>
+                  <TechnicalTerm>{item}</TechnicalTerm>
+                  {index < project.technologies.length - 1 ? ' · ' : ''}
+                </>
+              ))}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="resume-section" aria-labelledby="skills-heading">
+      <h2 id="skills-heading">{copy.expertise}</h2>
+      <div class="resume-skills">
+        {localizedResume.skillGroups.map((group) => (
+          <article>
+            <h3>{group.title}</h3>
+            <p>
+              {group.skills.map((item, index) => (
+                <>
+                  <TechnicalTerm>{item}</TechnicalTerm>
+                  {index < group.skills.length - 1 ? ' · ' : ''}
+                </>
+              ))}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="resume-section resume-education" aria-labelledby="education-heading">
+      <h2 id="education-heading">{copy.education}</h2>
+      {localizedResume.education.map((education) => (
+        <article class="resume-entry__header">
+          <div>
+            <h3>
+              {education.degree} {locale === 'fa' ? 'در' : 'in'} {education.field}
+            </h3>
+            <p>{education.institution}</p>
+          </div>
+          {education.status && <p class="resume-entry__meta">{education.status}</p>}
+        </article>
+      ))}
+    </section>
+
+    {resume.certifications.length > 0 && (
+      <section class="resume-section" aria-labelledby="certifications-heading">
+        <h2 id="certifications-heading">{copy.certifications}</h2>
+        <ul class="resume-certifications">
+          {resume.certifications.map((item) => (
+            <li>
+              <strong>{item.name}</strong> — {item.issuer}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </main>
+</ResumeLayout>

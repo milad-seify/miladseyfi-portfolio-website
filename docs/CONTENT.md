@@ -2,7 +2,8 @@
 
 ## Sources
 
-- Edit shared profile and homepage content in `src/data/profile.ts`.
+- Edit factual professional and contact data in `src/data/resume.ts`.
+- Edit localized website presentation in `src/i18n/en.ts` and `src/i18n/fa.ts`.
 - Add case studies in `src/content/projects/*.md`.
 - Add articles in `src/content/posts/*.md`.
 - Collection schemas in `src/content.config.ts` are the content contract.
@@ -11,7 +12,7 @@
 
 Unverified material must be visibly marked as placeholder or draft. Never infer employers, client names, dates, certifications, availability, outcomes, metrics, email addresses, social handles, or résumé URLs.
 
-Draft collection entries are excluded from production listings. Replace placeholder identity/contact fields before launch and follow the launch checklist in `README.md`.
+Draft collection entries are excluded from production listings. Persian case-study presentation translates a shared canonical entry rather than creating a second factual record. See [`I18N.md`](I18N.md) for translation rules.
 
 ## Writing style
 

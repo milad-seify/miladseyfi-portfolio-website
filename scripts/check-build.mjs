@@ -62,17 +62,26 @@ const requiredFiles = [
   'site.webmanifest',
   'sitemap-index.xml',
   join('resume', 'milad-seyfi-resume.pdf'),
+  join('resume', 'milad-seyfi-resume-fa.pdf'),
+  join('resume', 'milad-seyfi-resume-en.pdf'),
 ];
 for (const file of requiredFiles) {
   if (!existsSync(join(dist, file))) failures.push(`Missing required output: ${file}`);
 }
 
 JSON.parse(await readFile(join(dist, 'site.webmanifest'), 'utf8'));
-const pdf = await readFile(join(dist, 'resume', 'milad-seyfi-resume.pdf'));
+const pdfPaths = [
+  join(dist, 'resume', 'milad-seyfi-resume.pdf'),
+  join(dist, 'resume', 'milad-seyfi-resume-fa.pdf'),
+  join(dist, 'resume', 'milad-seyfi-resume-en.pdf'),
+];
 const socialImage = await readFile(join(dist, 'og-image.png'));
 const notFound = await readFile(join(dist, '404.html'), 'utf8');
-if (pdf.subarray(0, 5).toString() !== '%PDF-' || pdf.length < 10_000) {
-  failures.push('The committed resume PDF is invalid or unexpectedly small.');
+for (const pdfPath of pdfPaths) {
+  const pdf = await readFile(pdfPath);
+  if (pdf.subarray(0, 5).toString() !== '%PDF-' || pdf.length < 10_000) {
+    failures.push(`The committed resume PDF is invalid or unexpectedly small: ${pdfPath}`);
+  }
 }
 if (socialImage.subarray(1, 4).toString() !== 'PNG') {
   failures.push('The social preview is not a valid PNG.');

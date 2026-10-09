@@ -1,19 +1,25 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
 import SectionHeading from '@/components/ui/SectionHeading.astro';
-import { profile } from '@/data/profile';
+import { getDictionary, type Locale } from '@/i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = getDictionary(locale).services;
 ---
 
 <section class="section shell" id="services" aria-labelledby="services-heading">
   <div class="reveal">
     <SectionHeading
       id="services-heading"
-      eyebrow="Consulting"
-      heading={profile.servicesIntro.heading}
-      description={profile.servicesIntro.description}
+      eyebrow={copy.eyebrow}
+      heading={copy.heading}
+      description={copy.description}
     />
     <div class="services-grid">
-      {profile.services.map((service, index) => (
+      {copy.items.map((service, index) => (
         <article class="service-card">
           <span class="service-card__number">0{index + 1}</span>
           <h3>{service.title}</h3>

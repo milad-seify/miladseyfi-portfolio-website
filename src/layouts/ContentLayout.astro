@@ -1,20 +1,25 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import ButtonLink from '@/components/ui/ButtonLink.astro';
-import { withBasePath } from '@/lib/urls';
+import { getDictionary, getLocalePath, type Locale } from '@/i18n/config';
+import { getLocalizedResume } from '@/i18n/resume';
 
 interface Props {
+  locale: Locale;
+  routePath: string;
   title: string;
   description: string;
   eyebrow: string;
 }
-const { title, description, eyebrow } = Astro.props;
+const { locale, routePath, title, description, eyebrow } = Astro.props;
+const copy = getDictionary(locale).caseStudy;
+const personName = getLocalizedResume(locale).identity.name;
 ---
 
-<BaseLayout title={`${title} — Milad Seyfi`} description={description} type="article">
+<BaseLayout {locale} {routePath} title={`${title} — ${personName}`} {description} type="article">
   <article class="content-page shell">
-    <ButtonLink href={withBasePath()} variant="quiet">
-      Back to overview
+    <ButtonLink href={getLocalePath(locale)} variant="quiet">
+      {copy.back}
     </ButtonLink>
     <header>
       <p class="eyebrow">

@@ -1,9 +1,18 @@
 @import 'tailwindcss';
 
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('../assets/fonts/Vazirmatn.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 @theme {
   --font-sans:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  --font-fa: 'Vazirmatn', Tahoma, Arial, sans-serif;
   --color-ink: #edf7ff;
   --color-muted: #93a8bd;
   --color-dim: #63798f;
@@ -50,6 +59,15 @@ body {
   font-size: 1rem;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+}
+html[lang='fa'] body {
+  font-family: var(--font-fa);
+  line-height: 1.85;
+}
+html[lang='fa'] h1,
+html[lang='fa'] h2,
+html[lang='fa'] h3 {
+  letter-spacing: 0;
 }
 body::before {
   position: fixed;
@@ -106,7 +124,7 @@ summary {
 .skip-link {
   position: fixed;
   top: 0.75rem;
-  left: 0.75rem;
+  inset-inline-start: 0.75rem;
   z-index: 100;
   padding: 0.7rem 1rem;
   background: var(--color-cyan);
@@ -186,6 +204,21 @@ summary {
 .desktop-nav li a:hover {
   color: var(--color-ink);
 }
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--color-dim);
+  font: 650 0.68rem/1 var(--font-mono);
+}
+.language-switcher a {
+  padding-block: 0.35rem;
+  color: var(--color-muted);
+}
+.language-switcher a:hover,
+.language-switcher a[aria-current='page'] {
+  color: var(--color-cyan);
+}
 .nav-cta {
   padding: 0.62rem 1rem;
   border: 1px solid rgb(72 217 243 / 0.28);
@@ -219,7 +252,7 @@ summary {
 .mobile-nav nav {
   position: absolute;
   top: 3.25rem;
-  right: 0;
+  inset-inline-end: 0;
   display: grid;
   min-width: 13rem;
   padding: 0.75rem;
@@ -334,6 +367,18 @@ summary {
   color: var(--color-dim);
   cursor: not-allowed;
 }
+html[dir='rtl'] .button:not(.button--external) svg,
+html[dir='rtl'] .text-link svg,
+html[dir='rtl'] .writing-list article svg {
+  transform: scaleX(-1);
+}
+html[dir='rtl'] .writing-list article svg {
+  transform: translateY(-50%) scaleX(-1);
+}
+.technical-term,
+bdi[dir='ltr'] {
+  unicode-bidi: isolate;
+}
 .hero__signals {
   display: grid;
   grid-template-columns: 1fr;
@@ -344,7 +389,7 @@ summary {
   border-top: 1px solid rgb(147 168 189 / 0.14);
 }
 .hero__signals div {
-  padding-right: 0.5rem;
+  padding-inline-end: 0.5rem;
 }
 .hero__signals dt {
   color: var(--color-dim);
@@ -390,6 +435,22 @@ summary {
     inset 0 1px rgb(255 255 255 / 0.04),
     0 30px 80px rgb(0 0 0 / 0.24);
   backdrop-filter: blur(14px);
+}
+.architecture-map::after {
+  position: absolute;
+  inset: 20% 15%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(72 217 243 / 0.08), transparent 68%);
+  content: '';
+  filter: blur(18px);
+  animation: map-breathe 7s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes map-breathe {
+  to {
+    opacity: 0.45;
+    transform: scale(1.08);
+  }
 }
 .architecture-map::before {
   position: absolute;
@@ -621,14 +682,14 @@ summary {
 }
 .experience__highlights li {
   position: relative;
-  padding-left: 1rem;
+  padding-inline-start: 1rem;
   color: var(--color-muted);
   font-size: 0.86rem;
 }
 .experience__highlights li::before {
   position: absolute;
   top: 0.72em;
-  left: 0;
+  inset-inline-start: 0;
   width: 0.3rem;
   height: 0.3rem;
   border-radius: 50%;
@@ -636,7 +697,7 @@ summary {
   content: '';
 }
 .education-card {
-  margin-left: 2rem;
+  margin-inline-start: 2rem;
   padding: 1.25rem;
   border: 1px solid rgb(147 168 189 / 0.14);
   border-radius: var(--radius-sm);
@@ -692,7 +753,7 @@ summary {
 }
 .expertise-card::after {
   position: absolute;
-  right: -3rem;
+  inset-inline-end: -3rem;
   bottom: -4rem;
   width: 10rem;
   aspect-ratio: 1;
@@ -888,14 +949,15 @@ summary {
   position: relative;
   display: grid;
   gap: 0.5rem;
-  padding: 1.5rem 2.5rem 1.5rem 0;
+  padding-block: 1.5rem;
+  padding-inline: 0 2.5rem;
   border-bottom: 1px solid var(--color-line);
   transition:
-    padding-left 0.25s var(--ease-out),
+    padding-inline-start 0.25s var(--ease-out),
     background 0.25s;
 }
 .writing-list article:hover {
-  padding-left: 0.75rem;
+  padding-inline-start: 0.75rem;
   background: linear-gradient(90deg, rgb(72 217 243 / 0.035), transparent);
 }
 .writing-list article p {
@@ -920,7 +982,7 @@ summary {
 .writing-list article svg {
   position: absolute;
   top: 50%;
-  right: 0.5rem;
+  inset-inline-end: 0.5rem;
   color: var(--color-dim);
   transform: translateY(-50%);
 }
@@ -939,7 +1001,7 @@ summary {
 }
 .contact {
   display: grid;
-  gap: 2rem;
+  gap: clamp(2rem, 6vw, 5rem);
 }
 .contact h2 {
   max-width: 12ch;
@@ -969,15 +1031,127 @@ summary {
   color: var(--color-muted);
   font: 550 0.64rem/1.2 var(--font-mono);
 }
-.contact__actions {
+.contact__channels,
+.contact__resume-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.contact__resume-actions {
+  margin-top: 0.75rem;
+}
+.contact-form-panel {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  border: 1px solid rgb(72 217 243 / 0.2);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(145deg, rgb(15 34 55 / 0.92), rgb(8 20 34 / 0.88)), var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+.contact-form-panel::before {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgb(72 217 243 / 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(72 217 243 / 0.025) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(to bottom, black, transparent 55%);
+  content: '';
+  pointer-events: none;
+}
+.contact-form-panel__header,
+.contact-form,
+.contact-form__unavailable {
+  position: relative;
+}
+.contact-form-panel__header .eyebrow {
+  margin-bottom: 1rem;
+}
+.contact-form-panel__header h3 {
+  margin: 0;
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+}
+.contact-form-panel__header > p:last-child,
+.contact-form__footer p,
+.contact-form__unavailable {
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
+.contact-form {
+  margin-top: 1.5rem;
+}
+.contact-form__grid {
+  display: grid;
   gap: 1rem;
 }
-.contact__note {
+.contact-form label {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--color-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.contact-form small {
   color: var(--color-dim);
-  font: 550 0.65rem/1.5 var(--font-mono);
+  font-weight: 500;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  background: rgb(5 15 27 / 0.72);
+  color: var(--color-ink);
+  font: inherit;
+  padding: 0.75rem 0.85rem;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--color-cyan);
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(72 217 243 / 0.1);
+}
+.contact-form textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
+.contact-form__message {
+  margin-top: 1rem;
+}
+.contact-form__honeypot {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.contact-form__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.contact-form__footer p {
+  max-width: 31rem;
+  margin: 0;
+}
+.contact-form__unavailable {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px dashed var(--color-line-strong);
+  border-radius: var(--radius-sm);
+}
+.contact-form__unavailable p {
+  margin: 0;
 }
 .site-footer {
   border-top: 1px solid rgb(147 168 189 / 0.12);
@@ -1057,7 +1231,7 @@ summary {
   max-width: 46rem;
   margin: 2rem 0 0;
   padding: 1rem 1.2rem;
-  border-left: 2px solid var(--color-cyan);
+  border-inline-start: 2px solid var(--color-cyan);
   background: rgb(72 217 243 / 0.045);
   color: var(--color-ink);
   font-weight: 700;
@@ -1115,6 +1289,9 @@ summary {
   .content-meta {
     grid-template-columns: repeat(3, 1fr);
   }
+  .contact-form__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .site-footer__inner {
     grid-template-columns: 1fr auto;
     align-items: center;
@@ -1164,12 +1341,8 @@ summary {
     grid-row: auto;
   }
   .contact {
-    grid-template-columns: 1fr auto;
-    align-items: end;
-  }
-  .contact__actions {
-    max-width: 21rem;
-    justify-content: flex-end;
+    grid-template-columns: minmax(0, 0.78fr) minmax(25rem, 1.22fr);
+    align-items: start;
   }
 }
 
@@ -1184,7 +1357,7 @@ summary {
     display: block;
   }
   .site-footer__inner > p:last-child {
-    text-align: right;
+    text-align: end;
   }
 }
 

@@ -2,52 +2,60 @@
 import type { CollectionEntry } from 'astro:content';
 import Icon from '@/components/ui/Icon.astro';
 import SectionHeading from '@/components/ui/SectionHeading.astro';
-import { profile } from '@/data/profile';
-import { withBasePath } from '@/lib/urls';
+import TechnicalTerm from '@/components/ui/TechnicalTerm.astro';
+import { getDictionary, getLocalePath, type Locale } from '@/i18n/config';
+import { getProjectPresentation } from '@/i18n/projects';
 
 interface Props {
   projects: CollectionEntry<'projects'>[];
+  locale: Locale;
 }
-const { projects } = Astro.props;
+const { projects, locale } = Astro.props;
+const copy = getDictionary(locale).projects;
 ---
 
 <section class="section section--tinted" id="work" aria-labelledby="work-heading">
   <div class="shell reveal">
     <SectionHeading
       id="work-heading"
-      eyebrow="Selected work"
-      heading={profile.workIntro.heading}
-      description={profile.workIntro.description}
+      eyebrow={copy.eyebrow}
+      heading={copy.heading}
+      description={copy.description}
     />
     {projects.length > 0 ? (
       <div class="project-grid">
-        {projects.map((project) => (
-          <article class="project-card">
-            <div class="project-card__meta">
-              <span>{project.data.context}</span>
-              <span>{project.data.role}</span>
-            </div>
-            <strong class="project-card__highlight">{project.data.highlight}</strong>
-            <h3>
-              <a href={withBasePath(`projects/${project.id}/`)}>{project.data.title}</a>
-            </h3>
-            <p>{project.data.summary}</p>
-            <ul class="tag-list">
-              {project.data.technologies.map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-            <a class="text-link" href={withBasePath(`projects/${project.id}/`)}>
-              Read case study <Icon name="arrow" size={16} />
-            </a>
-          </article>
-        ))}
+        {projects.map((project) => {
+          const presentation = getProjectPresentation(locale, project);
+          return (
+            <article class="project-card">
+              <div class="project-card__meta">
+                <span>{presentation.context}</span>
+                <span>{presentation.role}</span>
+              </div>
+              <strong class="project-card__highlight">{presentation.highlight}</strong>
+              <h3>
+                <a href={getLocalePath(locale, `projects/${project.id}/`)}>{presentation.title}</a>
+              </h3>
+              <p>{presentation.summary}</p>
+              <ul class="tag-list">
+                {project.data.technologies.map((item) => (
+                  <li>
+                    <TechnicalTerm>{item}</TechnicalTerm>
+                  </li>
+                ))}
+              </ul>
+              <a class="text-link" href={getLocalePath(locale, `projects/${project.id}/`)}>
+                {copy.read} <Icon name="arrow" size={16} />
+              </a>
+            </article>
+          );
+        })}
       </div>
     ) : (
       <div class="empty-state">
-        <span class="empty-state__code">CASE_STUDIES / IN_REVIEW</span>
-        <h3>Detailed case studies are being prepared.</h3>
-        <p>Client context, dates, decisions, and outcomes will be added only after verification.</p>
+        <span class="empty-state__code">{copy.emptyCode}</span>
+        <h3>{copy.emptyTitle}</h3>
+        <p>{copy.emptyDescription}</p>
       </div>
     )}
   </div>

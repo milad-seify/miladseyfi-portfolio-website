@@ -7,8 +7,20 @@ import { dirname, extname, join, resolve, sep } from 'node:path';
 
 const root = process.cwd();
 const distRoot = resolve(root, 'dist');
-const publicPdf = resolve(root, 'public', 'resume', 'milad-seyfi-resume.pdf');
-const distPdf = resolve(distRoot, 'resume', 'milad-seyfi-resume.pdf');
+const pdfTargets = [
+  {
+    route: 'resume/',
+    publicPath: resolve(root, 'public', 'resume', 'milad-seyfi-resume-fa.pdf'),
+    distPath: resolve(distRoot, 'resume', 'milad-seyfi-resume-fa.pdf'),
+  },
+  {
+    route: 'en/resume/',
+    publicPath: resolve(root, 'public', 'resume', 'milad-seyfi-resume-en.pdf'),
+    distPath: resolve(distRoot, 'resume', 'milad-seyfi-resume-en.pdf'),
+  },
+];
+const defaultPublicPdf = resolve(root, 'public', 'resume', 'milad-seyfi-resume.pdf');
+const defaultDistPdf = resolve(distRoot, 'resume', 'milad-seyfi-resume.pdf');
 const [repositoryOwner, repositoryName] = process.env.GITHUB_REPOSITORY?.split('/') ?? [];
 const inferredBase =
   repositoryName && repositoryName !== `${repositoryOwner}.github.io` ? `/${repositoryName}` : '';
@@ -42,6 +54,9 @@ if (!browser) {
 }
 if (!existsSync(join(distRoot, 'resume', 'index.html'))) {
   throw new Error('dist/resume/index.html is missing. Run the build before PDF generation.');
+}
+if (!existsSync(join(distRoot, 'en', 'resume', 'index.html'))) {
+  throw new Error('dist/en/resume/index.html is missing. Run the build before PDF generation.');
 }
 
 const mimeTypes = {
@@ -81,41 +96,47 @@ const address = server.address();
 if (!address || typeof address === 'string') throw new Error('Unable to start local PDF server.');
 
 const browserProfile = await mkdtemp(join(tmpdir(), 'milad-resume-pdf-'));
-await mkdir(dirname(publicPdf), { recursive: true });
+await mkdir(dirname(defaultPublicPdf), { recursive: true });
 
 try {
-  const url = `http://127.0.0.1:${address.port}${base}/resume/`;
-  const args = [
-    '--headless=new',
-    '--disable-gpu',
-    '--no-sandbox',
-    '--no-pdf-header-footer',
-    '--print-to-pdf-no-header',
-    '--run-all-compositor-stages-before-draw',
-    '--virtual-time-budget=1000',
-    `--user-data-dir=${browserProfile}`,
-    `--print-to-pdf=${publicPdf}`,
-    url,
-  ];
+  for (const target of pdfTargets) {
+    const url = `http://127.0.0.1:${address.port}${base}/${target.route}`;
+    const args = [
+      '--headless=new',
+      '--disable-gpu',
+      '--no-sandbox',
+      '--no-pdf-header-footer',
+      '--print-to-pdf-no-header',
+      '--run-all-compositor-stages-before-draw',
+      '--virtual-time-budget=1000',
+      `--user-data-dir=${browserProfile}`,
+      `--print-to-pdf=${target.publicPath}`,
+      url,
+    ];
 
-  await new Promise((resolveBrowser, reject) => {
-    const child = spawn(browser, args, { stdio: 'inherit' });
-    child.once('error', reject);
-    child.once('exit', (code) => {
-      if (code === 0) resolveBrowser();
-      else reject(new Error(`Headless browser exited with code ${code}.`));
+    await new Promise((resolveBrowser, reject) => {
+      const child = spawn(browser, args, { stdio: 'inherit' });
+      child.once('error', reject);
+      child.once('exit', (code) => {
+        if (code === 0) resolveBrowser();
+        else reject(new Error(`Headless browser exited with code ${code}.`));
+      });
     });
-  });
 
-  const pdf = await readFile(publicPdf);
-  const pdfStats = await stat(publicPdf);
-  if (pdf.subarray(0, 5).toString() !== '%PDF-' || pdfStats.size < 10_000) {
-    throw new Error('Generated resume is not a valid readable PDF.');
+    const pdf = await readFile(target.publicPath);
+    const pdfStats = await stat(target.publicPath);
+    if (pdf.subarray(0, 5).toString() !== '%PDF-' || pdfStats.size < 10_000) {
+      throw new Error(`Generated resume is not a valid readable PDF: ${target.publicPath}`);
+    }
+
+    await mkdir(dirname(target.distPath), { recursive: true });
+    await copyFile(target.publicPath, target.distPath);
+    console.log(`Resume PDF generated: ${target.publicPath} (${pdfStats.size} bytes)`);
   }
 
-  await mkdir(dirname(distPdf), { recursive: true });
-  await copyFile(publicPdf, distPdf);
-  console.log(`Resume PDF generated: ${publicPdf} (${pdfStats.size} bytes)`);
+  await copyFile(pdfTargets[0].publicPath, defaultPublicPdf);
+  await copyFile(pdfTargets[0].publicPath, defaultDistPdf);
+  console.log(`Default resume alias updated: ${defaultPublicPdf}`);
 } finally {
   await new Promise((resolveClose) => server.close(resolveClose));
   await rm(browserProfile, { recursive: true, force: true });

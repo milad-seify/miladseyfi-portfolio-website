@@ -1,6 +1,6 @@
 ---
-import { getCollection, render } from 'astro:content';
-import ContentLayout from '@/layouts/ContentLayout.astro';
+import { getCollection } from 'astro:content';
+import ProjectCaseStudy from '@/components/sections/ProjectCaseStudy.astro';
 import { isPublished } from '@/lib/content';
 
 export async function getStaticPaths() {
@@ -9,24 +9,6 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { Content } = await render(project);
 ---
 
-<ContentLayout title={project.data.title} description={project.data.summary} eyebrow="Case study">
-  <dl class="content-meta">
-    <div>
-      <dt>Context</dt>
-      <dd>{project.data.context}</dd>
-    </div>
-    <div>
-      <dt>Role</dt>
-      <dd>{project.data.role}</dd>
-    </div>
-    <div>
-      <dt>Challenge</dt>
-      <dd>{project.data.challenge}</dd>
-    </div>
-  </dl>
-  <p class="content-highlight">{project.data.highlight}</p>
-  <Content />
-</ContentLayout>
+<ProjectCaseStudy locale="fa" {project} />

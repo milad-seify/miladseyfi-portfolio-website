@@ -1,45 +1,66 @@
 ---
+import ContactForm from './ContactForm.astro';
 import ButtonLink from '@/components/ui/ButtonLink.astro';
-import { profile } from '@/data/profile';
 import { resume } from '@/data/resume';
+import { getDictionary, getLocalePath, type Locale } from '@/i18n/config';
 import { withBasePath } from '@/lib/urls';
 
-const resumePage = withBasePath('resume/');
-const resumePdf = withBasePath('resume/milad-seyfi-resume.pdf');
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = getDictionary(locale).contact;
+const resumePage = getLocalePath(locale, 'resume/');
+const resumePdf = withBasePath(`resume/milad-seyfi-resume-${locale}.pdf`);
+type ChannelKey = keyof typeof copy.channelLabels;
+const channels: { key: ChannelKey; href: string; external: boolean }[] = [];
+if (resume.contact.linkedin)
+  channels.push({ key: 'linkedin', href: resume.contact.linkedin, external: true });
+if (resume.contact.email)
+  channels.push({ key: 'email', href: `mailto:${resume.contact.email}`, external: false });
+if (resume.contact.github)
+  channels.push({ key: 'github', href: resume.contact.github, external: true });
+if (resume.contact.telegram)
+  channels.push({ key: 'telegram', href: resume.contact.telegram, external: true });
+if (resume.contact.whatsapp)
+  channels.push({ key: 'whatsapp', href: resume.contact.whatsapp, external: true });
+if (resume.contact.website)
+  channels.push({ key: 'website', href: resume.contact.website, external: true });
 ---
 
 <section class="contact-section" id="contact" aria-labelledby="contact-heading">
   <div class="shell contact reveal">
-    <div>
+    <div class="contact__intro">
       <p class="eyebrow">
-        <span aria-hidden="true">//</span> Contact
+        <span aria-hidden="true">//</span> {copy.eyebrow}
       </p>
-      <h2 id="contact-heading">{profile.contact.heading}</h2>
-      <p class="contact__summary">{profile.contact.summary}</p>
-      <ul class="contact__topics" aria-label="Consulting enquiry topics">
-        {profile.contact.topics.map((topic) => (
+      <h2 id="contact-heading">{copy.heading}</h2>
+      <p class="contact__summary">{copy.summary}</p>
+      <ul class="contact__topics" aria-label={copy.topicsLabel}>
+        {copy.topics.map((topic) => (
           <li>{topic}</li>
         ))}
       </ul>
-    </div>
-    <div class="contact__actions">
-      {resume.contact.linkedin ? (
-        <ButtonLink href={resume.contact.linkedin} external>
-          Connect on LinkedIn
+      <div class="contact__channels">
+        {channels.map((channel, index) => (
+          <ButtonLink
+            href={channel.href}
+            external={channel.external}
+            variant={index === 0 ? 'primary' : 'secondary'}
+          >
+            {copy.channelLabels[channel.key]}
+          </ButtonLink>
+        ))}
+      </div>
+      <div class="contact__resume-actions">
+        <ButtonLink href={resumePage} variant="secondary">
+          {copy.resume}
         </ButtonLink>
-      ) : resume.contact.email ? (
-        <ButtonLink href={`mailto:${resume.contact.email}`}>Email Milad</ButtonLink>
-      ) : (
-        <span class="button button--disabled" aria-disabled="true">
-          Contact channel pending verification
-        </span>
-      )}
-      <ButtonLink href={resumePage} variant="secondary">
-        View Resume
-      </ButtonLink>
-      <ButtonLink href={resumePdf} variant="quiet" download="milad-seyfi-resume.pdf">
-        Download PDF
-      </ButtonLink>
+        <ButtonLink href={resumePdf} variant="quiet" download={`milad-seyfi-resume-${locale}.pdf`}>
+          {copy.pdf}
+        </ButtonLink>
+      </div>
     </div>
+    <ContactForm {locale} />
   </div>
 </section>

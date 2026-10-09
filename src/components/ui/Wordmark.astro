@@ -1,6 +1,13 @@
 ---
 import { resume } from '@/data/resume';
-import { withBasePath } from '@/lib/urls';
+import { getDictionary, getLocalePath, type Locale } from '@/i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const dictionary = getDictionary(locale);
 
 const initials = resume.identity.name
   .split(/\s+/)
@@ -8,12 +15,16 @@ const initials = resume.identity.name
   .join('');
 ---
 
-<a class="wordmark" href={withBasePath()} aria-label={`${resume.identity.name}, home`}>
+<a
+  class="wordmark"
+  href={getLocalePath(locale)}
+  aria-label={`${resume.identity.name}, ${dictionary.header.home}`}
+>
   <span class="wordmark__mark" aria-hidden="true">
     {initials}
   </span>
   <span class="wordmark__text">
     <strong>{resume.identity.name}</strong>
-    <small>Cloud · Platform · DevOps</small>
+    <small>{dictionary.wordmark}</small>
   </span>
 </a>

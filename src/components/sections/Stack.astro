@@ -1,23 +1,34 @@
 ---
 import SectionHeading from '@/components/ui/SectionHeading.astro';
-import { resume } from '@/data/resume';
+import TechnicalTerm from '@/components/ui/TechnicalTerm.astro';
+import { getDictionary, type Locale } from '@/i18n/config';
+import { getLocalizedResume } from '@/i18n/resume';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = getDictionary(locale).stack;
+const localizedResume = getLocalizedResume(locale);
 ---
 
 <section class="section section--bordered shell" id="stack" aria-labelledby="stack-heading">
   <div class="stack reveal">
     <SectionHeading
       id="stack-heading"
-      eyebrow="Technology stack"
-      heading="Tools, platforms, and control planes."
-      description="Technologies used across architecture, provisioning, automation, and operations."
+      eyebrow={copy.eyebrow}
+      heading={copy.heading}
+      description={copy.description}
     />
     <div class="stack__matrix">
-      {resume.skillGroups.map((group) => (
+      {localizedResume.skillGroups.map((group) => (
         <div class="stack__row">
           <h3>{group.title}</h3>
           <ul>
             {group.skills.map((item) => (
-              <li>{item}</li>
+              <li>
+                <TechnicalTerm>{item}</TechnicalTerm>
+              </li>
             ))}
           </ul>
         </div>

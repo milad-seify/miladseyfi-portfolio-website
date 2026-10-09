@@ -1,26 +1,36 @@
 ---
 import SectionHeading from '@/components/ui/SectionHeading.astro';
-import { profile } from '@/data/profile';
-import { resume } from '@/data/resume';
+import TechnicalTerm from '@/components/ui/TechnicalTerm.astro';
+import { getDictionary, type Locale } from '@/i18n/config';
+import { getLocalizedResume } from '@/i18n/resume';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = getDictionary(locale).expertise;
+const localizedResume = getLocalizedResume(locale);
 ---
 
 <section class="section shell" id="expertise" aria-labelledby="expertise-heading">
   <div class="reveal">
     <SectionHeading
       id="expertise-heading"
-      eyebrow="Expertise"
-      heading={profile.expertiseIntro.heading}
-      description={profile.expertiseIntro.description}
+      eyebrow={copy.eyebrow}
+      heading={copy.heading}
+      description={copy.description}
     />
     <div class="expertise-grid">
-      {resume.skillGroups.map((item, index) => (
+      {localizedResume.skillGroups.map((item, index) => (
         <article class="expertise-card">
           <span class="expertise-card__index">{String(index + 1).padStart(2, '0')}</span>
           <h3>{item.title}</h3>
           <p>{item.summary}</p>
           <ul class="tag-list">
             {item.skills.slice(0, 4).map((tag) => (
-              <li>{tag}</li>
+              <li>
+                <TechnicalTerm>{tag}</TechnicalTerm>
+              </li>
             ))}
           </ul>
         </article>

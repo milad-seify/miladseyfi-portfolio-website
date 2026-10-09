@@ -12,12 +12,15 @@ pnpm validate
 
 `validate` runs Astro/TypeScript checks, formatting verification, and the production build.
 
+`resume:pdf` builds and prints Persian and English resume routes with a local Chrome/Edge installation. CI verifies committed PDFs but does not regenerate them.
+
 ## CI and deploy
 
 - CI runs on pushes and pull requests with a pinned Node major, Corepack, frozen lockfile, and pnpm cache.
 - Pages deployment runs only from `main`, uses GitHub's Pages artifact flow, and grants only `contents: read`, `pages: write`, and `id-token: write` where needed.
 - The Astro `site` and `base` values derive from repository/environment settings. For deployment, use Actions variable `SITE_URL` for a custom-domain HTTPS origin and `BASE_PATH` only for an intentional subpath.
 - Add `public/CNAME` only after the real domain is known.
+- Set `PUBLIC_CONTACT_FORM_ENDPOINT` to a verified Formspree-compatible HTTPS endpoint to enable the native contact form. Without it, the site renders a localized unavailable state and keeps LinkedIn available.
 
 Dependabot maintains npm and GitHub Actions dependencies on a weekly schedule. Review major upgrades and keep lockfile changes committed.
 

@@ -16,14 +16,14 @@ Run the complete quality gate with `pnpm validate`. See [`AGENTS.md`](AGENTS.md)
 
 ## Professional data and resume
 
-`src/data/resume.ts` is the canonical source for identity, career history, education, skills, verified metrics, selected projects, certifications, and contact links. `src/data/profile.ts` contains website positioning and presentation copy only.
+`src/data/resume.ts` is the canonical source for identity, career history, education, skills, verified metrics, selected projects, certifications, and contact links. Localized presentation lives in `src/i18n` and maps back to canonical IDs.
 
 ```sh
 pnpm resume:check
 pnpm resume:pdf
 ```
 
-`resume:check` catches missing required fields, invalid date ranges, placeholders, and malformed contact URLs. `resume:pdf` builds the site and prints `/resume` through a locally installed Chrome or Edge browser to `public/resume/milad-seyfi-resume.pdf`. Set `CHROME_PATH` if the browser is installed outside a standard location.
+`resume:check` catches missing required fields, invalid date ranges, placeholders, and malformed contact URLs. `resume:pdf` builds the site and prints `/resume/` and `/en/resume/` through a locally installed Chrome or Edge browser to language-specific PDFs, while retaining `milad-seyfi-resume.pdf` as the Persian compatibility alias. Set `CHROME_PATH` if needed.
 
 Long-form work and writing remain in the typed collections under `src/content/projects` and `src/content/posts`.
 
@@ -34,6 +34,8 @@ Long-form work and writing remain in the typed collections under `src/content/pr
 3. Run `pnpm resume:check`, `pnpm validate`, and `pnpm resume:pdf`.
 4. Confirm the production URL and verify the committed 1200×630 PNG social card.
 5. Add `public/CNAME` only when the real custom domain is known.
+
+Persian is the default language at unprefixed routes; English is under `/en/`. Set `PUBLIC_CONTACT_FORM_ENDPOINT` to enable the native contact form. LinkedIn remains available when the endpoint is unset.
 
 ## Deployment
 

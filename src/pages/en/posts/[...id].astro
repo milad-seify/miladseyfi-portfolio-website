@@ -1,10 +1,12 @@
 ---
 import { getCollection, render } from 'astro:content';
 import ContentLayout from '@/layouts/ContentLayout.astro';
-import { formatDate, isPublished } from '@/lib/content';
+import { isPublished } from '@/lib/content';
 
 export async function getStaticPaths() {
-  const posts = (await getCollection('posts')).filter(isPublished);
+  const posts = (await getCollection('posts'))
+    .filter(isPublished)
+    .filter((post) => post.data.locale === 'en');
   return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
 }
 
@@ -13,11 +15,11 @@ const { Content } = await render(post);
 ---
 
 <ContentLayout
+  locale="en"
+  routePath={`posts/${post.id}/`}
   title={post.data.title}
   description={post.data.description}
-  eyebrow={
-    post.data.publishedAt ? `Article · ${formatDate(post.data.publishedAt)}` : 'Article draft'
-  }
+  eyebrow="Article"
 >
   <Content />
 </ContentLayout>

@@ -6,6 +6,8 @@ export interface ContactInfo {
   website?: string;
   linkedin?: string;
   github?: string;
+  telegram?: string;
+  whatsapp?: string;
 }
 
 export interface CareerHighlight {
@@ -16,6 +18,7 @@ export interface CareerHighlight {
 }
 
 export interface Education {
+  id: string;
   institution: string;
   degree: string;
   field: string;
@@ -25,6 +28,7 @@ export interface Education {
 }
 
 export interface Experience {
+  id: string;
   organization: string;
   role: string;
   startDate: ResumeMonth;
@@ -106,6 +110,7 @@ export const resume: Resume = {
   ],
   experience: [
     {
+      id: 'greenplus-cloud-engineer',
       organization: 'GreenPlus',
       role: 'Cloud Engineer',
       startDate: '2023-09',
@@ -140,6 +145,7 @@ export const resume: Resume = {
   ],
   education: [
     {
+      id: 'ferdowsi-msc-software-engineering',
       institution: 'Ferdowsi University of Mashhad',
       degree: 'Master of Science',
       field: 'Software Engineering',

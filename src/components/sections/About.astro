@@ -1,18 +1,24 @@
 ---
 import SectionHeading from '@/components/ui/SectionHeading.astro';
-import { profile } from '@/data/profile';
+import { getDictionary, type Locale } from '@/i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const copy = getDictionary(locale).about;
 ---
 
 <section class="section shell" id="about" aria-labelledby="about-heading">
   <div class="about reveal">
-    <SectionHeading id="about-heading" eyebrow="About" heading={profile.about.heading} />
+    <SectionHeading id="about-heading" eyebrow={copy.eyebrow} heading={copy.heading} />
     <div class="about__body">
-      {profile.about.paragraphs.map((paragraph) => (
+      {copy.paragraphs.map((paragraph) => (
         <p>{paragraph}</p>
       ))}
     </div>
     <ol class="principles">
-      {profile.about.principles.map((principle) => (
+      {copy.principles.map((principle) => (
         <li>
           <span>{principle.value}</span>
           {principle.label}

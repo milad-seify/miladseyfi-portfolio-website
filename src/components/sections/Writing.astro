@@ -2,34 +2,34 @@
 import type { CollectionEntry } from 'astro:content';
 import Icon from '@/components/ui/Icon.astro';
 import SectionHeading from '@/components/ui/SectionHeading.astro';
-import { profile } from '@/data/profile';
-import { formatDate } from '@/lib/content';
-import { withBasePath } from '@/lib/urls';
+import { formatDate, getDictionary, getLocalePath, type Locale } from '@/i18n/config';
 
 interface Props {
   posts: CollectionEntry<'posts'>[];
+  locale: Locale;
 }
-const { posts } = Astro.props;
+const { posts, locale } = Astro.props;
+const copy = getDictionary(locale).writing;
 ---
 
 <section class="section shell" id="writing" aria-labelledby="writing-heading">
   <div class="reveal">
     <SectionHeading
       id="writing-heading"
-      eyebrow="Notes & articles"
-      heading={profile.writingIntro.heading}
-      description={profile.writingIntro.description}
+      eyebrow={copy.eyebrow}
+      heading={copy.heading}
+      description={copy.description}
     />
     {posts.length > 0 ? (
       <div class="writing-list">
         {posts.map((post) => (
           <article>
             <p>
-              {post.data.publishedAt ? `${formatDate(post.data.publishedAt)} · ` : ''}
+              {post.data.publishedAt ? `${formatDate(post.data.publishedAt, locale)} · ` : ''}
               {post.data.tags.join(' / ')}
             </p>
             <h3>
-              <a href={withBasePath(`posts/${post.id}/`)}>{post.data.title}</a>
+              <a href={getLocalePath(locale, `posts/${post.id}/`)}>{post.data.title}</a>
             </h3>
             <span>{post.data.description}</span>
             <Icon name="arrow" size={20} />
@@ -38,8 +38,8 @@ const { posts } = Astro.props;
       </div>
     ) : (
       <div class="writing-empty">
-        <p class="eyebrow">EDITORIAL_QUEUE / 00</p>
-        <p>Articles will appear here after editorial review.</p>
+        <p class="eyebrow">{copy.queue}</p>
+        <p>{copy.empty}</p>
       </div>
     )}
   </div>

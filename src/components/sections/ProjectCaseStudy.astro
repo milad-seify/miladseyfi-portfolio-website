@@ -1,0 +1,71 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import ContentLayout from '@/layouts/ContentLayout.astro';
+import TechnicalTerm from '@/components/ui/TechnicalTerm.astro';
+import { getDictionary, type Locale } from '@/i18n/config';
+import { getPersianProject, getProjectPresentation } from '@/i18n/projects';
+
+interface Props {
+  locale: Locale;
+  project: CollectionEntry<'projects'>;
+}
+
+const { locale, project } = Astro.props;
+const copy = getDictionary(locale).caseStudy;
+const presentation = getProjectPresentation(locale, project);
+const persian = locale === 'fa' ? getPersianProject(project.id) : undefined;
+const { Content } = await render(project);
+const routePath = `projects/${project.id}/`;
+---
+
+<ContentLayout
+  {locale}
+  {routePath}
+  title={presentation.title}
+  description={presentation.summary}
+  eyebrow={copy.eyebrow}
+>
+  <dl class="content-meta">
+    <div>
+      <dt>{copy.context}</dt>
+      <dd>{presentation.context}</dd>
+    </div>
+    <div>
+      <dt>{copy.role}</dt>
+      <dd>{presentation.role}</dd>
+    </div>
+    <div>
+      <dt>{copy.challenge}</dt>
+      <dd>{presentation.challenge}</dd>
+    </div>
+  </dl>
+  <p class="content-highlight">{presentation.highlight}</p>
+  <ul class="tag-list content-technologies" aria-label="Technologies">
+    {project.data.technologies.map((technology) => (
+      <li>
+        <TechnicalTerm>{technology}</TechnicalTerm>
+      </li>
+    ))}
+  </ul>
+  {persian ? (
+    <div class="localized-prose">
+      {persian.sections.map((section) => (
+        <section>
+          <h2>{section.heading}</h2>
+          {section.paragraphs?.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+          {section.bullets && (
+            <ul>
+              {section.bullets.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          )}
+        </section>
+      ))}
+    </div>
+  ) : (
+    <Content />
+  )}
+</ContentLayout>

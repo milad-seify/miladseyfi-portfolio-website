@@ -83,6 +83,8 @@ if (resume.contact.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(resume.contact.em
 checkUrl(resume.contact.website, 'contact.website');
 checkUrl(resume.contact.linkedin, 'contact.linkedin');
 checkUrl(resume.contact.github, 'contact.github');
+checkUrl(resume.contact.telegram, 'contact.telegram');
+checkUrl(resume.contact.whatsapp, 'contact.whatsapp');
 
 const inspectPlaceholders = (value, path = 'resume') => {
   if (typeof value === 'string' && placeholderPattern.test(value)) {

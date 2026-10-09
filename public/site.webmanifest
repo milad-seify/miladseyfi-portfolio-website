@@ -1,7 +1,9 @@
 {
-  "name": "Milad Seyfi — Cloud Architect & DevOps Consultant",
-  "short_name": "Milad Seyfi",
-  "description": "Cloud architecture, platform engineering, and DevOps consulting.",
+  "name": "میلاد سیفی — معمار کلاد و مشاور دواپس",
+  "short_name": "میلاد سیفی",
+  "description": "معماری کلاد، مهندسی پلتفرم و مشاوره دواپس.",
+  "lang": "fa",
+  "dir": "rtl",
   "id": ".",
   "start_url": ".",
   "scope": ".",
