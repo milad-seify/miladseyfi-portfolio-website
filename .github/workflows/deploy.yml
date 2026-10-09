@@ -12,7 +12,7 @@ env:
   ASTRO_TELEMETRY_DISABLED: '1'
   SITE_URL: ${{ vars.SITE_URL }}
   BASE_PATH: ${{ vars.BASE_PATH }}
-
+  PUBLIC_CONTACT_FORM_ENDPOINT: ${{ vars.PUBLIC_CONTACT_FORM_ENDPOINT }}
 concurrency:
   group: pages
   cancel-in-progress: false
