@@ -20,7 +20,7 @@ const localizedResume = getLocalizedResume(locale);
 >
   <div class="experience reveal">
     <p class="section-coordinate" aria-hidden="true">
-      03 / CHRONOLOGY
+      04 / CHRONOLOGY
     </p>
     <SectionHeading
       id="experience-heading"
@@ -55,18 +55,6 @@ const localizedResume = getLocalizedResume(locale);
             </ul>
           </div>
         </article>
-      ))}
-      {localizedResume.education.map((education, index) => (
-        <aside class="education-card" aria-labelledby={`education-heading-${index}`}>
-          <p class="timeline__period">{copy.education}</p>
-          <h3 id={`education-heading-${index}`}>
-            {education.degree} in {education.field}
-          </h3>
-          <p>
-            {education.institution}
-            {education.status ? ` · ${education.status}` : ''}
-          </p>
-        </aside>
       ))}
     </div>
   </div>

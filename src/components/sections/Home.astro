@@ -27,11 +27,11 @@ const posts = (await getCollection('posts'))
 <BaseLayout {locale}>
   <Hero {locale} />
   <About {locale} />
-  <Experience {locale} />
   <Expertise {locale} />
   <Projects {projects} {locale} />
+  <Experience {locale} />
   <Services {locale} />
   <Stack {locale} />
-  <Writing {posts} {locale} />
+  {posts.length > 0 && <Writing {posts} {locale} />}
   <Contact {locale} />
 </BaseLayout>
