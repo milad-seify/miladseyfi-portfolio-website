@@ -26,7 +26,7 @@ resume data + content collections
 
 - Static output and no hydrated components by default.
 - Native CSS scroll-driven entry effects with a non-supporting-browser fallback; reduced motion disables them.
-- Self-hosted Vazirmatn for Persian and a system stack for English; no font CDN request.
+- Self-hosted Estedad for Persian and a system stack for English; no font CDN request.
 - Repository Pages URL is configurable through environment variables; a custom domain requires no component changes.
 
 Create an ADR in `docs/adr/` only for a hard-to-reverse cross-cutting decision (runtime framework, CMS/backend, hosting migration, or analytics vendor).

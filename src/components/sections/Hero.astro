@@ -14,12 +14,16 @@ const localizedResume = getLocalizedResume(locale);
 ---
 
 <section class="hero shell" aria-labelledby="hero-title">
-  <div class="hero__copy">
+  <header class="hero__headline">
     <p class="hero__status">
       <span></span>
       {copy.status}
     </p>
+    <p class="hero__name">{localizedResume.identity.name}</p>
     <h1 id="hero-title">{copy.title}</h1>
+  </header>
+
+  <div class="hero__copy">
     <p class="hero__summary">{copy.summary}</p>
     <div class="hero__actions">
       <ButtonLink href="#work">{copy.workCta}</ButtonLink>
@@ -27,14 +31,6 @@ const localizedResume = getLocalizedResume(locale);
         {copy.contactCta}
       </ButtonLink>
     </div>
-    <dl class="hero__signals" aria-label={copy.metricsLabel}>
-      {localizedResume.careerHighlights.map((highlight) => (
-        <div>
-          <dt>{highlight.label}</dt>
-          <dd>{highlight.value}</dd>
-        </div>
-      ))}
-    </dl>
   </div>
 
   <div class="hero__visual" aria-hidden="true">
@@ -87,4 +83,22 @@ const localizedResume = getLocalizedResume(locale);
       </div>
     </div>
   </div>
+
+  <dl class="hero__signals" aria-label={copy.metricsLabel}>
+    {localizedResume.careerHighlights.map((highlight, index) => (
+      <div>
+        <span aria-hidden="true">0{index + 1}</span>
+        <dt>{highlight.label}</dt>
+        <dd>{highlight.value}</dd>
+      </div>
+    ))}
+  </dl>
+
+  <p class="hero__coordinate" aria-hidden="true">
+    SYSTEM / CLOUD
+    <br />
+    PLANE / ARCHITECTURE
+    <br />
+    STATE / {copy.stable}
+  </p>
 </section>

@@ -14,15 +14,23 @@ const localizedResume = getLocalizedResume(locale);
 
 <section class="section shell" id="expertise" aria-labelledby="expertise-heading">
   <div class="reveal">
+    <p class="section-coordinate" aria-hidden="true">
+      02 / CAPABILITY MAP
+    </p>
     <SectionHeading
       id="expertise-heading"
       eyebrow={copy.eyebrow}
       heading={copy.heading}
       description={copy.description}
     />
-    <div class="expertise-grid">
+    <div class="expertise-grid" aria-label={copy.heading}>
+      <div class="expertise-core" aria-hidden="true">
+        <span>CLOUD</span>
+        <i></i>
+        <small>CONTROL / PLANE</small>
+      </div>
       {localizedResume.skillGroups.map((item, index) => (
-        <article class="expertise-card">
+        <article class:list={['expertise-card', `expertise-card--${index + 1}`]}>
           <span class="expertise-card__index">{String(index + 1).padStart(2, '0')}</span>
           <h3>{item.title}</h3>
           <p>{item.summary}</p>

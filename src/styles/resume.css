@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Vazirmatn';
-  src: url('../assets/fonts/Vazirmatn.woff2') format('woff2');
+  font-family: 'Estedad';
+  src: url('../assets/fonts/Estedad.woff2') format('woff2');
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
@@ -35,7 +35,7 @@ html {
 }
 
 html[lang='fa'] {
-  font-family: 'Vazirmatn', Tahoma, Arial, sans-serif;
+  font-family: 'Estedad', Tahoma, Arial, sans-serif;
   line-height: 1.65;
 }
 

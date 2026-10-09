@@ -11,6 +11,9 @@ const copy = getDictionary(locale).about;
 
 <section class="section shell" id="about" aria-labelledby="about-heading">
   <div class="about reveal">
+    <p class="section-coordinate" aria-hidden="true">
+      01 / POSITION
+    </p>
     <SectionHeading id="about-heading" eyebrow={copy.eyebrow} heading={copy.heading} />
     <div class="about__body">
       {copy.paragraphs.map((paragraph) => (

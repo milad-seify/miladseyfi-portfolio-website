@@ -12,6 +12,9 @@ const copy = getDictionary(locale).services;
 
 <section class="section shell" id="services" aria-labelledby="services-heading">
   <div class="reveal">
+    <p class="section-coordinate" aria-hidden="true">
+      05 / CONSULTING INTERFACES
+    </p>
     <SectionHeading
       id="services-heading"
       eyebrow={copy.eyebrow}
@@ -22,8 +25,10 @@ const copy = getDictionary(locale).services;
       {copy.items.map((service, index) => (
         <article class="service-card">
           <span class="service-card__number">0{index + 1}</span>
-          <h3>{service.title}</h3>
-          <p>{service.description}</p>
+          <div class="service-card__copy">
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+          </div>
           <ul>
             {service.deliverables.map((item) => (
               <li>

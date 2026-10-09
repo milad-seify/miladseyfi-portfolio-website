@@ -16,6 +16,9 @@ const copy = getDictionary(locale).projects;
 
 <section class="section section--tinted" id="work" aria-labelledby="work-heading">
   <div class="shell reveal">
+    <p class="section-coordinate" aria-hidden="true">
+      04 / SELECTED SYSTEMS
+    </p>
     <SectionHeading
       id="work-heading"
       eyebrow={copy.eyebrow}
@@ -24,10 +27,18 @@ const copy = getDictionary(locale).projects;
     />
     {projects.length > 0 ? (
       <div class="project-grid">
-        {projects.map((project) => {
+        {projects.map((project, index) => {
           const presentation = getProjectPresentation(locale, project);
           return (
-            <article class="project-card">
+            <article
+              class:list={[
+                'project-card',
+                index === 0 ? 'project-card--feature' : 'project-card--compact',
+              ]}
+            >
+              <span class="project-card__index" aria-hidden="true">
+                / {String(index + 1).padStart(2, '0')}
+              </span>
               <div class="project-card__meta">
                 <span>{presentation.context}</span>
                 <span>{presentation.role}</span>

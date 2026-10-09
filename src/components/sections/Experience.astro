@@ -19,6 +19,9 @@ const localizedResume = getLocalizedResume(locale);
   aria-labelledby="experience-heading"
 >
   <div class="experience reveal">
+    <p class="section-coordinate" aria-hidden="true">
+      03 / CHRONOLOGY
+    </p>
     <SectionHeading
       id="experience-heading"
       eyebrow={copy.eyebrow}
@@ -26,8 +29,8 @@ const localizedResume = getLocalizedResume(locale);
       description={copy.note}
     />
     <div class="timeline">
-      {localizedResume.experience.map((item) => (
-        <article class="timeline__item">
+      {localizedResume.experience.map((item, index) => (
+        <article class="timeline__item" data-entry={String(index + 1).padStart(2, '0')}>
           <div class="timeline__rail">
             <span></span>
           </div>

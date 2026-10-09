@@ -14,6 +14,9 @@ const localizedResume = getLocalizedResume(locale);
 
 <section class="section section--bordered shell" id="stack" aria-labelledby="stack-heading">
   <div class="stack reveal">
+    <p class="section-coordinate" aria-hidden="true">
+      06 / ECOSYSTEM
+    </p>
     <SectionHeading
       id="stack-heading"
       eyebrow={copy.eyebrow}
@@ -21,8 +24,13 @@ const localizedResume = getLocalizedResume(locale);
       description={copy.description}
     />
     <div class="stack__matrix">
-      {localizedResume.skillGroups.map((group) => (
-        <div class="stack__row">
+      <div class="stack__axis" aria-hidden="true">
+        <span>INFRASTRUCTURE</span>
+        <i></i>
+        <span>OPERATIONS</span>
+      </div>
+      {localizedResume.skillGroups.map((group, index) => (
+        <div class="stack__row" data-layer={String(index + 1).padStart(2, '0')}>
           <h3>{group.title}</h3>
           <ul>
             {group.skills.map((item) => (
