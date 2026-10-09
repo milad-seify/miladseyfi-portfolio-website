@@ -46,7 +46,6 @@ export const resumeFa = {
       institution: 'دانشگاه فردوسی مشهد',
       degree: 'کارشناسی ارشد',
       field: 'مهندسی نرم‌افزار',
-      status: 'دانشجوی فعلی',
     },
   },
   skillGroups: {

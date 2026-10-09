@@ -1,5 +1,4 @@
 ---
-import Icon from '@/components/ui/Icon.astro';
 import SectionHeading from '@/components/ui/SectionHeading.astro';
 import { getDictionary, type Locale } from '@/i18n/config';
 
@@ -12,9 +11,6 @@ const copy = getDictionary(locale).services;
 
 <section class="section services-section" id="services" aria-labelledby="services-heading">
   <div class="shell reveal">
-    <p class="section-coordinate" aria-hidden="true">
-      05 / CONSULTING INTERFACES
-    </p>
     <SectionHeading
       id="services-heading"
       eyebrow={copy.eyebrow}
@@ -31,10 +27,7 @@ const copy = getDictionary(locale).services;
           </div>
           <ul>
             {service.deliverables.map((item) => (
-              <li>
-                <Icon name="check" size={17} />
-                {item}
-              </li>
+              <li>{item}</li>
             ))}
           </ul>
         </article>

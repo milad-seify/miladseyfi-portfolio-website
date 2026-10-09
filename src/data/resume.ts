@@ -149,7 +149,6 @@ export const resume: Resume = {
       institution: 'Ferdowsi University of Mashhad',
       degree: 'Master of Science',
       field: 'Software Engineering',
-      status: 'Current student',
     },
   ],
   skillGroups: [

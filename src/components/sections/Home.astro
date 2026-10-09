@@ -10,18 +10,16 @@ import Services from './Services.astro';
 import Stack from './Stack.astro';
 import Writing from './Writing.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getLinkedInPosts } from '@/data/linkedin-posts';
 import type { Locale } from '@/i18n/config';
-import { byNewest, byOrder, isPublished } from '@/lib/content';
+import { byOrder, isPublished } from '@/lib/content';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
 const projects = (await getCollection('projects')).filter(isPublished).sort(byOrder);
-const posts = (await getCollection('posts'))
-  .filter(isPublished)
-  .filter((post) => post.data.locale === locale)
-  .sort(byNewest);
+const posts = getLinkedInPosts(locale);
 ---
 
 <BaseLayout {locale}>

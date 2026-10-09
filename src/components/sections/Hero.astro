@@ -24,7 +24,8 @@ const localizedResume = getLocalizedResume(locale);
   </header>
 
   <div class="hero__copy">
-    <p class="hero__summary">{copy.summary}</p>
+    <p class="hero__summary hero__summary--desktop">{copy.summary}</p>
+    <p class="hero__summary hero__summary--mobile">{copy.summaryShort}</p>
     <div class="hero__actions">
       <ButtonLink href="#work">{copy.workCta}</ButtonLink>
       <ButtonLink href="#contact" variant="secondary">
@@ -34,13 +35,7 @@ const localizedResume = getLocalizedResume(locale);
   </div>
 
   <div class="hero__visual" aria-hidden="true">
-    <div class="orb orb--one"></div>
-    <div class="orb orb--two"></div>
     <div class="architecture-map">
-      <div class="architecture-map__topline">
-        <span>{copy.topology}</span>
-        <span class="live-dot">{copy.stable}</span>
-      </div>
       <div class="node node--cloud">
         <Icon name="cloud" size={24} />
         <span>
@@ -67,20 +62,6 @@ const localizedResume = getLocalizedResume(locale);
           <TechnicalTerm>{copy.storage}</TechnicalTerm>
         </span>
       </div>
-      <div class="map-metrics">
-        <span>
-          <i></i>
-          {copy.observable}
-        </span>
-        <span>
-          <i></i>
-          {copy.repeatable}
-        </span>
-        <span>
-          <i></i>
-          {copy.operable}
-        </span>
-      </div>
     </div>
   </div>
 
@@ -93,12 +74,4 @@ const localizedResume = getLocalizedResume(locale);
       </div>
     ))}
   </dl>
-
-  <p class="hero__coordinate" aria-hidden="true">
-    SYSTEM / CLOUD
-    <br />
-    PLANE / ARCHITECTURE
-    <br />
-    STATE / {copy.stable}
-  </p>
 </section>

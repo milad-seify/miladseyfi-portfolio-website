@@ -25,7 +25,11 @@ Use semantic token names. Components must not define a competing palette.
 - Decorative SVGs are hidden from assistive technology. Meaningful icons require accessible text.
 - Focus indicators must remain visible on every interactive element.
 - Motion communicates entrance, topology state, or interaction feedback only. Keep it subtle, CSS-driven, and disabled under `prefers-reduced-motion`.
+- Standard entrance motion should resolve in roughly 450–650ms. Scroll-linked reveals start partially visible and complete early in the viewport.
+- Profile photography uses an editorial rectangular crop rather than an avatar. The component must retain the same composition when its fallback is replaced by a verified photograph.
 
 ## Responsive behavior
 
 Design mobile-first. Collapse navigation to an accessible native disclosure, stack grids, avoid horizontal scrolling, and keep touch targets at least 44px.
+
+The mobile Hero uses its concise summary and reduced topology composition; it is not a direct stack of the desktop layout.

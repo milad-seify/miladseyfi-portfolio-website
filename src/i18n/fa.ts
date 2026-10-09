@@ -21,18 +21,15 @@ export const fa = {
     title: 'معماری کلاد برای زیرساختی که باید درست کار کند.',
     summary:
       'مهندس کلاد و مشاور DevOps با تجربه عملی در طراحی، بهره‌برداری و نوسازی پلتفرم‌های OpenStack، Ceph و Kubernetes؛ از زیرساخت چند دیتاسنتری و اتوماسیون پلتفرم تا مشاهده‌پذیری، مالکیت سرویس، مستندسازی فنی و منتورینگ.',
+    summaryShort:
+      'طراحی و نوسازی OpenStack، Ceph و Kubernetes؛ با تمرکز بر اتوماسیون، قابلیت اتکا و عملیات روز دوم.',
     workCta: 'مشاهده پروژه‌های منتخب',
     contactCta: 'شروع یک گفت‌وگو',
     metricsLabel: 'شاخص‌های اصلی تجربه',
-    topology: 'TOPOLOGY / PLATFORM',
-    stable: 'STABLE',
     cloud: 'Cloud layer',
     platform: 'Platform',
     automation: 'Automation',
     storage: 'Storage',
-    observable: 'OBSERVABLE',
-    repeatable: 'REPEATABLE',
-    operable: 'OPERABLE',
   },
   about: {
     eyebrow: 'درباره من',
@@ -114,11 +111,13 @@ export const fa = {
     description: 'فناوری‌های مورد استفاده در معماری، تأمین زیرساخت، اتوماسیون و عملیات.',
   },
   writing: {
-    eyebrow: 'یادداشت‌ها و مقاله‌ها',
-    heading: 'یادداشت فنی، بدون حاشیه.',
-    description: 'یادداشت‌هایی درباره معماری کلاد، پلتفرم Kubernetes، اتوماسیون و عملیات زیرساخت.',
-    queue: 'EDITORIAL_QUEUE / 00',
-    empty: 'مقاله‌ها پس از بازبینی محتوایی در این بخش منتشر می‌شوند.',
+    eyebrow: 'نوشته‌ها در LinkedIn',
+    heading: 'تفکر فنی، در متن کار واقعی.',
+    description:
+      'نوشته‌های منتشرشده درباره معماری کلاد، پلتفرم Kubernetes، اتوماسیون و عملیات زیرساخت؛ با پیوند مستقیم به نسخه اصلی.',
+    source: 'مشاهده پست اصلی در LinkedIn',
+    profileCta: 'مشاهده پروفایل LinkedIn',
+    empty: 'نوشته‌های منتشرشده پس از ثبت لینک اصلی آن‌ها در این بخش نمایش داده می‌شوند.',
   },
   contact: {
     eyebrow: 'ارتباط',
@@ -138,6 +137,7 @@ export const fa = {
     resume: 'مشاهده رزومه',
     pdf: 'دریافت PDF',
     form: {
+      eyebrow: 'شرح پروژه',
       heading: 'درخواست همکاری',
       description: 'زمینه، محدودیت‌ها و نوع تصمیم یا همراهی فنی مورد نیاز را کوتاه و روشن بنویسید.',
       name: 'نام',

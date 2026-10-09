@@ -13,7 +13,7 @@ This is a static Astro 7 portfolio for Milad Seyfi. Prefer the smallest change t
 ## Working rules
 
 - Run `pnpm validate` before handoff.
-- Keep factual professional data in `src/data/resume.ts`, localized presentation copy in `src/i18n`, and long-form projects/posts in content collections.
+- Keep factual professional data in `src/data/resume.ts`, localized presentation copy in `src/i18n`, long-form projects/posts in content collections, and verified LinkedIn post links/profile photography in the dedicated files documented by [`docs/CONTENT.md`](docs/CONTENT.md).
 - Build reusable primitives in `src/components/ui`, composed sections in `src/components/sections`, and page chrome in `src/layouts`.
 - Use semantic HTML and CSS first. Add client JavaScript only when the same UX cannot be delivered accessibly with HTML/CSS.
 - Use tokens from `src/styles/global.css`; do not introduce one-off colors, spacing systems, or external runtime assets.

@@ -19,18 +19,15 @@ export const en = {
     title: 'Cloud architecture for infrastructure that has to work.',
     summary:
       'Cloud engineer and DevOps consultant with hands-on experience designing, operating, and modernizing OpenStack, Ceph, and Kubernetes platforms. Work spans multi-datacenter infrastructure, platform automation, observability, service ownership, technical documentation, and mentoring.',
+    summaryShort:
+      'Designing and modernizing OpenStack, Ceph, and Kubernetes with a focus on automation, reliability, and day-two operations.',
     workCta: 'Explore selected work',
     contactCta: 'Start a conversation',
     metricsLabel: 'Core practice areas',
-    topology: 'PLATFORM_TOPOLOGY',
-    stable: 'STABLE',
     cloud: 'Cloud layer',
     platform: 'Platform',
     automation: 'Automation',
     storage: 'Storage',
-    observable: 'OBSERVABLE',
-    repeatable: 'REPEATABLE',
-    operable: 'OPERABLE',
   },
   about: {
     eyebrow: 'About',
@@ -119,12 +116,13 @@ export const en = {
     description: 'Technologies used across architecture, provisioning, automation, and operations.',
   },
   writing: {
-    eyebrow: 'Notes & articles',
-    heading: 'Technical notes, without the noise.',
+    eyebrow: 'Writing on LinkedIn',
+    heading: 'Technical thinking, grounded in the work.',
     description:
-      'Working notes on cloud architecture, Kubernetes platforms, automation, and infrastructure operations.',
-    queue: 'EDITORIAL_QUEUE / 00',
-    empty: 'Articles will appear here after editorial review.',
+      'Published writing on cloud architecture, Kubernetes platforms, automation, and infrastructure operations, linked to the original post.',
+    source: 'View original post on LinkedIn',
+    profileCta: 'View LinkedIn profile',
+    empty: 'Published writing will appear here once its original LinkedIn URL is registered.',
   },
   contact: {
     eyebrow: 'Contact',
@@ -144,6 +142,7 @@ export const en = {
     resume: 'View resume',
     pdf: 'Download PDF',
     form: {
+      eyebrow: 'Project brief',
       heading: 'Project enquiry',
       description: 'Share the context, constraints, and the decision or delivery support you need.',
       name: 'Name',
