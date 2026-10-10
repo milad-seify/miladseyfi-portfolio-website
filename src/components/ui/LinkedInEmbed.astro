@@ -1,0 +1,19 @@
+---
+import type { LinkedInPost } from '@/data/linkedin-posts';
+
+interface Props {
+  post: LinkedInPost;
+  title: string;
+}
+
+const { post, title } = Astro.props;
+---
+
+<article class="linkedin-embed">
+  <iframe
+    src={post.embedUrl}
+    {title}
+    loading="lazy"
+    referrerpolicy="strict-origin-when-cross-origin"
+  ></iframe>
+</article>

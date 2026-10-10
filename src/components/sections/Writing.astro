@@ -1,20 +1,27 @@
 ---
 import ButtonLink from '@/components/ui/ButtonLink.astro';
-import Icon from '@/components/ui/Icon.astro';
+import LinkedInEmbed from '@/components/ui/LinkedInEmbed.astro';
 import SectionHeading from '@/components/ui/SectionHeading.astro';
 import type { LinkedInPost } from '@/data/linkedin-posts';
 import { resume } from '@/data/resume';
-import { formatDate, getDictionary, type Locale } from '@/i18n/config';
+import { getDictionary, getLocalePath, type Locale } from '@/i18n/config';
 
 interface Props {
-  posts: LinkedInPost[];
+  posts: readonly LinkedInPost[];
   locale: Locale;
+  mode?: 'preview' | 'all';
 }
-const { posts, locale } = Astro.props;
+
+const { posts, locale, mode = 'preview' } = Astro.props;
 const copy = getDictionary(locale).writing;
+const numberFormatter = new Intl.NumberFormat(locale === 'fa' ? 'fa-IR' : 'en');
 ---
 
-<section class="section writing-section" id="writing" aria-labelledby="writing-heading">
+<section
+  class:list={['section writing-section', mode === 'all' && 'writing-section--all']}
+  id={mode === 'preview' ? 'writing' : undefined}
+  aria-labelledby="writing-heading"
+>
   <div class="shell reveal">
     <SectionHeading
       id="writing-heading"
@@ -22,34 +29,25 @@ const copy = getDictionary(locale).writing;
       heading={copy.heading}
       description={copy.description}
     />
-    {posts.length > 0 ? (
-      <div class="writing-list">
-        {posts.map((post) => (
-          <article>
-            <p>
-              {formatDate(new Date(`${post.publishedAt}T00:00:00Z`), locale)}
-              {post.category ? ` · ${post.category}` : ''}
-            </p>
-            <h3>
-              <a href={post.url} target="_blank" rel="noreferrer">
-                {post.title}
-              </a>
-            </h3>
-            <span>{post.summary}</span>
-            <small>{copy.source}</small>
-            <Icon name="external" size={20} />
-          </article>
-        ))}
-      </div>
-    ) : (
-      <div class="writing-empty">
-        <p>{copy.empty}</p>
-        {resume.contact.linkedin && (
-          <ButtonLink href={resume.contact.linkedin} external variant="secondary">
-            {copy.profileCta}
-          </ButtonLink>
-        )}
-      </div>
-    )}
+    <div class="writing-actions">
+      {resume.contact.linkedin && (
+        <ButtonLink href={resume.contact.linkedin} external variant="secondary">
+          {copy.profileCta}
+        </ButtonLink>
+      )}
+      <ButtonLink
+        href={mode === 'preview' ? getLocalePath(locale, 'writing/') : getLocalePath(locale)}
+        variant="quiet"
+      >
+        {mode === 'preview' ? copy.viewAll : copy.backHome}
+      </ButtonLink>
+    </div>
+    <ol class:list={['linkedin-grid', mode === 'preview' && 'linkedin-grid--preview']}>
+      {posts.map((post, index) => (
+        <li>
+          <LinkedInEmbed {post} title={`${copy.embedTitle} ${numberFormatter.format(index + 1)}`} />
+        </li>
+      ))}
+    </ol>
   </div>
 </section>

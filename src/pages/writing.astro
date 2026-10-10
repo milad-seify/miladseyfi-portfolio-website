@@ -1,0 +1,20 @@
+---
+import Writing from '@/components/sections/Writing.astro';
+import { getLinkedInPosts } from '@/data/linkedin-posts';
+import { getDictionary } from '@/i18n/config';
+import { getLocalizedResume } from '@/i18n/resume';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const locale = 'fa';
+const copy = getDictionary(locale).writing;
+const localizedResume = getLocalizedResume(locale);
+---
+
+<BaseLayout
+  {locale}
+  routePath="writing/"
+  title={`${copy.pageTitle} — ${localizedResume.identity.name}`}
+  description={copy.pageDescription}
+>
+  <Writing posts={getLinkedInPosts()} {locale} mode="all" />
+</BaseLayout>

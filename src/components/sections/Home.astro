@@ -19,7 +19,7 @@ interface Props {
 }
 const { locale } = Astro.props;
 const projects = (await getCollection('projects')).filter(isPublished).sort(byOrder);
-const posts = getLinkedInPosts(locale);
+const posts = getLinkedInPosts().slice(0, 3);
 ---
 
 <BaseLayout {locale}>
@@ -30,6 +30,6 @@ const posts = getLinkedInPosts(locale);
   <Experience {locale} />
   <Services {locale} />
   <Stack {locale} />
-  <Writing {posts} {locale} />
+  <Writing {posts} {locale} mode="preview" />
   <Contact {locale} />
 </BaseLayout>

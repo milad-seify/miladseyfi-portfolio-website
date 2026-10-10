@@ -113,11 +113,13 @@ export const fa = {
   writing: {
     eyebrow: 'نوشته‌ها در LinkedIn',
     heading: 'تفکر فنی، در متن کار واقعی.',
-    description:
-      'نوشته‌های منتشرشده درباره معماری کلاد، پلتفرم Kubernetes، اتوماسیون و عملیات زیرساخت؛ با پیوند مستقیم به نسخه اصلی.',
-    source: 'مشاهده پست اصلی در LinkedIn',
+    description: 'منتخبی از نوشته‌های منتشرشده میلاد در LinkedIn، از منبع رسمی آن‌ها.',
+    pageTitle: 'نوشته‌ها در LinkedIn',
+    pageDescription: 'نوشته‌های منتشرشده میلاد سیفی در LinkedIn، از منبع رسمی آن‌ها.',
+    embedTitle: 'پست LinkedIn میلاد سیفی، شماره',
     profileCta: 'مشاهده پروفایل LinkedIn',
-    empty: 'نوشته‌های منتشرشده پس از ثبت لینک اصلی آن‌ها در این بخش نمایش داده می‌شوند.',
+    viewAll: 'مشاهده همه نوشته‌ها',
+    backHome: 'بازگشت به وب‌سایت',
   },
   contact: {
     eyebrow: 'ارتباط',

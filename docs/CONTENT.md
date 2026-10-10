@@ -6,7 +6,7 @@
 - Edit localized website presentation in `src/i18n/en.ts` and `src/i18n/fa.ts`.
 - Add case studies in `src/content/projects/*.md`.
 - Add articles in `src/content/posts/*.md`.
-- Register published LinkedIn posts in `src/data/linkedin-posts.ts`; every entry requires its canonical LinkedIn URL.
+- Register published LinkedIn posts in `src/data/linkedin-posts.ts` only from verified official embed URLs. Keep the list newest-first; the homepage shows the first three and the localized Writing routes show the complete list.
 - Register verified profile photography in `src/data/media.ts` after importing optimized source files from `src/assets/images/profile/`.
 - Collection schemas in `src/content.config.ts` are the content contract.
 

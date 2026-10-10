@@ -119,10 +119,14 @@ export const en = {
     eyebrow: 'Writing on LinkedIn',
     heading: 'Technical thinking, grounded in the work.',
     description:
-      'Published writing on cloud architecture, Kubernetes platforms, automation, and infrastructure operations, linked to the original post.',
-    source: 'View original post on LinkedIn',
+      'A selection of Milad’s published LinkedIn posts, displayed from their official source.',
+    pageTitle: 'Writing on LinkedIn',
+    pageDescription:
+      'Published LinkedIn posts by Milad Seyfi, displayed from their official source.',
+    embedTitle: 'LinkedIn post by Milad Seyfi, item',
     profileCta: 'View LinkedIn profile',
-    empty: 'Published writing will appear here once its original LinkedIn URL is registered.',
+    viewAll: 'View all posts',
+    backHome: 'Back to portfolio',
   },
   contact: {
     eyebrow: 'Contact',

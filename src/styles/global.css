@@ -1318,68 +1318,42 @@ html[dir='rtl'] .stack__axis i::after {
 }
 
 /* Writing */
-.writing-list {
-  border-block-start: 1px solid var(--line-on-cream);
-}
-
-.writing-list article {
-  position: relative;
+.linkedin-grid {
   display: grid;
-  gap: 0.5rem;
-  padding: 1.6rem 3rem 1.6rem 0;
-  border-block-end: 1px solid var(--line-on-cream);
-}
-
-html[dir='rtl'] .writing-list article {
-  padding-inline: 0 3rem;
-}
-
-.writing-list article > p {
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1rem, 2vw, 1.5rem);
   margin: 0;
-  color: var(--coral-ink);
-  font-size: 0.68rem;
-  font-weight: 750;
+  padding: 0;
+  list-style: none;
 }
 
-.writing-list h3 {
-  margin: 0;
-  color: var(--blue-dark);
-  font-size: clamp(1.4rem, 3vw, 2.5rem);
+.linkedin-grid > li,
+.linkedin-embed {
+  min-width: 0;
 }
 
-.writing-list article > span {
-  color: var(--muted-on-cream);
+.linkedin-embed {
+  overflow: hidden;
+  border: 1px solid var(--line-on-cream);
+  border-radius: 0.45rem;
+  background: var(--white);
 }
 
-.writing-list article > small {
-  color: var(--coral-ink);
-  font-size: var(--type-meta);
-  font-weight: 720;
+.linkedin-embed iframe {
+  display: block;
+  width: 100%;
+  height: clamp(38rem, 75vw, 43rem);
+  border: 0;
 }
 
-.writing-list article > svg {
-  position: absolute;
-  inset-block-start: 50%;
-  inset-inline-end: 0;
-  color: var(--coral);
-}
-
-.writing-empty {
+.writing-actions {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  padding-block: 2rem;
-  border-block: 1px solid var(--line-on-cream);
-}
-
-.writing-empty p {
-  margin: 0;
-}
-
-.writing-empty > p {
-  max-width: 42rem;
-  color: var(--muted-on-cream);
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  padding-bottom: 1.5rem;
+  border-block-end: 1px solid var(--line-on-cream);
 }
 
 /* Contact */
@@ -1891,6 +1865,10 @@ html[lang='fa'] .content-page > header h1 {
 }
 
 @media (min-width: 880px) {
+  .linkedin-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .desktop-nav {
     display: flex;
   }
@@ -2057,6 +2035,14 @@ html[lang='fa'] .content-page > header h1 {
 }
 
 @media (min-width: 1024px) {
+  .linkedin-grid--preview {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .linkedin-grid--preview .linkedin-embed iframe {
+    height: 38rem;
+  }
+
   .about {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -2313,10 +2299,9 @@ html[lang='fa'] .content-page > header h1 {
     font-size: clamp(2.7rem, 12vw, 4rem);
   }
 
-  .writing-empty {
+  .writing-actions {
     align-items: stretch;
     flex-direction: column;
-    gap: 1rem;
   }
 
   .contact h2 {
