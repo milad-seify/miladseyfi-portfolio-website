@@ -12,6 +12,7 @@ const { post, title } = Astro.props;
 <article class="linkedin-embed">
   <iframe
     src={post.embedUrl}
+    height={post.embedHeight}
     {title}
     loading="lazy"
     referrerpolicy="strict-origin-when-cross-origin"

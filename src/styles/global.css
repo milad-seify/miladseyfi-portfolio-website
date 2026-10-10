@@ -1342,7 +1342,6 @@ html[dir='rtl'] .stack__axis i::after {
 .linkedin-embed iframe {
   display: block;
   width: 100%;
-  height: clamp(38rem, 75vw, 43rem);
   border: 0;
 }
 
@@ -2037,10 +2036,6 @@ html[lang='fa'] .content-page > header h1 {
 @media (min-width: 1024px) {
   .linkedin-grid--preview {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .linkedin-grid--preview .linkedin-embed iframe {
-    height: 38rem;
   }
 
   .about {
