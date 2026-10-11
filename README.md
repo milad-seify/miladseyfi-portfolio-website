@@ -1,6 +1,6 @@
 # Milad Seyfi — Portfolio and Résumé
 
-Milad Seyfi's personal portfolio and résumé website, built as a fully static Astro site. Persian is the default language, with the English version available under `/en/`. The production build emits static HTML and CSS with zero generated client JavaScript.
+Milad Seyfi's personal portfolio and résumé website, built as a fully static Astro site. Persian is the default language, with the English version available under `/en/`. The production build emits static HTML and CSS with zero generated client JavaScript..
 
 **Live site:** [miladseyfi.ir](https://miladseyfi.ir)
 
