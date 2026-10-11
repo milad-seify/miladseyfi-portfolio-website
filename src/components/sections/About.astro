@@ -2,6 +2,7 @@
 import SectionHeading from '@/components/ui/SectionHeading.astro';
 import ProfilePortrait from '@/components/ui/ProfilePortrait.astro';
 import { profileMedia } from '@/data/media';
+import { getProfileContent } from '@/data/profile-content';
 import { getDictionary, type Locale } from '@/i18n/config';
 
 interface Props {
@@ -9,19 +10,20 @@ interface Props {
 }
 const { locale } = Astro.props;
 const copy = getDictionary(locale).about;
+const profileContent = getProfileContent(locale).about;
 ---
 
 <section class="section about-section" id="about" aria-labelledby="about-heading">
   <div class="about shell reveal">
-    <SectionHeading id="about-heading" eyebrow={copy.eyebrow} heading={copy.heading} />
+    <SectionHeading id="about-heading" eyebrow={copy.eyebrow} heading={profileContent.heading} />
     <ProfilePortrait photo={profileMedia.primaryPortrait} {locale} />
     <div class="about__body">
-      {copy.paragraphs.map((paragraph) => (
+      {profileContent.paragraphs.map((paragraph) => (
         <p>{paragraph}</p>
       ))}
     </div>
     <ol class="principles">
-      {copy.principles.map((principle) => (
+      {profileContent.principles.map((principle) => (
         <li>
           <span>{principle.value}</span>
           {principle.label}

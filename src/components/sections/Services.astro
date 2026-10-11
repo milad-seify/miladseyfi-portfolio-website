@@ -1,12 +1,14 @@
 ---
 import SectionHeading from '@/components/ui/SectionHeading.astro';
 import { getDictionary, type Locale } from '@/i18n/config';
+import { getProfileContent } from '@/data/profile-content';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
 const copy = getDictionary(locale).services;
+const profileContent = getProfileContent(locale).services;
 ---
 
 <section class="section services-section" id="services" aria-labelledby="services-heading">
@@ -14,11 +16,11 @@ const copy = getDictionary(locale).services;
     <SectionHeading
       id="services-heading"
       eyebrow={copy.eyebrow}
-      heading={copy.heading}
-      description={copy.description}
+      heading={profileContent.heading}
+      description={profileContent.description}
     />
     <div class="services-grid">
-      {copy.items.map((service, index) => (
+      {profileContent.items.map((service, index) => (
         <article class="service-card">
           <span class="service-card__number">0{index + 1}</span>
           <div class="service-card__copy">

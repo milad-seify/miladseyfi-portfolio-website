@@ -1,0 +1,278 @@
+backend:
+  name: github
+  repo: milad-seify/miladseyfi-portfolio-website
+  branch: main
+  auth_methods: [token]
+
+media_folder: public/media
+public_folder: /media
+
+collections:
+  - name: professional
+    label: Professional data
+    files:
+      - name: profile
+        label: Profile, about, services, and contact
+        file: src/content-data/profile.json
+        format: json
+        fields:
+          - label: English
+            name: en
+            widget: object
+            fields:
+              - label: Hero positioning
+                name: hero
+                widget: object
+                fields:
+                  - { label: Role, name: status, widget: string }
+                  - { label: Main title, name: title, widget: string }
+                  - { label: Full introduction, name: summary, widget: text }
+                  - { label: Short introduction, name: summaryShort, widget: text }
+              - label: About
+                name: about
+                widget: object
+                fields:
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: Paragraphs, name: paragraphs, widget: list }
+                  - label: Principles
+                    name: principles
+                    widget: list
+                    fields:
+                      - { label: Number, name: value, widget: string }
+                      - { label: Principle, name: label, widget: string }
+              - label: Services
+                name: services
+                widget: object
+                fields:
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: Description, name: description, widget: text }
+                  - label: Services in display order
+                    name: items
+                    widget: list
+                    fields:
+                      - { label: Title, name: title, widget: string }
+                      - { label: Description, name: description, widget: text }
+                      - { label: Deliverables, name: deliverables, widget: list }
+              - label: Contact introduction
+                name: contact
+                widget: object
+                fields:
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: Summary, name: summary, widget: text }
+                  - { label: Topics, name: topics, widget: list }
+          - label: Persian
+            name: fa
+            widget: object
+            fields:
+              - label: Hero positioning
+                name: hero
+                widget: object
+                fields:
+                  - { label: Role, name: status, widget: string }
+                  - { label: Main title, name: title, widget: string }
+                  - { label: Full introduction, name: summary, widget: text }
+                  - { label: Short introduction, name: summaryShort, widget: text }
+              - label: About
+                name: about
+                widget: object
+                fields:
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: Paragraphs, name: paragraphs, widget: list }
+                  - label: Principles
+                    name: principles
+                    widget: list
+                    fields:
+                      - { label: Number, name: value, widget: string }
+                      - { label: Principle, name: label, widget: string }
+              - label: Services
+                name: services
+                widget: object
+                fields:
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: Description, name: description, widget: text }
+                  - label: Services in display order
+                    name: items
+                    widget: list
+                    fields:
+                      - { label: Title, name: title, widget: string }
+                      - { label: Description, name: description, widget: text }
+                      - { label: Deliverables, name: deliverables, widget: list }
+              - label: Contact introduction
+                name: contact
+                widget: object
+                fields:
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: Summary, name: summary, widget: text }
+                  - { label: Topics, name: topics, widget: list }
+      - name: resume
+        label: Resume and contact
+        file: src/content-data/resume.json
+        format: json
+        fields:
+          - label: Identity
+            name: identity
+            widget: object
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Professional headline, name: professionalHeadline, widget: string }
+              - { label: Summary, name: summary, widget: text }
+          - label: Contact and social links
+            name: contact
+            widget: object
+            fields:
+              - { label: Email, name: email, widget: string, required: false }
+              - { label: Website, name: website, widget: string, required: false }
+              - { label: LinkedIn, name: linkedin, widget: string, required: false }
+              - { label: GitHub, name: github, widget: string, required: false }
+              - { label: Telegram, name: telegram, widget: string, required: false }
+              - { label: WhatsApp, name: whatsapp, widget: string, required: false }
+          - label: Career highlights
+            name: careerHighlights
+            widget: list
+            fields:
+              - { label: Stable ID, name: id, widget: string }
+              - { label: Label, name: label, widget: string }
+              - { label: Value, name: value, widget: string }
+              - { label: Detail, name: detail, widget: string }
+          - label: Experience
+            name: experience
+            widget: list
+            fields:
+              - { label: Stable ID, name: id, widget: string }
+              - { label: Organization, name: organization, widget: string }
+              - { label: Role, name: role, widget: string }
+              - { label: Start month (YYYY-MM), name: startDate, widget: string }
+              - { label: End month (YYYY-MM), name: endDate, widget: string, required: false }
+              - { label: Locations, name: locations, widget: list, required: false }
+              - { label: Summary, name: summary, widget: text }
+              - { label: Responsibilities, name: responsibilities, widget: list }
+              - { label: Verified highlights, name: highlights, widget: list }
+              - { label: Skills, name: skills, widget: list }
+          - label: Education
+            name: education
+            widget: list
+            fields:
+              - { label: Stable ID, name: id, widget: string }
+              - { label: Institution, name: institution, widget: string }
+              - { label: Degree, name: degree, widget: string }
+              - { label: Field, name: field, widget: string }
+              - { label: Status, name: status, widget: string, required: false }
+          - label: Skills and technologies
+            name: skillGroups
+            widget: list
+            fields:
+              - { label: Stable ID, name: id, widget: string }
+              - { label: Title, name: title, widget: string }
+              - { label: Summary, name: summary, widget: text }
+              - { label: Skills, name: skills, widget: list }
+          - label: Selected projects
+            name: selectedProjects
+            widget: list
+            fields:
+              - { label: Stable ID, name: id, widget: string }
+              - { label: Title, name: title, widget: string }
+              - { label: Summary, name: summary, widget: text }
+              - { label: Contributions, name: contributions, widget: list }
+              - { label: Technologies, name: technologies, widget: list }
+              - { label: Verified result, name: verifiedResult, widget: string, required: false }
+          - label: Certifications
+            name: certifications
+            widget: list
+            required: false
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Issuer, name: issuer, widget: string }
+              - { label: Issued month (YYYY-MM), name: issuedDate, widget: string, required: false }
+              - { label: Credential URL, name: credentialUrl, widget: string, required: false }
+      - name: linkedin
+        label: LinkedIn embeds
+        file: src/content-data/linkedin.json
+        format: json
+        fields:
+          - label: Posts (newest first)
+            name: posts
+            widget: list
+            fields:
+              - { label: LinkedIn post ID, name: id, widget: string }
+              - { label: Official embed URL, name: embedUrl, widget: string }
+              - { label: Embed height (pixels), name: embedHeight, widget: number, value_type: int }
+      - name: projects-fa
+        label: Persian project presentation
+        file: src/content-data/projects-fa.json
+        format: json
+        fields:
+          - label: Projects
+            name: projects
+            widget: list
+            fields:
+              - { label: Canonical project ID, name: id, widget: string }
+              - { label: Title, name: title, widget: string }
+              - { label: Summary, name: summary, widget: text }
+              - { label: Context, name: context, widget: string }
+              - { label: Role, name: role, widget: string }
+              - { label: Challenge, name: challenge, widget: text }
+              - { label: Highlight, name: highlight, widget: text }
+              - label: Sections
+                name: sections
+                widget: list
+                fields:
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: Paragraphs, name: paragraphs, widget: list, required: false }
+                  - { label: Bullets, name: bullets, widget: list, required: false }
+
+  - name: projects
+    label: Project case studies
+    folder: src/content/projects
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    fields:
+      - { label: Language, name: locale, widget: hidden, default: en }
+      - { label: Translation key, name: translationKey, widget: string, required: false }
+      - { label: Title, name: title, widget: string }
+      - { label: Summary, name: summary, widget: text }
+      - { label: Context, name: context, widget: string }
+      - { label: Role, name: role, widget: string }
+      - { label: Challenge, name: challenge, widget: text }
+      - { label: Highlight, name: highlight, widget: text }
+      - { label: Technologies, name: technologies, widget: list }
+      - { label: Featured, name: featured, widget: boolean, default: false }
+      - {
+          label: Published,
+          name: draft,
+          widget: boolean,
+          default: true,
+          required: false,
+          hint: 'Turn off draft to publish.',
+        }
+      - { label: Display order, name: order, widget: number, value_type: int, default: 0 }
+      - { label: External URL, name: externalUrl, widget: string, required: false }
+      - { label: Case study, name: body, widget: markdown }
+
+  - name: posts
+    label: Native writing
+    folder: src/content/posts
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    fields:
+      - { label: Language, name: locale, widget: hidden, default: en }
+      - { label: Translation key, name: translationKey, widget: string, required: false }
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: Publish date, name: publishedAt, widget: datetime, required: false }
+      - { label: Updated date, name: updatedAt, widget: datetime, required: false }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - {
+          label: Published,
+          name: draft,
+          widget: boolean,
+          default: true,
+          required: false,
+          hint: 'Turn off draft to publish.',
+        }
+      - { label: Article, name: body, widget: markdown }

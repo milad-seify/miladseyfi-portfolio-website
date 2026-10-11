@@ -60,6 +60,8 @@ const requiredFiles = [
   'og-image.png',
   'robots.txt',
   'site.webmanifest',
+  join('admin', 'index.html'),
+  join('admin', 'config.yml'),
   'sitemap-index.xml',
   join('resume', 'milad-seyfi-resume.pdf'),
   join('resume', 'milad-seyfi-resume-fa.pdf'),
@@ -77,6 +79,8 @@ const pdfPaths = [
 ];
 const socialImage = await readFile(join(dist, 'og-image.png'));
 const notFound = await readFile(join(dist, '404.html'), 'utf8');
+const admin = await readFile(join(dist, 'admin', 'index.html'), 'utf8');
+const robots = await readFile(join(dist, 'robots.txt'), 'utf8');
 for (const pdfPath of pdfPaths) {
   const pdf = await readFile(pdfPath);
   if (pdf.subarray(0, 5).toString() !== '%PDF-' || pdf.length < 10_000) {
@@ -89,9 +93,17 @@ if (socialImage.subarray(1, 4).toString() !== 'PNG') {
 if (!notFound.includes('name="robots" content="noindex, nofollow"')) {
   failures.push('The 404 page must be excluded from indexing.');
 }
+if (!admin.includes('name="robots" content="noindex, nofollow"')) {
+  failures.push('The CMS interface must be excluded from indexing.');
+}
+if (!robots.includes('Disallow: /admin/')) {
+  failures.push('robots.txt must exclude the CMS interface.');
+}
 if (files.some((file) => extname(file) === '.js')) {
   failures.push('Unexpected client-side JavaScript was emitted.');
 }
 
 if (failures.length > 0) throw new Error(`Build validation failed:\n${failures.join('\n')}`);
-console.log(`Build validation passed (${htmlFiles.length} HTML files, base ${basePath}, zero JS).`);
+console.log(
+  `Build validation passed (${htmlFiles.length} public HTML files, base ${basePath}, zero JS).`,
+);

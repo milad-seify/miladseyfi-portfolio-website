@@ -15,12 +15,6 @@ export const en = {
   header: { contact: 'Let’s talk', menu: 'Toggle navigation', home: 'home' },
   wordmark: 'Cloud · Platform · DevOps',
   hero: {
-    status: 'Cloud Architect & DevOps Consultant',
-    title: 'Cloud architecture for infrastructure that has to work.',
-    summary:
-      'Cloud engineer and DevOps consultant with hands-on experience designing, operating, and modernizing OpenStack, Ceph, and Kubernetes platforms. Work spans multi-datacenter infrastructure, platform automation, observability, service ownership, technical documentation, and mentoring.',
-    summaryShort:
-      'Designing and modernizing OpenStack, Ceph, and Kubernetes with a focus on automation, reliability, and day-two operations.',
     workCta: 'Explore selected work',
     contactCta: 'Start a conversation',
     metricsLabel: 'Core practice areas',
@@ -29,19 +23,8 @@ export const en = {
     automation: 'Automation',
     storage: 'Storage',
   },
-  about: {
-    eyebrow: 'About',
-    heading: 'Engineering depth, moving toward architecture.',
-    paragraphs: [
-      'My work connects infrastructure design to implementation, day-two operations, and the teams responsible for the platform.',
-      'I approach reliability, repeatability, operational ownership, and clear technical documentation as architecture concerns—not follow-up tasks.',
-    ],
-    principles: [
-      { value: '01', label: 'Make constraints explicit' },
-      { value: '02', label: 'Design for day-two operations' },
-      { value: '03', label: 'Automate repeatable work' },
-    ],
-  },
+  about: { eyebrow: 'About' },
+  services: { eyebrow: 'Consulting' },
   experience: {
     eyebrow: 'Experience',
     heading: 'Infrastructure engineering at production scale.',
@@ -66,50 +49,6 @@ export const en = {
     emptyDescription:
       'Client context, dates, decisions, and outcomes will be added only after verification.',
   },
-  services: {
-    eyebrow: 'Consulting',
-    heading: 'Consulting grounded in operating experience.',
-    description:
-      'Architecture and implementation support for organizations building or improving private-cloud and platform infrastructure.',
-    items: [
-      {
-        title: 'Cloud Architecture Consulting',
-        description:
-          'Architecture review, infrastructure design, modernization planning, and technical decision support.',
-        deliverables: ['Architecture review', 'Decision record', 'Modernization roadmap'],
-      },
-      {
-        title: 'OpenStack & Private Cloud',
-        description:
-          'Design, deployment, modernization, and operational architecture for OpenStack infrastructure.',
-        deliverables: ['Platform design', 'Migration approach', 'Operations model'],
-      },
-      {
-        title: 'Kubernetes & Platform Engineering',
-        description:
-          'Kubernetes architecture, Cluster API lifecycle management, and internal platform design.',
-        deliverables: ['Platform architecture', 'Lifecycle design', 'API boundaries'],
-      },
-      {
-        title: 'Infrastructure Automation',
-        description:
-          'Terraform, Ansible, AWX, GitOps, and repeatable infrastructure delivery workflows.',
-        deliverables: ['Automation design', 'Workflow baseline', 'Source-of-truth model'],
-      },
-      {
-        title: 'Cloud Storage Architecture',
-        description:
-          'Ceph architecture, OpenStack storage integration, storage tiers, and operational design.',
-        deliverables: ['Storage topology', 'Pool strategy', 'Integration review'],
-      },
-      {
-        title: 'Observability & Reliability',
-        description:
-          'Monitoring and logging architecture for cloud, network, hardware, and platform operations.',
-        deliverables: ['Visibility assessment', 'Signal design', 'Operational runbook'],
-      },
-    ],
-  },
   stack: {
     eyebrow: 'Technology stack',
     heading: 'Tools, platforms, and control planes.',
@@ -129,12 +68,8 @@ export const en = {
     backHome: 'Back to portfolio',
   },
   contact: {
-    eyebrow: 'Contact',
-    heading: 'Bring the platform problem.',
-    summary:
-      'For private-cloud architecture, Kubernetes platforms, storage, automation, or infrastructure modernization, connect with me or send a concise project brief.',
     topicsLabel: 'Consulting enquiry topics',
-    topics: ['Architecture review', 'Platform modernization', 'Delivery support'],
+    eyebrow: 'Contact',
     channelLabels: {
       email: 'Email',
       linkedin: 'LinkedIn',

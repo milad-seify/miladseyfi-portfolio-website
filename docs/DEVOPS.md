@@ -24,6 +24,12 @@ pnpm validate
 
 Dependabot maintains npm and GitHub Actions dependencies on a weekly schedule. Review major upgrades and keep lockfile changes committed.
 
+## CMS publishing
+
+`/admin/` is a static Sveltia CMS interface. For the single technical owner, sign in with a GitHub fine-grained PAT restricted to `milad-seify/miladseyfi-portfolio-website` with only **Contents: Read and write**. Give the token a short expiration and paste it only into the CMS sign-in dialog; do not commit it, add it to Actions variables, or expose it through Astro.
+
+CMS saves a normal Git commit to `main`, so the existing CI and Pages deployment remains the sole publishing path. Roll back by reverting that commit. `/admin/` is noindex and excluded from `robots.txt`; this does not secure the route, while GitHub authentication and repository permissions do.
+
 ## Release checks
 
 Before publishing: replace all placeholders, confirm canonical URL and contact links, provide the résumé and social image, verify Pages settings, run `pnpm validate`, and test keyboard/reduced-motion behavior in the production preview.

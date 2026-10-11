@@ -1,4 +1,7 @@
 const { resume } = await import(new URL('../src/data/resume.ts', import.meta.url));
+const linkedInData = await import(new URL('../src/content-data/linkedin.json', import.meta.url), {
+  with: { type: 'json' },
+});
 
 const issues = [];
 const monthPattern = /^\d{4}-(0[1-9]|1[0-2])$/;
@@ -13,6 +16,15 @@ const requireText = (value, path) => {
 const requireList = (value, path) => {
   if (!Array.isArray(value) || value.length === 0) {
     issues.push(`${path} must contain at least one item.`);
+  }
+};
+
+const requireUniqueIds = (items, path) => {
+  const ids = new Set();
+  for (const [index, item] of items.entries()) {
+    requireText(item.id, `${path}[${index}].id`);
+    if (ids.has(item.id)) issues.push(`${path}[${index}].id must be unique.`);
+    ids.add(item.id);
   }
 };
 
@@ -35,6 +47,11 @@ requireList(resume.experience, 'experience');
 requireList(resume.education, 'education');
 requireList(resume.skillGroups, 'skillGroups');
 requireList(resume.selectedProjects, 'selectedProjects');
+requireUniqueIds(resume.careerHighlights, 'careerHighlights');
+requireUniqueIds(resume.experience, 'experience');
+requireUniqueIds(resume.education, 'education');
+requireUniqueIds(resume.skillGroups, 'skillGroups');
+requireUniqueIds(resume.selectedProjects, 'selectedProjects');
 
 for (const [index, experience] of resume.experience.entries()) {
   const path = `experience[${index}]`;
@@ -101,6 +118,30 @@ const inspectPlaceholders = (value, path = 'resume') => {
 };
 
 inspectPlaceholders(resume);
+
+const linkedInPosts = linkedInData.default.posts;
+if (!Array.isArray(linkedInPosts) || linkedInPosts.length === 0) {
+  issues.push('LinkedIn posts must contain at least one verified embed.');
+} else {
+  const ids = new Set();
+  for (const [index, post] of linkedInPosts.entries()) {
+    const path = `linkedin.posts[${index}]`;
+    requireText(post.id, `${path}.id`);
+    if (ids.has(post.id)) issues.push(`${path}.id must be unique.`);
+    ids.add(post.id);
+    if (
+      typeof post.embedUrl !== 'string' ||
+      !/^https:\/\/www\.linkedin\.com\/embed\/feed\/update\/urn:li:(ugcPost|share):\d+$/.test(
+        post.embedUrl,
+      )
+    ) {
+      issues.push(`${path}.embedUrl must be an official LinkedIn embed URL.`);
+    }
+    if (!Number.isInteger(post.embedHeight) || post.embedHeight <= 0) {
+      issues.push(`${path}.embedHeight must be a positive integer.`);
+    }
+  }
+}
 
 if (issues.length > 0) {
   console.error('Resume validation failed:\n');

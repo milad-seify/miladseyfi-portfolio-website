@@ -19,7 +19,6 @@ interface PersianProject {
 }
 
 export const getProjectPresentation = (locale: Locale, project: CollectionEntry<'projects'>) =>
-  locale === 'fa' ? projectsFa[project.id as keyof typeof projectsFa] : project.data;
+  locale === 'fa' ? (projectsFa[project.id] ?? project.data) : project.data;
 
-export const getPersianProject = (id: string): PersianProject | undefined =>
-  projectsFa[id as keyof typeof projectsFa];
+export const getPersianProject = (id: string): PersianProject | undefined => projectsFa[id];
