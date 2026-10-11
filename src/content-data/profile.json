@@ -3,7 +3,7 @@
     "hero": {
       "status": "Cloud Architect & DevOps Consultant",
       "title": "Cloud architecture for infrastructure that has to work.",
-      "summary": "Cloud engineer and DevOps consultant with hands-on experience designing, operating, and modernizing OpenStack, Ceph, and Kubernetes platforms. Work spans multi-datacenter infrastructure, platform automation, observability, service ownership, technical documentation, and mentoring.",
+      "summary": "HI ! Cloud engineer and DevOps consultant with hands-on experience designing, operating, and modernizing OpenStack, Ceph, and Kubernetes platforms. Work spans multi-datacenter infrastructure, platform automation, observability, service ownership, technical documentation, and mentoring.",
       "summaryShort": "Designing and modernizing OpenStack, Ceph, and Kubernetes with a focus on automation, reliability, and day-two operations."
     },
     "about": {
@@ -34,39 +34,67 @@
         {
           "title": "Cloud Architecture Consulting",
           "description": "Architecture review, infrastructure design, modernization planning, and technical decision support.",
-          "deliverables": ["Architecture review", "Decision record", "Modernization roadmap"]
+          "deliverables": [
+            "Architecture review",
+            "Decision record",
+            "Modernization roadmap"
+          ]
         },
         {
           "title": "OpenStack & Private Cloud",
           "description": "Design, deployment, modernization, and operational architecture for OpenStack infrastructure.",
-          "deliverables": ["Platform design", "Migration approach", "Operations model"]
+          "deliverables": [
+            "Platform design",
+            "Migration approach",
+            "Operations model"
+          ]
         },
         {
           "title": "Kubernetes & Platform Engineering",
           "description": "Kubernetes architecture, Cluster API lifecycle management, and internal platform design.",
-          "deliverables": ["Platform architecture", "Lifecycle design", "API boundaries"]
+          "deliverables": [
+            "Platform architecture",
+            "Lifecycle design",
+            "API boundaries"
+          ]
         },
         {
           "title": "Infrastructure Automation",
           "description": "Terraform, Ansible, AWX, GitOps, and repeatable infrastructure delivery workflows.",
-          "deliverables": ["Automation design", "Workflow baseline", "Source-of-truth model"]
+          "deliverables": [
+            "Automation design",
+            "Workflow baseline",
+            "Source-of-truth model"
+          ]
         },
         {
           "title": "Cloud Storage Architecture",
           "description": "Ceph architecture, OpenStack storage integration, storage tiers, and operational design.",
-          "deliverables": ["Storage topology", "Pool strategy", "Integration review"]
+          "deliverables": [
+            "Storage topology",
+            "Pool strategy",
+            "Integration review"
+          ]
         },
         {
           "title": "Observability & Reliability",
           "description": "Monitoring and logging architecture for cloud, network, hardware, and platform operations.",
-          "deliverables": ["Visibility assessment", "Signal design", "Operational runbook"]
+          "deliverables": [
+            "Visibility assessment",
+            "Signal design",
+            "Operational runbook"
+          ]
         }
       ]
     },
     "contact": {
       "heading": "Bring the platform problem.",
       "summary": "For private-cloud architecture, Kubernetes platforms, storage, automation, or infrastructure modernization, connect with me or send a concise project brief.",
-      "topics": ["Architecture review", "Platform modernization", "Delivery support"]
+      "topics": [
+        "Architecture review",
+        "Platform modernization",
+        "Delivery support"
+      ]
     }
   },
   "fa": {
@@ -104,39 +132,67 @@
         {
           "title": "مشاوره معماری کلاد",
           "description": "بازبینی معماری، طراحی زیرساخت، برنامه نوسازی و پشتیبانی تصمیم‌های فنی.",
-          "deliverables": ["بازبینی معماری", "ثبت تصمیم فنی", "نقشه راه نوسازی"]
+          "deliverables": [
+            "بازبینی معماری",
+            "ثبت تصمیم فنی",
+            "نقشه راه نوسازی"
+          ]
         },
         {
           "title": "OpenStack و کلاد خصوصی",
           "description": "طراحی، استقرار، نوسازی و معماری عملیاتی زیرساخت OpenStack.",
-          "deliverables": ["طراحی پلتفرم", "رویکرد مهاجرت", "مدل عملیات"]
+          "deliverables": [
+            "طراحی پلتفرم",
+            "رویکرد مهاجرت",
+            "مدل عملیات"
+          ]
         },
         {
           "title": "Kubernetes و مهندسی پلتفرم",
           "description": "معماری Kubernetes، مدیریت چرخه عمر با Cluster API و طراحی پلتفرم داخلی.",
-          "deliverables": ["معماری پلتفرم", "طراحی چرخه عمر", "مرزهای API"]
+          "deliverables": [
+            "معماری پلتفرم",
+            "طراحی چرخه عمر",
+            "مرزهای API"
+          ]
         },
         {
           "title": "اتوماسیون زیرساخت",
           "description": "جریان‌های تحویل تکرارپذیر با Terraform، Ansible، AWX و GitOps.",
-          "deliverables": ["طراحی اتوماسیون", "خط مبنای جریان کار", "مدل منبع حقیقت"]
+          "deliverables": [
+            "طراحی اتوماسیون",
+            "خط مبنای جریان کار",
+            "مدل منبع حقیقت"
+          ]
         },
         {
           "title": "معماری ذخیره‌سازی کلاد",
           "description": "معماری Ceph، یکپارچه‌سازی با OpenStack، لایه‌های ذخیره‌سازی و طراحی عملیات.",
-          "deliverables": ["توپولوژی ذخیره‌سازی", "راهبرد Pool", "بازبینی یکپارچه‌سازی"]
+          "deliverables": [
+            "توپولوژی ذخیره‌سازی",
+            "راهبرد Pool",
+            "بازبینی یکپارچه‌سازی"
+          ]
         },
         {
           "title": "مشاهده‌پذیری و قابلیت اتکا",
           "description": "معماری مانیتورینگ و لاگ برای عملیات کلاد، شبکه، سخت‌افزار و پلتفرم.",
-          "deliverables": ["ارزیابی دیدپذیری", "طراحی سیگنال", "راهنمای عملیاتی"]
+          "deliverables": [
+            "ارزیابی دیدپذیری",
+            "طراحی سیگنال",
+            "راهنمای عملیاتی"
+          ]
         }
       ]
     },
     "contact": {
       "heading": "مسئله پلتفرم را مطرح کنید.",
       "summary": "برای معماری کلاد خصوصی، پلتفرم Kubernetes، ذخیره‌سازی، اتوماسیون یا نوسازی زیرساخت، از طریق کانال‌های عمومی در ارتباط باشید یا شرح کوتاهی از پروژه بفرستید.",
-      "topics": ["بازبینی معماری", "نوسازی پلتفرم", "همراهی در تحویل"]
+      "topics": [
+        "بازبینی معماری",
+        "نوسازی پلتفرم",
+        "همراهی در تحویل"
+      ]
     }
   }
 }
