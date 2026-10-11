@@ -3,7 +3,7 @@
     "hero": {
       "status": "Cloud Architect & DevOps Consultant",
       "title": "Cloud architecture for infrastructure that has to work.",
-      "summary": "HI ! Cloud engineer and DevOps consultant with hands-on experience designing, operating, and modernizing OpenStack, Ceph, and Kubernetes platforms. Work spans multi-datacenter infrastructure, platform automation, observability, service ownership, technical documentation, and mentoring.",
+      "summary": "Cloud engineer and DevOps consultant with hands-on experience designing, operating, and modernizing OpenStack, Ceph, and Kubernetes platforms. Work spans multi-datacenter infrastructure, platform automation, observability, service ownership, technical documentation, and mentoring.",
       "summaryShort": "Designing and modernizing OpenStack, Ceph, and Kubernetes with a focus on automation, reliability, and day-two operations."
     },
     "about": {
