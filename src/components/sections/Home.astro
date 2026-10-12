@@ -10,7 +10,7 @@ import Services from './Services.astro';
 import Stack from './Stack.astro';
 import Writing from './Writing.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { getLinkedInPosts } from '@/data/linkedin-posts';
+import { getLinkedInPosts, hasLinkedInPreview } from '@/data/linkedin-posts';
 import type { Locale } from '@/i18n/config';
 import { byOrder, isPublished } from '@/lib/content';
 
@@ -19,7 +19,7 @@ interface Props {
 }
 const { locale } = Astro.props;
 const projects = (await getCollection('projects')).filter(isPublished).sort(byOrder);
-const posts = getLinkedInPosts().slice(0, 3);
+const posts = getLinkedInPosts().filter(hasLinkedInPreview).slice(0, 3);
 ---
 
 <BaseLayout {locale}>
@@ -29,7 +29,7 @@ const posts = getLinkedInPosts().slice(0, 3);
   <Expertise {locale} />
   <Experience {locale} />
   <Stack {locale} />
-  <Writing {posts} {locale} mode="preview" />
+  {posts.length > 0 && <Writing {posts} {locale} mode="preview" />}
   <About {locale} />
   <Contact {locale} />
 </BaseLayout>

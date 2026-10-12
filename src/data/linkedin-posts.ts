@@ -13,6 +13,8 @@ export interface LinkedInPost {
   id: string;
   embedUrl: LinkedInEmbedUrl;
   embedHeight: number;
+  image?: string;
+  imageAlt?: string;
   title?: string;
   excerpt?: string;
   date?: `${number}-${number}-${number}`;
@@ -30,6 +32,15 @@ export interface LinkedInPost {
 const linkedInPosts = linkedInData.posts as readonly LinkedInPost[];
 
 export const getLinkedInPosts = (): readonly LinkedInPost[] => linkedInPosts;
+
+export const hasLinkedInPreview = (post: LinkedInPost): boolean =>
+  [
+    post.image,
+    post.title,
+    post.excerpt ?? post.summary,
+    post.topic ?? post.category,
+    post.date ?? post.publishedAt,
+  ].some((value) => Boolean(value?.trim()));
 
 export const getLinkedInPostUrl = (
   post: LinkedInPost,

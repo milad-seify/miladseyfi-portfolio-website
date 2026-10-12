@@ -3,6 +3,7 @@ import Icon from './Icon.astro';
 import { getLinkedInPostUrl, type LinkedInPost } from '@/data/linkedin-posts';
 import { resume } from '@/data/resume';
 import { formatDate, getDictionary, type Locale } from '@/i18n/config';
+import { withBasePath } from '@/lib/urls';
 
 interface Props {
   post: LinkedInPost;
@@ -15,20 +16,24 @@ const copy = getDictionary(locale).writing;
 const number = new Intl.NumberFormat(locale === 'fa' ? 'fa-IR' : 'en', {
   minimumIntegerDigits: 2,
 }).format(index + 1);
-const title = post.title ?? copy.postFallback.replace('{number}', number);
 const excerpt = post.excerpt ?? post.summary;
 const topic = post.topic ?? post.category;
 const dateValue = post.date ?? post.publishedAt;
 const date = dateValue ? formatDate(new Date(`${dateValue}T00:00:00Z`), locale) : undefined;
-const hasEditorialMetadata = Boolean(topic || date || post.title || excerpt);
 const directPostUrl = getLinkedInPostUrl(post);
 const href = directPostUrl ?? resume.contact.linkedin;
-const editorialLinkLabel = directPostUrl ? copy.postCta : copy.profileFallback;
-const compactLinkLabel = directPostUrl ? copy.embedCta : copy.profileFallback;
+const linkLabel = directPostUrl ? copy.postCta : copy.profileFallback;
+const linkAccessibleLabel = post.title ? `${linkLabel}: ${post.title}` : `${linkLabel} ${number}`;
+const imageSrc = post.image ? withBasePath(post.image) : undefined;
 ---
 
-{hasEditorialMetadata ? (
-  <article class="linkedin-card linkedin-card--editorial">
+<article class:list={['linkedin-card', imageSrc ? 'linkedin-card--image' : 'linkedin-card--text']}>
+  {imageSrc && (
+    <div class="linkedin-card__media">
+      <img src={imageSrc} alt={post.imageAlt ?? ''} loading="lazy" decoding="async" />
+    </div>
+  )}
+  <div class="linkedin-card__body">
     <header class="linkedin-card__meta">
       <span aria-hidden="true">{number}</span>
       <div>
@@ -37,20 +42,16 @@ const compactLinkLabel = directPostUrl ? copy.embedCta : copy.profileFallback;
         {!topic && !date && <span>LinkedIn</span>}
       </div>
     </header>
-    <h3>{title}</h3>
-    {excerpt && <p>{excerpt}</p>}
-    <a class="text-link" href={href} target="_blank" rel="noreferrer">
-      {editorialLinkLabel} <Icon name="external" size={16} />
+    {post.title && <h3>{post.title}</h3>}
+    {excerpt && <p class="linkedin-card__excerpt">{excerpt}</p>}
+    <a
+      class="text-link"
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      aria-label={linkAccessibleLabel}
+    >
+      {linkLabel} <Icon name="external" size={16} />
     </a>
-  </article>
-) : (
-  <article class="linkedin-card linkedin-card--compact">
-    <a class="linkedin-card__compact-link" href={href} target="_blank" rel="noreferrer">
-      <span class="linkedin-card__compact-label">LinkedIn</span>
-      <span class="linkedin-card__compact-number">{number}</span>
-      <span class="linkedin-card__compact-action">
-        {compactLinkLabel} <Icon name="external" size={16} />
-      </span>
-    </a>
-  </article>
-)}
+  </div>
+</article>

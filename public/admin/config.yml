@@ -196,6 +196,14 @@ collections:
               - { label: LinkedIn post ID, name: id, widget: string }
               - { label: Official embed URL, name: embedUrl, widget: string }
               - { label: Embed height (pixels), name: embedHeight, widget: number, value_type: int }
+              - { label: Preview image, name: image, widget: image, required: false }
+              - {
+                  label: Image alt text,
+                  name: imageAlt,
+                  widget: string,
+                  required: false,
+                  hint: 'Describe meaningful image content; leave empty if decorative.',
+                }
               - { label: Editorial title, name: title, widget: string, required: false }
               - { label: Short excerpt, name: excerpt, widget: text, required: false }
               - { label: Publish date, name: date, widget: datetime, type: date, required: false }

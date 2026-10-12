@@ -14,6 +14,8 @@ interface Props {
 
 const { posts, locale, mode = 'preview' } = Astro.props;
 const copy = getDictionary(locale).writing;
+const hasPosts = posts.length > 0;
+const visibleCount = Math.min(posts.length, 3);
 ---
 
 <section
@@ -28,25 +30,49 @@ const copy = getDictionary(locale).writing;
       heading={copy.heading}
       description={copy.description}
     />
-    <div class="writing-actions">
-      {resume.contact.linkedin && (
-        <ButtonLink href={resume.contact.linkedin} external variant="secondary">
-          {copy.profileCta}
-        </ButtonLink>
-      )}
-      <ButtonLink
-        href={mode === 'preview' ? getLocalePath(locale, 'writing/') : getLocalePath(locale)}
-        variant="quiet"
-      >
-        {mode === 'preview' ? copy.viewAll : copy.backHome}
-      </ButtonLink>
-    </div>
-    <ol class:list={['writing-grid', mode === 'preview' && 'writing-grid--preview']}>
-      {posts.map((post, index) => (
-        <li>
-          <LinkedInCard {post} {locale} {index} />
-        </li>
-      ))}
-    </ol>
+    {hasPosts ? (
+      <>
+        <div class="writing-actions">
+          {resume.contact.linkedin && (
+            <ButtonLink href={resume.contact.linkedin} external variant="secondary">
+              {copy.profileCta}
+            </ButtonLink>
+          )}
+          <ButtonLink
+            href={mode === 'preview' ? getLocalePath(locale, 'writing/') : getLocalePath(locale)}
+            variant="quiet"
+          >
+            {mode === 'preview' ? copy.viewAll : copy.backHome}
+          </ButtonLink>
+        </div>
+        <ol
+          class:list={[
+            'writing-grid',
+            mode === 'preview' && 'writing-grid--preview',
+            `writing-grid--count-${visibleCount}`,
+          ]}
+        >
+          {posts.map((post, index) => (
+            <li>
+              <LinkedInCard {post} {locale} {index} />
+            </li>
+          ))}
+        </ol>
+      </>
+    ) : (
+      <div class="writing-empty">
+        <p>{copy.empty}</p>
+        <div class="writing-empty__actions">
+          {resume.contact.linkedin && (
+            <ButtonLink href={resume.contact.linkedin} external variant="secondary">
+              {copy.profileCta}
+            </ButtonLink>
+          )}
+          <ButtonLink href={getLocalePath(locale)} variant="quiet">
+            {copy.backHome}
+          </ButtonLink>
+        </div>
+      </div>
+    )}
   </div>
 </section>

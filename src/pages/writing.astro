@@ -1,6 +1,6 @@
 ---
 import Writing from '@/components/sections/Writing.astro';
-import { getLinkedInPosts } from '@/data/linkedin-posts';
+import { getLinkedInPosts, hasLinkedInPreview } from '@/data/linkedin-posts';
 import { getDictionary } from '@/i18n/config';
 import { getLocalizedResume } from '@/i18n/resume';
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -8,6 +8,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 const locale = 'fa';
 const copy = getDictionary(locale).writing;
 const localizedResume = getLocalizedResume(locale);
+const posts = getLinkedInPosts().filter(hasLinkedInPreview);
 ---
 
 <BaseLayout
@@ -16,5 +17,5 @@ const localizedResume = getLocalizedResume(locale);
   title={`${copy.pageTitle} — ${localizedResume.identity.name}`}
   description={copy.pageDescription}
 >
-  <Writing posts={getLinkedInPosts()} {locale} mode="all" />
+  <Writing {posts} {locale} mode="all" />
 </BaseLayout>
