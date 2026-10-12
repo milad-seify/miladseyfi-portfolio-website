@@ -7,7 +7,7 @@ Personal portfolio and résumé site for Milad Seyfi. It is a static Astro site 
 ## Features
 
 - Bilingual Persian and English portfolio and résumé routes
-- Project case studies and LinkedIn writing embeds
+- Project case studies and lightweight LinkedIn writing cards
 - Git-backed content editing at `/admin/`
 - Contact form with a configurable endpoint
 - Generated Persian and English résumé PDFs
@@ -118,7 +118,7 @@ For a single owner, create a fine-grained token restricted to `milad-seify/milad
 
 - Professional, résumé, and contact data: `src/content-data/resume.json`
 - Profile, about, services, and contact presentation: `src/content-data/profile.json`
-- LinkedIn embeds: `src/content-data/linkedin.json`
+- LinkedIn source data and optional verified card metadata: `src/content-data/linkedin.json`
 - Persian project presentation: `src/content-data/projects-fa.json`
 - Project case studies and posts: `src/content/`
 - Localized UI copy: `src/i18n/`

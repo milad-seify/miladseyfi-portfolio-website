@@ -1,0 +1,44 @@
+---
+import Icon from './Icon.astro';
+import type { LinkedInPost } from '@/data/linkedin-posts';
+import { resume } from '@/data/resume';
+import { formatDate, getDictionary, type Locale } from '@/i18n/config';
+
+interface Props {
+  post: LinkedInPost;
+  locale: Locale;
+  index: number;
+}
+
+const { post, locale, index } = Astro.props;
+const copy = getDictionary(locale).writing;
+const title = post.title ?? copy.postFallback;
+const excerpt = post.excerpt ?? post.summary;
+const topic = post.topic ?? post.category;
+const dateValue = post.date ?? post.publishedAt;
+const date = dateValue ? formatDate(new Date(`${dateValue}T00:00:00Z`), locale) : undefined;
+const href = post.postUrl ?? post.canonicalUrl ?? resume.contact.linkedin;
+const linkLabel = post.postUrl || post.canonicalUrl ? copy.postCta : copy.profileFallback;
+const hasEditorialMetadata = Boolean(topic || date || post.title || excerpt);
+const number = new Intl.NumberFormat(locale === 'fa' ? 'fa-IR' : 'en', {
+  minimumIntegerDigits: 2,
+}).format(index + 1);
+---
+
+<article class:list={['linkedin-card', !hasEditorialMetadata && 'linkedin-card--minimal']}>
+  <header class="linkedin-card__meta">
+    <span aria-hidden="true">{number}</span>
+    <div>
+      {topic && <span>{topic}</span>}
+      {date && <time datetime={dateValue}>{date}</time>}
+      {!topic && !date && <span>LinkedIn</span>}
+    </div>
+  </header>
+  <h3>{title}</h3>
+  {excerpt && <p>{excerpt}</p>}
+  {href && (
+    <a class="text-link" href={href} target="_blank" rel="noreferrer">
+      {linkLabel} <Icon name="external" size={16} />
+    </a>
+  )}
+</article>

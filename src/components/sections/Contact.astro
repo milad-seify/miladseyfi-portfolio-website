@@ -20,14 +20,6 @@ if (resume.contact.linkedin)
   channels.push({ key: 'linkedin', href: resume.contact.linkedin, external: true });
 if (resume.contact.email)
   channels.push({ key: 'email', href: `mailto:${resume.contact.email}`, external: false });
-if (resume.contact.github)
-  channels.push({ key: 'github', href: resume.contact.github, external: true });
-if (resume.contact.telegram)
-  channels.push({ key: 'telegram', href: resume.contact.telegram, external: true });
-if (resume.contact.whatsapp)
-  channels.push({ key: 'whatsapp', href: resume.contact.whatsapp, external: true });
-if (resume.contact.website)
-  channels.push({ key: 'website', href: resume.contact.website, external: true });
 ---
 
 <section class="contact-section" id="contact" aria-labelledby="contact-heading">
@@ -43,13 +35,12 @@ if (resume.contact.website)
           <li>{topic}</li>
         ))}
       </ul>
+    </div>
+    <ContactForm {locale} />
+    <div class="contact__secondary">
       <div class="contact__channels">
-        {channels.map((channel, index) => (
-          <ButtonLink
-            href={channel.href}
-            external={channel.external}
-            variant={index === 0 ? 'primary' : 'secondary'}
-          >
+        {channels.map((channel) => (
+          <ButtonLink href={channel.href} external={channel.external} variant="secondary">
             {copy.channelLabels[channel.key]}
           </ButtonLink>
         ))}
@@ -63,6 +54,5 @@ if (resume.contact.website)
         </ButtonLink>
       </div>
     </div>
-    <ContactForm {locale} />
   </div>
 </section>

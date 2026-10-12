@@ -1,6 +1,6 @@
 ---
 import ButtonLink from '@/components/ui/ButtonLink.astro';
-import LinkedInEmbed from '@/components/ui/LinkedInEmbed.astro';
+import LinkedInCard from '@/components/ui/LinkedInCard.astro';
 import SectionHeading from '@/components/ui/SectionHeading.astro';
 import type { LinkedInPost } from '@/data/linkedin-posts';
 import { resume } from '@/data/resume';
@@ -14,7 +14,6 @@ interface Props {
 
 const { posts, locale, mode = 'preview' } = Astro.props;
 const copy = getDictionary(locale).writing;
-const numberFormatter = new Intl.NumberFormat(locale === 'fa' ? 'fa-IR' : 'en');
 ---
 
 <section
@@ -42,10 +41,10 @@ const numberFormatter = new Intl.NumberFormat(locale === 'fa' ? 'fa-IR' : 'en');
         {mode === 'preview' ? copy.viewAll : copy.backHome}
       </ButtonLink>
     </div>
-    <ol class:list={['linkedin-grid', mode === 'preview' && 'linkedin-grid--preview']}>
+    <ol class:list={['writing-grid', mode === 'preview' && 'writing-grid--preview']}>
       {posts.map((post, index) => (
         <li>
-          <LinkedInEmbed {post} title={`${copy.embedTitle} ${numberFormatter.format(index + 1)}`} />
+          <LinkedInCard {post} {locale} {index} />
         </li>
       ))}
     </ol>

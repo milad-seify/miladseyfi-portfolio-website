@@ -5,6 +5,7 @@ import SectionHeading from '@/components/ui/SectionHeading.astro';
 import TechnicalTerm from '@/components/ui/TechnicalTerm.astro';
 import { getDictionary, getLocalePath, type Locale } from '@/i18n/config';
 import { getProjectPresentation } from '@/i18n/projects';
+import { getLocalizedResume } from '@/i18n/resume';
 
 interface Props {
   projects: CollectionEntry<'projects'>[];
@@ -12,6 +13,7 @@ interface Props {
 }
 const { projects, locale } = Astro.props;
 const copy = getDictionary(locale).projects;
+const localizedResume = getLocalizedResume(locale);
 ---
 
 <section class="section section--tinted" id="work" aria-labelledby="work-heading">
@@ -26,6 +28,10 @@ const copy = getDictionary(locale).projects;
       <div class="project-grid">
         {projects.map((project, index) => {
           const presentation = getProjectPresentation(locale, project);
+          const resumeProject = localizedResume.selectedProjects.find(
+            (item) => item.id === project.id,
+          );
+          const outcome = resumeProject?.verifiedResult ?? presentation.highlight;
           return (
             <article
               class:list={[
@@ -38,13 +44,25 @@ const copy = getDictionary(locale).projects;
               </span>
               <div class="project-card__meta">
                 <span>{presentation.context}</span>
-                <span>{presentation.role}</span>
               </div>
-              <strong class="project-card__highlight">{presentation.highlight}</strong>
               <h3>
                 <a href={getLocalePath(locale, `projects/${project.id}/`)}>{presentation.title}</a>
               </h3>
-              <p>{presentation.summary}</p>
+              <dl class="project-card__facts">
+                <div>
+                  <dt>{copy.challenge}</dt>
+                  <dd>{presentation.challenge}</dd>
+                </div>
+                <div>
+                  <dt>{copy.role}</dt>
+                  <dd>{presentation.role}</dd>
+                </div>
+                <div class="project-card__outcome">
+                  <dt>{resumeProject?.verifiedResult ? copy.result : copy.highlight}</dt>
+                  <dd>{outcome}</dd>
+                </div>
+              </dl>
+              <p class="project-card__summary">{presentation.summary}</p>
               <ul class="tag-list">
                 {project.data.technologies.map((item) => (
                   <li>

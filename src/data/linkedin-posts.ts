@@ -9,6 +9,11 @@ export interface LinkedInPost {
   embedUrl: LinkedInEmbedUrl;
   embedHeight: number;
   title?: string;
+  excerpt?: string;
+  date?: `${number}-${number}-${number}`;
+  topic?: string;
+  postUrl?: `https://www.linkedin.com/${string}`;
+  // Legacy optional names remain readable for existing content.
   publishedAt?: `${number}-${number}-${number}`;
   summary?: string;
   canonicalUrl?: `https://www.linkedin.com/${string}`;

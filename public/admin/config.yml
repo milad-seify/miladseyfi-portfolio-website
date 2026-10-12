@@ -196,6 +196,17 @@ collections:
               - { label: LinkedIn post ID, name: id, widget: string }
               - { label: Official embed URL, name: embedUrl, widget: string }
               - { label: Embed height (pixels), name: embedHeight, widget: number, value_type: int }
+              - { label: Editorial title, name: title, widget: string, required: false }
+              - { label: Short excerpt, name: excerpt, widget: text, required: false }
+              - { label: Publish date, name: date, widget: date, required: false }
+              - { label: Topic, name: topic, widget: string, required: false }
+              - {
+                  label: Canonical LinkedIn post URL,
+                  name: postUrl,
+                  widget: string,
+                  required: false,
+                  hint: 'Use only the verified public LinkedIn post URL.',
+                }
       - name: projects-fa
         label: Persian project presentation
         file: src/content-data/projects-fa.json

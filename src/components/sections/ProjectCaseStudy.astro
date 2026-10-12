@@ -4,6 +4,7 @@ import ContentLayout from '@/layouts/ContentLayout.astro';
 import TechnicalTerm from '@/components/ui/TechnicalTerm.astro';
 import { getDictionary, type Locale } from '@/i18n/config';
 import { getPersianProject, getProjectPresentation } from '@/i18n/projects';
+import { getLocalizedResume } from '@/i18n/resume';
 
 interface Props {
   locale: Locale;
@@ -14,6 +15,10 @@ const { locale, project } = Astro.props;
 const copy = getDictionary(locale).caseStudy;
 const presentation = getProjectPresentation(locale, project);
 const persian = locale === 'fa' ? getPersianProject(project.id) : undefined;
+const resumeProject = getLocalizedResume(locale).selectedProjects.find(
+  (item) => item.id === project.id,
+);
+const outcome = resumeProject?.verifiedResult ?? presentation.highlight;
 const { Content } = await render(project);
 const routePath = `projects/${project.id}/`;
 ---
@@ -39,7 +44,13 @@ const routePath = `projects/${project.id}/`;
       <dd>{presentation.challenge}</dd>
     </div>
   </dl>
-  <p class="content-highlight">{presentation.highlight}</p>
+  <aside
+    class="content-highlight"
+    aria-label={resumeProject?.verifiedResult ? copy.verifiedResult : copy.verifiedHighlight}
+  >
+    <span>{resumeProject?.verifiedResult ? copy.verifiedResult : copy.verifiedHighlight}</span>
+    <p>{outcome}</p>
+  </aside>
   <ul class="tag-list content-technologies" aria-label="Technologies">
     {project.data.technologies.map((technology) => (
       <li>

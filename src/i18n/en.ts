@@ -7,11 +7,16 @@ export const en = {
   language: { name: 'English', switchLabel: 'Change language' },
   theme: { toDark: 'Switch to dark theme', toLight: 'Switch to light theme' },
   navigation: [
-    { label: 'About', href: '#about' },
-    { label: 'Expertise', href: '#expertise' },
-    { label: 'Work', href: '#work' },
+    { label: 'Projects', href: '#work' },
     { label: 'Services', href: '#services' },
     { label: 'Writing', href: '#writing' },
+  ],
+  mobileNavigation: [
+    { label: 'Projects', href: '#work' },
+    { label: 'Services', href: '#services' },
+    { label: 'Expertise', href: '#expertise' },
+    { label: 'Writing', href: '#writing' },
+    { label: 'About', href: '#about' },
   ],
   header: { contact: 'Let’s talk', menu: 'Toggle navigation', home: 'home' },
   wordmark: 'Cloud · Platform · DevOps',
@@ -45,6 +50,10 @@ export const en = {
     description:
       'Verified engineering work across private cloud, distributed storage, Kubernetes platforms, and infrastructure automation. Confidential details are omitted.',
     read: 'Read case study',
+    challenge: 'Challenge',
+    role: 'Role',
+    result: 'Verified result',
+    highlight: 'Verified highlight',
     emptyCode: 'CASE_STUDIES / IN_REVIEW',
     emptyTitle: 'Detailed case studies are being prepared.',
     emptyDescription:
@@ -58,15 +67,16 @@ export const en = {
   writing: {
     eyebrow: 'Writing on LinkedIn',
     heading: 'Technical thinking, grounded in the work.',
-    description:
-      'A selection of Milad’s published LinkedIn posts, displayed from their official source.',
+    description: 'A selection of Milad’s published technical notes and infrastructure thinking.',
     pageTitle: 'Writing on LinkedIn',
-    pageDescription:
-      'Published LinkedIn posts by Milad Seyfi, displayed from their official source.',
+    pageDescription: 'Published LinkedIn posts by Milad Seyfi.',
     embedTitle: 'LinkedIn post by Milad Seyfi, item',
     profileCta: 'View LinkedIn profile',
     viewAll: 'View all posts',
     backHome: 'Back to portfolio',
+    postFallback: 'Published LinkedIn post',
+    postCta: 'Read on LinkedIn',
+    profileFallback: 'Open LinkedIn profile',
   },
   contact: {
     topicsLabel: 'Consulting enquiry topics',
@@ -118,9 +128,13 @@ export const en = {
     context: 'Context',
     role: 'Role',
     challenge: 'Challenge',
+    verifiedResult: 'Verified result',
+    verifiedHighlight: 'Verified highlight',
   },
   footer: {
     statement: 'Architecture for systems—and teams—that need to last.',
+    navigationLabel: 'Footer links',
+    resume: 'Resume',
   },
   notFound: {
     title: 'Page not found — Milad Seyfi',

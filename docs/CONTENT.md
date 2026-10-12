@@ -7,7 +7,7 @@
 - Edit Persian project presentation in `src/content-data/projects-fa.json`; it must keep the canonical project ID.
 - Add case studies in `src/content/projects/*.md`.
 - Add articles in `src/content/posts/*.md`.
-- Register published LinkedIn posts in `src/content-data/linkedin.json` only from verified official embed URLs. Keep the list newest-first; the homepage shows the first three and the localized Writing routes show the complete list.
+- Register published LinkedIn posts in `src/content-data/linkedin.json` only from verified official embed URLs. Keep the list newest-first; the homepage shows the first three and the localized Writing routes show the complete list. Optional editorial metadata (`title`, `excerpt`, `date`, `topic`, and verified canonical `postUrl`) powers native writing cards; omit any field that has not been verified.
 - Register verified profile photography in `src/data/media.ts` after importing optimized source files from `src/assets/images/profile/`.
 - Collection schemas in `src/content.config.ts` are the content contract.
 

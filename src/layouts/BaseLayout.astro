@@ -53,6 +53,47 @@ const sameAs = [
   resume.contact.whatsapp,
   resume.contact.website,
 ].filter((url): url is string => Boolean(url));
+interface FooterLink {
+  label: string;
+  href: string;
+  external: boolean;
+}
+const footerLinks: FooterLink[] = [];
+if (resume.contact.linkedin)
+  footerLinks.push({
+    label: dictionary.contact.channelLabels.linkedin,
+    href: resume.contact.linkedin,
+    external: true,
+  });
+if (resume.contact.email)
+  footerLinks.push({
+    label: dictionary.contact.channelLabels.email,
+    href: `mailto:${resume.contact.email}`,
+    external: false,
+  });
+if (resume.contact.github)
+  footerLinks.push({
+    label: dictionary.contact.channelLabels.github,
+    href: resume.contact.github,
+    external: true,
+  });
+if (resume.contact.telegram)
+  footerLinks.push({
+    label: dictionary.contact.channelLabels.telegram,
+    href: resume.contact.telegram,
+    external: true,
+  });
+if (resume.contact.whatsapp)
+  footerLinks.push({
+    label: dictionary.contact.channelLabels.whatsapp,
+    href: resume.contact.whatsapp,
+    external: true,
+  });
+footerLinks.push({
+  label: dictionary.footer.resume,
+  href: getLocalePath(locale, 'resume/'),
+  external: false,
+});
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -193,7 +234,7 @@ const jsonLd = {
             <span></span>
           </summary>
           <nav aria-label={locale === 'fa' ? 'ناوبری موبایل' : 'Mobile navigation'}>
-            {dictionary.navigation.map((item) => (
+            {dictionary.mobileNavigation.map((item) => (
               <a href={`${getLocalePath(locale)}${item.href}`}>{item.label}</a>
             ))}
             <LanguageSwitcher {locale} routePath={hasLocalizedRoute ? routePath : ''} />
@@ -209,10 +250,23 @@ const jsonLd = {
     <footer class="site-footer">
       <div class="shell site-footer__inner">
         <Wordmark {locale} />
-        <p>{dictionary.footer.statement}</p>
-        <p>
-          © {new Date().getUTCFullYear()} {resume.identity.name}
-        </p>
+        <div class="site-footer__copy">
+          <p>{dictionary.footer.statement}</p>
+          <p>
+            © {new Date().getUTCFullYear()} {resume.identity.name}
+          </p>
+        </div>
+        <nav class="site-footer__links" aria-label={dictionary.footer.navigationLabel}>
+          {footerLinks.map((link) => (
+            <a
+              href={link.href}
+              target={link.external ? '_blank' : undefined}
+              rel={link.external ? 'noreferrer' : undefined}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
       </div>
     </footer>
   </body>
