@@ -76,7 +76,7 @@ export const en = {
     backHome: 'Back to portfolio',
     postFallback: 'LinkedIn post {number}',
     postCta: 'Read on LinkedIn',
-    embedCta: 'Open LinkedIn post',
+    embedCta: 'View post on LinkedIn',
     profileFallback: 'Open LinkedIn profile',
   },
   contact: {

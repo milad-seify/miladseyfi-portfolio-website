@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import type { LinkedInPost } from '@/data/linkedin-posts';
+import { getLinkedInPostUrl, type LinkedInPost } from '@/data/linkedin-posts';
 import { resume } from '@/data/resume';
 import { formatDate, getDictionary, type Locale } from '@/i18n/config';
 
@@ -20,30 +20,37 @@ const excerpt = post.excerpt ?? post.summary;
 const topic = post.topic ?? post.category;
 const dateValue = post.date ?? post.publishedAt;
 const date = dateValue ? formatDate(new Date(`${dateValue}T00:00:00Z`), locale) : undefined;
-const canonicalPostUrl = post.postUrl ?? post.canonicalUrl;
-const href = canonicalPostUrl ?? post.embedUrl ?? resume.contact.linkedin;
-const linkLabel = canonicalPostUrl
-  ? copy.postCta
-  : post.embedUrl
-    ? copy.embedCta
-    : copy.profileFallback;
 const hasEditorialMetadata = Boolean(topic || date || post.title || excerpt);
+const directPostUrl = getLinkedInPostUrl(post);
+const href = directPostUrl ?? resume.contact.linkedin;
+const editorialLinkLabel = directPostUrl ? copy.postCta : copy.profileFallback;
+const compactLinkLabel = directPostUrl ? copy.embedCta : copy.profileFallback;
 ---
 
-<article class:list={['linkedin-card', !hasEditorialMetadata && 'linkedin-card--minimal']}>
-  <header class="linkedin-card__meta">
-    <span aria-hidden="true">{number}</span>
-    <div>
-      {topic && <span>{topic}</span>}
-      {date && <time datetime={dateValue}>{date}</time>}
-      {!topic && !date && <span>LinkedIn</span>}
-    </div>
-  </header>
-  <h3>{title}</h3>
-  {excerpt && <p>{excerpt}</p>}
-  {href && (
+{hasEditorialMetadata ? (
+  <article class="linkedin-card linkedin-card--editorial">
+    <header class="linkedin-card__meta">
+      <span aria-hidden="true">{number}</span>
+      <div>
+        {topic && <span>{topic}</span>}
+        {date && <time datetime={dateValue}>{date}</time>}
+        {!topic && !date && <span>LinkedIn</span>}
+      </div>
+    </header>
+    <h3>{title}</h3>
+    {excerpt && <p>{excerpt}</p>}
     <a class="text-link" href={href} target="_blank" rel="noreferrer">
-      {linkLabel} <Icon name="external" size={16} />
+      {editorialLinkLabel} <Icon name="external" size={16} />
     </a>
-  )}
-</article>
+  </article>
+) : (
+  <article class="linkedin-card linkedin-card--compact">
+    <a class="linkedin-card__compact-link" href={href} target="_blank" rel="noreferrer">
+      <span class="linkedin-card__compact-label">LinkedIn</span>
+      <span class="linkedin-card__compact-number">{number}</span>
+      <span class="linkedin-card__compact-action">
+        {compactLinkLabel} <Icon name="external" size={16} />
+      </span>
+    </a>
+  </article>
+)}
