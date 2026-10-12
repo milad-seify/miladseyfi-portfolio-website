@@ -55,7 +55,7 @@ export const fa = {
     challenge: 'چالش',
     role: 'نقش',
     result: 'نتیجه تأییدشده',
-    highlight: 'نکته تأییدشده',
+    highlight: 'نکته کلیدی',
     emptyCode: 'CASE_STUDIES / IN_REVIEW',
     emptyTitle: 'مطالعه‌های موردی در حال آماده‌سازی هستند.',
     emptyDescription: 'زمینه، تاریخ‌ها، تصمیم‌ها و نتیجه‌ها فقط پس از تأیید منتشر خواهند شد.',
@@ -75,8 +75,9 @@ export const fa = {
     profileCta: 'مشاهده پروفایل LinkedIn',
     viewAll: 'مشاهده همه نوشته‌ها',
     backHome: 'بازگشت به وب‌سایت',
-    postFallback: 'نوشته منتشرشده در LinkedIn',
+    postFallback: 'پست LinkedIn شماره {number}',
     postCta: 'مطالعه در LinkedIn',
+    embedCta: 'مشاهده پست LinkedIn',
     profileFallback: 'مشاهده پروفایل LinkedIn',
   },
   contact: {
@@ -130,7 +131,7 @@ export const fa = {
     role: 'نقش',
     challenge: 'چالش',
     verifiedResult: 'نتیجه تأییدشده',
-    verifiedHighlight: 'نکته تأییدشده',
+    highlight: 'نکته کلیدی',
   },
   footer: {
     statement: 'معماری برای سامانه‌ها و تیم‌هایی که باید ماندگار باشند.',

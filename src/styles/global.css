@@ -1624,6 +1624,16 @@ html[lang='fa'] .contact h2 {
   color: var(--blue-ink);
 }
 
+html[data-theme='dark'] .project-card--feature h3,
+html[data-theme='dark'] .contact h2,
+html[data-theme='dark'] .expertise-core {
+  color: var(--blue-ink);
+}
+
+html[data-theme='dark'] .expertise-core i {
+  background: var(--blue-ink);
+}
+
 .contact-form-panel {
   align-self: start;
   padding: clamp(1.5rem, 4vw, 2.75rem);

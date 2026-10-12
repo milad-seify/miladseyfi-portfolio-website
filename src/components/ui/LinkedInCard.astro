@@ -12,17 +12,22 @@ interface Props {
 
 const { post, locale, index } = Astro.props;
 const copy = getDictionary(locale).writing;
-const title = post.title ?? copy.postFallback;
+const number = new Intl.NumberFormat(locale === 'fa' ? 'fa-IR' : 'en', {
+  minimumIntegerDigits: 2,
+}).format(index + 1);
+const title = post.title ?? copy.postFallback.replace('{number}', number);
 const excerpt = post.excerpt ?? post.summary;
 const topic = post.topic ?? post.category;
 const dateValue = post.date ?? post.publishedAt;
 const date = dateValue ? formatDate(new Date(`${dateValue}T00:00:00Z`), locale) : undefined;
-const href = post.postUrl ?? post.canonicalUrl ?? resume.contact.linkedin;
-const linkLabel = post.postUrl || post.canonicalUrl ? copy.postCta : copy.profileFallback;
+const canonicalPostUrl = post.postUrl ?? post.canonicalUrl;
+const href = canonicalPostUrl ?? post.embedUrl ?? resume.contact.linkedin;
+const linkLabel = canonicalPostUrl
+  ? copy.postCta
+  : post.embedUrl
+    ? copy.embedCta
+    : copy.profileFallback;
 const hasEditorialMetadata = Boolean(topic || date || post.title || excerpt);
-const number = new Intl.NumberFormat(locale === 'fa' ? 'fa-IR' : 'en', {
-  minimumIntegerDigits: 2,
-}).format(index + 1);
 ---
 
 <article class:list={['linkedin-card', !hasEditorialMetadata && 'linkedin-card--minimal']}>

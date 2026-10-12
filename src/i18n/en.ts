@@ -53,7 +53,7 @@ export const en = {
     challenge: 'Challenge',
     role: 'Role',
     result: 'Verified result',
-    highlight: 'Verified highlight',
+    highlight: 'Highlight',
     emptyCode: 'CASE_STUDIES / IN_REVIEW',
     emptyTitle: 'Detailed case studies are being prepared.',
     emptyDescription:
@@ -74,8 +74,9 @@ export const en = {
     profileCta: 'View LinkedIn profile',
     viewAll: 'View all posts',
     backHome: 'Back to portfolio',
-    postFallback: 'Published LinkedIn post',
+    postFallback: 'LinkedIn post {number}',
     postCta: 'Read on LinkedIn',
+    embedCta: 'Open LinkedIn post',
     profileFallback: 'Open LinkedIn profile',
   },
   contact: {
@@ -129,7 +130,7 @@ export const en = {
     role: 'Role',
     challenge: 'Challenge',
     verifiedResult: 'Verified result',
-    verifiedHighlight: 'Verified highlight',
+    highlight: 'Highlight',
   },
   footer: {
     statement: 'Architecture for systems—and teams—that need to last.',
