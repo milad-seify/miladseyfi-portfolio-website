@@ -3,15 +3,8 @@ import { readFile, readdir, stat } from 'node:fs/promises';
 import { extname, join } from 'node:path';
 
 const dist = join(process.cwd(), 'dist');
-const [owner, repositoryName] = process.env.GITHUB_REPOSITORY?.split('/') ?? [];
-const configuredSite = process.env.SITE_URL?.trim() || undefined;
 const configuredBase = process.env.BASE_PATH?.trim() || undefined;
-const inferredBase =
-  repositoryName && repositoryName !== `${owner}.github.io` ? repositoryName : '';
-const baseSegment = (configuredBase ?? (configuredSite ? '' : inferredBase)).replace(
-  /^\/+|\/+$/g,
-  '',
-);
+const baseSegment = (configuredBase ?? '').replace(/^\/+|\/+$/g, '');
 const basePath = baseSegment ? `/${baseSegment}/` : '/';
 
 const walk = async (directory) => {
