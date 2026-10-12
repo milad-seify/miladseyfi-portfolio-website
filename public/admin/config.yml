@@ -240,12 +240,12 @@ collections:
       - { label: Technologies, name: technologies, widget: list }
       - { label: Featured, name: featured, widget: boolean, default: false }
       - {
-          label: Published,
+          label: Draft,
           name: draft,
           widget: boolean,
           default: true,
           required: false,
-          hint: 'Turn off draft to publish.',
+          hint: 'On = hidden from the public site. Turn off to publish.',
         }
       - { label: Display order, name: order, widget: number, value_type: int, default: 0 }
       - { label: External URL, name: externalUrl, widget: string, required: false }
@@ -268,11 +268,11 @@ collections:
       - { label: Updated date, name: updatedAt, widget: datetime, required: false }
       - { label: Tags, name: tags, widget: list, required: false }
       - {
-          label: Published,
+          label: Draft,
           name: draft,
           widget: boolean,
           default: true,
           required: false,
-          hint: 'Turn off draft to publish.',
+          hint: 'On = hidden from the public site. Turn off to publish.',
         }
       - { label: Article, name: body, widget: markdown }

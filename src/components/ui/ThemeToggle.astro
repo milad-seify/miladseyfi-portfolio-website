@@ -1,0 +1,22 @@
+---
+import { getDictionary, type Locale } from '@/i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const theme = getDictionary(locale).theme;
+---
+
+<button
+  class="theme-toggle"
+  type="button"
+  data-theme-toggle
+  data-theme-light-label={theme.toDark}
+  data-theme-dark-label={theme.toLight}
+  aria-label={theme.toDark}
+  aria-pressed="false"
+>
+  <span aria-hidden="true"></span>
+</button>

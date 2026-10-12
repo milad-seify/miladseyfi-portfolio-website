@@ -12,6 +12,10 @@ All tokens live in `src/styles/global.css` and are exposed to Tailwind through `
 
 Use semantic token names. Components must not define a competing palette.
 
+## Theme
+
+Light preserves the existing coral, cream, and periwinkle composition. Dark uses graphite and slate surfaces with the same coral signal and readable cool text. The document shell applies the system preference when no saved choice exists; an accessible header control stores an explicit override in local storage. Components use the shared tokens so the two themes do not fork stylesheets.
+
 ## Component rules
 
 - One primary action per visual group; secondary actions use quieter treatments.

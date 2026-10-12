@@ -38,6 +38,10 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Validate and build static site
         run: pnpm validate
+      - name: Generate deployment resume PDFs
+        run: node scripts/generate-resume-pdf.mjs
+      - name: Validate deployment artifact
+        run: node scripts/check-build.mjs
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:

@@ -7,6 +7,7 @@ export const fa = {
       'معماری کلاد، مهندسی پلتفرم و مشاوره DevOps با تمرکز بر زیرساخت ابری خصوصی، Kubernetes، ذخیره‌سازی و اتوماسیون.',
   },
   language: { name: 'فارسی', switchLabel: 'تغییر زبان' },
+  theme: { toDark: 'تغییر به حالت تیره', toLight: 'تغییر به حالت روشن' },
   navigation: [
     { label: 'درباره من', href: '#about' },
     { label: 'تخصص‌ها', href: '#expertise' },

@@ -100,10 +100,10 @@ if (!robots.includes('Disallow: /admin/')) {
   failures.push('robots.txt must exclude the CMS interface.');
 }
 if (files.some((file) => extname(file) === '.js')) {
-  failures.push('Unexpected client-side JavaScript was emitted.');
+  failures.push('Unexpected emitted JavaScript bundle.');
 }
 
 if (failures.length > 0) throw new Error(`Build validation failed:\n${failures.join('\n')}`);
 console.log(
-  `Build validation passed (${htmlFiles.length} public HTML files, base ${basePath}, zero JS).`,
+  `Build validation passed (${htmlFiles.length} public HTML files, base ${basePath}, no emitted JavaScript bundles).`,
 );

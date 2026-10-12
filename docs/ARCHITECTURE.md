@@ -2,7 +2,7 @@
 
 ## Shape
 
-Astro renders a fully static bilingual site. Persian is served unprefixed and English under `/en/`; both compose the same components and canonical data. Public routes have no backend, framework island, runtime data fetch, or client JavaScript. `/admin/` is a separate static Sveltia CMS interface backed by GitHub commits.
+Astro renders a fully static bilingual site. Persian is served unprefixed and English under `/en/`; both compose the same components and canonical data. Public routes have no backend, framework island, or runtime data fetch. The document shell contains one small progressive-enhancement script for theme preference. `/admin/` is a separate static Sveltia CMS interface backed by GitHub commits.
 
 ```text
 resume data + content collections
@@ -24,7 +24,7 @@ resume data + content collections
 
 ## Decisions
 
-- Static output and no hydrated components by default.
+- Static output and no hydrated components. The only public-site script resolves and persists light/dark preference before paint.
 - Native CSS scroll-driven entry effects with a non-supporting-browser fallback; reduced motion disables them.
 - Self-hosted Estedad for Persian and a system stack for English; no font CDN request.
 - Repository Pages URL is configurable through environment variables; a custom domain requires no component changes.

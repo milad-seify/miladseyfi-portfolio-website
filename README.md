@@ -40,7 +40,7 @@ CMS-managed data + i18n + Markdown content
           GitHub Pages
 ```
 
-Public portfolio routes ship static HTML and CSS with zero generated client JavaScript. `/admin/` is a separate, static Sveltia CMS interface and may load its own JavaScript.
+Public portfolio routes ship static HTML and CSS without framework hydration. A small inline progressive-enhancement script resolves and persists the light/dark preference; `/admin/` is a separate static Sveltia CMS interface and may load its own JavaScript.
 
 ## Repository structure
 
@@ -128,7 +128,7 @@ Run `pnpm resume:check` after résumé changes and `pnpm validate` before publis
 
 ## Deployment
 
-GitHub Actions validates pushes and pull requests. A push to `main` runs validation, builds the static site, and deploys the Pages artifact. `SITE_URL` supplies the custom-domain origin; `BASE_PATH` is only for intentional subpath hosting.
+GitHub Actions validates pushes and pull requests. A push to `main` runs validation, builds the static site, generates fresh Persian and English résumé PDFs into the Pages artifact, validates that artifact, and deploys it. The production origin defaults to `https://miladseyfi.ir`; `SITE_URL` can override it and `BASE_PATH` is only for intentional subpath hosting.
 
 ## Documentation
 

@@ -5,6 +5,7 @@ export const en = {
       'Cloud architecture, platform engineering, and DevOps consulting across private cloud, Kubernetes, storage, and infrastructure automation.',
   },
   language: { name: 'English', switchLabel: 'Change language' },
+  theme: { toDark: 'Switch to dark theme', toLight: 'Switch to light theme' },
   navigation: [
     { label: 'About', href: '#about' },
     { label: 'Expertise', href: '#expertise' },

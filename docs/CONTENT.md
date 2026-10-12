@@ -27,6 +27,6 @@ The homepage uses Astro image optimization for registered profile photography. U
 
 ## CMS workflow
 
-Use `/admin/` for the files above and for project/post Markdown. It commits changes to `main`; GitHub Actions validates and deploys them. A Git revert is the rollback path. The CMS may upload project/post media to `public/media`, but the registered profile portrait remains code-managed to retain Astro optimization.
+Use `/admin/` for the files above and for project/post Markdown. It commits changes to `main`; GitHub Actions validates, builds, generates deployment-specific resume PDFs, and deploys the artifact. A Git revert is the rollback path. The CMS may upload project/post media to `public/media`, but the registered profile portrait remains code-managed to retain Astro optimization.
 
 Keep navigation, generic UI labels, component behavior, deployment configuration, and secrets out of CMS-managed files. Validate factual changes with `pnpm resume:check` and `pnpm validate`.
