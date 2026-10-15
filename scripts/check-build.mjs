@@ -21,6 +21,7 @@ const walk = async (directory) => {
 
 const files = await walk(dist);
 const htmlFiles = files.filter((file) => extname(file) === '.html');
+const vendoredSveltiaAsset = join(dist, 'admin', 'vendor', 'sveltia-cms-0.234.0.js');
 const failures = [];
 
 for (const file of htmlFiles) {
@@ -55,6 +56,9 @@ const requiredFiles = [
   'site.webmanifest',
   join('admin', 'index.html'),
   join('admin', 'config.yml'),
+  join('admin', 'vendor', 'sveltia-cms-0.234.0.js'),
+  join('admin', 'vendor', 'SHA256SUMS'),
+  join('admin', 'vendor', 'LICENSE-Sveltia-CMS-0.234.0.txt'),
   'sitemap-index.xml',
   join('resume', 'milad-seyfi-resume.pdf'),
   join('resume', 'milad-seyfi-resume-fa.pdf'),
@@ -92,11 +96,11 @@ if (!admin.includes('name="robots" content="noindex, nofollow"')) {
 if (!robots.includes('Disallow: /admin/')) {
   failures.push('robots.txt must exclude the CMS interface.');
 }
-if (files.some((file) => extname(file) === '.js')) {
+if (files.some((file) => extname(file) === '.js' && file !== vendoredSveltiaAsset)) {
   failures.push('Unexpected emitted JavaScript bundle.');
 }
 
 if (failures.length > 0) throw new Error(`Build validation failed:\n${failures.join('\n')}`);
 console.log(
-  `Build validation passed (${htmlFiles.length} public HTML files, base ${basePath}, no emitted JavaScript bundles).`,
+  `Build validation passed (${htmlFiles.length} public HTML files, base ${basePath}, no emitted application JavaScript bundles).`,
 );
