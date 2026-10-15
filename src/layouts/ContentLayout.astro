@@ -10,16 +10,35 @@ interface Props {
   title: string;
   description: string;
   eyebrow: string;
+  backLabel?: string;
+  backHref?: string;
+  hasLocalizedRoute?: boolean;
 }
-const { locale, routePath, title, description, eyebrow } = Astro.props;
+const {
+  locale,
+  routePath,
+  title,
+  description,
+  eyebrow,
+  backLabel,
+  backHref,
+  hasLocalizedRoute = true,
+} = Astro.props;
 const copy = getDictionary(locale).caseStudy;
 const personName = getLocalizedResume(locale).identity.name;
 ---
 
-<BaseLayout {locale} {routePath} title={`${title} — ${personName}`} {description} type="article">
+<BaseLayout
+  {locale}
+  {routePath}
+  title={`${title} — ${personName}`}
+  {description}
+  type="article"
+  {hasLocalizedRoute}
+>
   <article class="content-page shell">
-    <ButtonLink href={getLocalePath(locale)} variant="quiet">
-      {copy.back}
+    <ButtonLink href={backHref ?? getLocalePath(locale)} variant="quiet">
+      {backLabel ?? copy.back}
     </ButtonLink>
     <header>
       <p class="eyebrow">
