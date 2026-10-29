@@ -280,7 +280,13 @@ collections:
     format: frontmatter
     slug: '{{slug}}'
     fields:
-      - { label: Language, name: locale, widget: hidden, default: en }
+      - label: Language
+        name: locale
+        widget: select
+        options:
+          - { label: English, value: en }
+          - { label: Persian, value: fa }
+        default: en
       - { label: Translation key, name: translationKey, widget: string, required: false }
       - { label: Title, name: title, widget: string }
       - { label: Description, name: description, widget: text }
