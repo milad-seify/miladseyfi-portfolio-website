@@ -14,7 +14,9 @@ if (!siteValue) {
     site = new URL(siteValue);
     if (site.protocol !== 'https:') issues.push('SITE_URL must use HTTPS.');
     if (site.pathname !== '/' || site.search || site.hash)
-      issues.push('SITE_URL must be an origin only; configure any hosting subpath with BASE_PATH.');
+      issues.push(
+        'SITE_URL must be an origin only; configure any hosting subpath with BASE_PATH.',
+      );
     if (site.hostname === 'example.com' || site.hostname.endsWith('.example'))
       issues.push('SITE_URL must not use an example domain.');
   } catch {
@@ -31,7 +33,9 @@ const configuredBase = process.env.BASE_PATH?.trim() ?? '';
 const baseSegment = configuredBase.replace(/^\/+|\/+$/g, '');
 const normalizedBase = baseSegment ? `/${baseSegment}` : '';
 if (configuredBase && configuredBase !== normalizedBase)
-  issues.push(`BASE_PATH should use normalized form ${normalizedBase || '/'} (no trailing slash).`);
+  issues.push(
+    `BASE_PATH should use normalized form ${normalizedBase || '/'} (no trailing slash).`,
+  );
 
 if (site && repository && site.hostname.endsWith('.github.io')) {
   const [owner, repoName] = repository.split('/');
@@ -44,7 +48,11 @@ if (site && repository && site.hostname.endsWith('.github.io')) {
 }
 
 const resume = JSON.parse(await read('src/content-data/resume.json'));
-if (!Object.values(resume.contact ?? {}).some((value) => typeof value === 'string' && value.trim()))
+if (
+  !Object.values(resume.contact ?? {}).some(
+    (value) => typeof value === 'string' && value.trim(),
+  )
+)
   issues.push('Configure at least one real contact or social channel before production deployment.');
 
 const cmsConfig = await read('public/admin/config.yml');
