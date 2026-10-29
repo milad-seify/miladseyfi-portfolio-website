@@ -37,6 +37,8 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Production preflight
+        run: pnpm production:check
       - name: Validate and build static site
         run: pnpm validate
       - name: Generate deployment resume PDFs

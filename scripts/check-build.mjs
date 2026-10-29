@@ -7,7 +7,7 @@ const configuredBase = process.env.BASE_PATH?.trim() || undefined;
 const baseSegment = (configuredBase ?? '').replace(/^\/+|\/+$/g, '');
 const basePath = baseSegment ? `/${baseSegment}/` : '/';
 const requireResumePdfs = process.env.REQUIRE_RESUME_PDFS === '1';
-const optionalResumePdfPattern = /^\/resume\/resume(?:-(?:fa|en))?\.pdf$/;
+const optionalResumePdfPattern = /^resume\/resume(?:-(?:fa|en))?\.pdf$/;
 
 const walk = async (directory) => {
   const entries = await readdir(directory);
@@ -33,7 +33,6 @@ for (const file of htmlFiles) {
     if (!url.startsWith('/') || url.startsWith('//')) continue;
     const pathname = url.split(/[?#]/)[0];
     if (!pathname) continue;
-    if (!requireResumePdfs && optionalResumePdfPattern.test(pathname)) continue;
     if (basePath !== '/' && !pathname.startsWith(basePath)) {
       failures.push(`${file}: path escapes configured base (${url})`);
       continue;
@@ -42,6 +41,7 @@ for (const file of htmlFiles) {
       /^\/+/,
       '',
     );
+    if (!requireResumePdfs && optionalResumePdfPattern.test(relative)) continue;
     const target = pathname.endsWith('/')
       ? join(dist, relative, 'index.html')
       : join(dist, relative);
@@ -92,8 +92,8 @@ if (!notFound.includes('name="robots" content="noindex, nofollow"'))
   failures.push('The 404 page must be excluded from indexing.');
 if (!admin.includes('name="robots" content="noindex, nofollow"'))
   failures.push('The CMS interface must be excluded from indexing.');
-if (!robots.includes('Disallow: /admin/'))
-  failures.push('robots.txt must exclude the CMS interface.');
+if (!robots.includes(`Disallow: ${basePath}admin/`))
+  failures.push('robots.txt must exclude the CMS interface at the configured base path.');
 if (files.some((file) => extname(file) === '.js' && file !== vendoredSveltiaAsset))
   failures.push('Unexpected emitted JavaScript bundle.');
 

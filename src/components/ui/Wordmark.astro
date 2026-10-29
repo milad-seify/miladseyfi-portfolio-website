@@ -1,6 +1,7 @@
 ---
 import { resume } from '@/data/resume';
 import { getDictionary, getLocalePath, type Locale } from '@/i18n/config';
+import { getInitials } from '@/lib/identity';
 
 interface Props {
   locale: Locale;
@@ -8,11 +9,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const dictionary = getDictionary(locale);
-
-const initials = resume.identity.name
-  .split(/\s+/)
-  .map((part) => part[0])
-  .join('');
+const initials = getInitials(resume.identity.name);
 ---
 
 <a

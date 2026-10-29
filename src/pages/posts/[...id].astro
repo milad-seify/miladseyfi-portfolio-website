@@ -1,0 +1,26 @@
+---
+import { getCollection, render } from 'astro:content';
+import ContentLayout from '@/layouts/ContentLayout.astro';
+import { isPublished } from '@/lib/content';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('posts'))
+    .filter(isPublished)
+    .filter((post) => post.data.locale === 'fa');
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<ContentLayout
+  locale="fa"
+  routePath={`posts/${post.id}/`}
+  title={post.data.title}
+  description={post.data.description}
+  eyebrow="مقاله"
+  hasLocalizedRoute={false}
+>
+  <Content />
+</ContentLayout>

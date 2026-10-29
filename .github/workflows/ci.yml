@@ -40,5 +40,9 @@ jobs:
         run: pnpm check
       - name: Formatting check
         run: pnpm format:check
-      - name: Production build
+      - name: Root-path production build
+        run: pnpm build
+      - name: Subpath production build
+        env:
+          BASE_PATH: /portfolio-preview
         run: pnpm build

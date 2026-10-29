@@ -1,39 +1,43 @@
 # Design System
 
-The visual language is an editorial portfolio crossed with technical architecture: periwinkle-blue fields, warm cream surfaces, coral signals, large Persian-first typography, asymmetric composition, and thin structural rules. Infrastructure appears through relationships and diagrams, not dashboard styling.
+## Status: replaceable starter baseline
 
-## Tokens
+The repository ships with a complete visual baseline so the starter is usable and reviewable before a new owner's design brief exists. The current coral/cream/periwinkle editorial composition is **not** part of the reusable product contract.
 
-All tokens live in `src/styles/global.css` and are exposed to Tailwind through `@theme`:
+When a new owner supplies UI references, palette, typography, or brand direction, that explicit brief supersedes the baseline visual language. Replace the system coherently; do not keep legacy visual motifs merely because they exist in the starter.
 
-- Color: `#526594` blue, `#F3E8D6` cream, `#FF5A50` coral, and derived tones defined in `global.css`. Coral is the signature signal; cream and blue form the large page fields.
-- Type: self-hosted Estedad for Persian, system sans for English, and system monospace for labels/technical details.
-- Layout: `--container`, section spacing, radii, shadows, and transition timings.
+## Stable design contracts
 
-Use semantic token names. Components must not define a competing palette.
+These constraints should normally survive a redesign:
 
-## Theme
+- design mobile-first and avoid horizontal overflow
+- preserve visible keyboard focus and semantic interactive elements
+- keep readable color contrast in both supported themes
+- preserve `prefers-reduced-motion`
+- maintain RTL/LTR parity when both locales remain enabled
+- use shared tokens rather than scattered one-off values
+- keep touch targets at least 44px where practical
+- hide decorative SVGs from assistive technology and give meaningful media accessible text
+- keep public pages static unless a new requirement truly needs client-side runtime code
 
-Light preserves the existing coral, cream, and periwinkle composition. Dark uses graphite and slate surfaces with the same coral signal and readable cool text. The document shell applies the system preference when no saved choice exists; an accessible header control stores an explicit override in local storage. Components use the shared tokens so the two themes do not fork stylesheets.
+## Baseline implementation
 
-## Component rules
+The current tokens live in `src/styles/global.css` and are exposed to Tailwind through `@theme`. The starter currently uses:
 
-- One primary action per visual group; secondary actions use quieter treatments.
-- Prefer typography, rules, and spatial hierarchy over containers. Reserve bordered panels for a genuine interface or form boundary.
-- Do not use glass, glow, gradient text, neon, or generic dark-dashboard treatments.
-- Use coral for large display text, fields, rules, and states. Small text uses accessible cream, deep-blue, or `--coral-ink` rather than raw coral.
-- Use borders, architectural lines, and coordinates sparingly; typography and color fields provide the hierarchy.
-- Technical labels are small supporting details, not the dominant voice.
-- Give each major section its own composition; do not repeat equal card grids or a single heading/layout formula.
-- Treat the coral connector, topology object, oversized name, and project numbering as recurring authored details.
-- Decorative SVGs are hidden from assistive technology. Meaningful icons require accessible text.
-- Focus indicators must remain visible on every interactive element.
-- Motion communicates entrance, topology state, or interaction feedback only. Keep it subtle, CSS-driven, and disabled under `prefers-reduced-motion`.
-- Standard entrance motion should resolve in roughly 450–650ms. Scroll-linked reveals start partially visible and complete early in the viewport.
-- Profile photography uses an editorial rectangular crop rather than an avatar. The component must retain the same composition when its fallback is replaced by a verified photograph.
+- color: periwinkle blue, warm cream, coral, and derived dark-theme tones
+- type: self-hosted Estedad for Persian, system sans for English, and system monospace for supporting technical labels
+- layout: shared container width, section spacing, radii, shadows, and transition timings
 
-## Responsive behavior
+These values are starting points, not brand requirements.
 
-Design mobile-first. Collapse navigation to an accessible native disclosure, stack grids, avoid horizontal scrolling, and keep touch targets at least 44px.
+## Rebrand contract
 
-The mobile Hero uses its concise summary and reduced topology composition; it is not a direct stack of the desktop layout.
+For a new portfolio:
+
+1. define the new visual direction before editing individual components
+2. replace global tokens and typography first
+3. update section compositions and reusable primitives second
+4. remove obsolete motifs/classes instead of accumulating overrides
+5. validate focus states, contrast, mobile layouts, RTL/LTR, and reduced motion after the redesign
+
+A redesign may use a completely different visual language as long as the stable accessibility and rendering contracts remain intact.
