@@ -7,6 +7,7 @@ const configuredBase = process.env.BASE_PATH?.trim() || undefined;
 const baseSegment = (configuredBase ?? '').replace(/^\/+|\/+$/g, '');
 const basePath = baseSegment ? `/${baseSegment}/` : '/';
 const requireResumePdfs = process.env.REQUIRE_RESUME_PDFS === '1';
+const optionalResumePdfPattern = /^\/resume\/resume(?:-(?:fa|en))?\.pdf$/;
 
 const walk = async (directory) => {
   const entries = await readdir(directory);
@@ -32,6 +33,7 @@ for (const file of htmlFiles) {
     if (!url.startsWith('/') || url.startsWith('//')) continue;
     const pathname = url.split(/[?#]/)[0];
     if (!pathname) continue;
+    if (!requireResumePdfs && optionalResumePdfPattern.test(pathname)) continue;
     if (basePath !== '/' && !pathname.startsWith(basePath)) {
       failures.push(`${file}: path escapes configured base (${url})`);
       continue;
