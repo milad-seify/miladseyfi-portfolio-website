@@ -2,34 +2,42 @@
 
 ## Local commands
 
-See `package.json` for the source of truth. Typical workflow:
-
 ```sh
 pnpm install --frozen-lockfile
 pnpm dev
 pnpm validate
 ```
 
-`validate` runs Astro/TypeScript checks, formatting verification, and the production build.
-
-`resume:pdf` builds and prints Persian and English resume routes with a local Chrome/Edge installation.
+`validate` runs résumé validation, Astro/TypeScript checks, formatting verification, a production build, and static artifact checks. `resume:pdf` prints Persian and English résumé routes with a local Chrome/Edge installation.
 
 ## CI and deploy
 
-- CI runs on pushes and pull requests with a pinned Node major, Corepack, frozen lockfile, and pnpm cache.
-- Pages deployment runs only from `main`, uses GitHub's Pages artifact flow, and grants only `contents: read`, `pages: write`, and `id-token: write` where needed.
-- Deployment validates and builds once, generates fresh Persian and English resume PDFs with the runner Chrome into `dist`, then validates the artifact before upload. It never writes a commit back to `main`.
-- The production origin is `https://miladseyfi.ir`. `SITE_URL` can override it and `BASE_PATH` is only for intentional subpath hosting. No `CNAME` file is required by the current setup.
-- Set `PUBLIC_CONTACT_FORM_ENDPOINT` to a verified Formspree-compatible HTTPS endpoint to enable the native contact form. Without it, the site renders a localized unavailable state and keeps LinkedIn available.
-
-Dependabot maintains npm and GitHub Actions dependencies on a weekly schedule. Review major upgrades and keep lockfile changes committed.
+- CI runs on pushes and pull requests with the pinned Node/pnpm versions and frozen lockfile.
+- GitHub Pages deployment runs from `main` and uses the Pages artifact flow.
+- Configure repository Actions variables before production deployment:
+  - `SITE_URL`: canonical production origin, for example `https://portfolio.example`
+  - `BASE_PATH`: normally empty for a custom domain; use a repository subpath only when intentionally hosting there
+  - `PUBLIC_CONTACT_FORM_ENDPOINT`: optional verified Formspree-compatible HTTPS endpoint
+- If `SITE_URL` is not configured, Astro falls back to `https://example.com`; do not publish with that fallback.
+- Deployment builds/validates, generates fresh `resume-fa.pdf`, `resume-en.pdf`, and `resume.pdf`, then performs a stricter artifact validation before upload.
+- No deployment step commits generated files back to `main`.
 
 ## CMS publishing
 
-`/admin/` is a static Sveltia CMS interface. For the single technical owner, sign in with a GitHub fine-grained PAT restricted to `milad-seify/miladseyfi-portfolio-website` with only **Contents: Read and write**. Give the token a short expiration and paste it only into the CMS sign-in dialog; do not commit it, add it to Actions variables, or expose it through Astro.
+Before using `/admin/`, replace `OWNER/REPOSITORY` in `public/admin/config.yml` with the new repository. Use a short-lived fine-grained GitHub PAT restricted to that repository with the minimum Contents permission required for editing. Never store the token in source, Actions variables, screenshots, or documentation.
 
-CMS saves a normal Git commit to `main`, so the publishing path is CMS commit → CI/build → fresh resume PDFs → Pages artifact. Roll back by reverting that commit. `/admin/` is noindex and excluded from `robots.txt`; this does not secure the route, while GitHub authentication and repository permissions do.
+CMS saves normal Git commits to `main`; rollback is a Git revert.
 
 ## Release checks
 
-Before publishing: replace all placeholders, confirm canonical URL and contact links, provide the résumé and social image, verify Pages settings, run `pnpm validate`, and test keyboard/reduced-motion behavior in the production preview.
+Before first production release:
+
+- replace all sample content and sample project data
+- replace the generic favicon/social preview
+- add only verified contact/social links
+- set `SITE_URL` and review canonical/sitemap/robots output
+- configure the contact form only if an endpoint exists
+- verify the CMS repository target
+- run `pnpm validate`
+- inspect both résumé routes and generated PDFs
+- test keyboard navigation, RTL/LTR, dark mode, reduced motion, and mobile layouts

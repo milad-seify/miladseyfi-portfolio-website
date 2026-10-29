@@ -13,6 +13,7 @@ env:
   SITE_URL: ${{ vars.SITE_URL }}
   BASE_PATH: ${{ vars.BASE_PATH }}
   PUBLIC_CONTACT_FORM_ENDPOINT: ${{ vars.PUBLIC_CONTACT_FORM_ENDPOINT }}
+
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -41,6 +42,8 @@ jobs:
       - name: Generate deployment resume PDFs
         run: node scripts/generate-resume-pdf.mjs
       - name: Validate deployment artifact
+        env:
+          REQUIRE_RESUME_PDFS: '1'
         run: node scripts/check-build.mjs
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4

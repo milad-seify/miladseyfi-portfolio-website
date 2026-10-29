@@ -2,13 +2,13 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 
-const productionSite = 'https://miladseyfi.ir';
+const fallbackSite = 'https://example.com';
 const configuredSite = process.env.SITE_URL?.trim() || undefined;
 const configuredBase = process.env.BASE_PATH?.trim() || undefined;
 
 export default defineConfig({
   output: 'static',
-  site: configuredSite ?? productionSite,
+  site: configuredSite ?? fallbackSite,
   base: configuredBase ?? '/',
   i18n: {
     defaultLocale: 'fa',
