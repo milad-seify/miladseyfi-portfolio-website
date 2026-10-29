@@ -1,7 +1,8 @@
 export const en = {
   meta: {
     title: 'Your Name — Professional Portfolio',
-    description: 'A bilingual professional portfolio for selected work, experience, services, and writing.',
+    description:
+      'A bilingual professional portfolio for selected work, experience, services, and writing.',
   },
   language: { name: 'English', switchLabel: 'Change language' },
   theme: { toDark: 'Switch to dark theme', toLight: 'Switch to light theme' },
@@ -40,12 +41,14 @@ export const en = {
   expertise: {
     eyebrow: 'Expertise',
     heading: 'Capabilities grouped around the work.',
-    description: 'Related skills are grouped by the problems, systems, and responsibilities they support.',
+    description:
+      'Related skills are grouped by the problems, systems, and responsibilities they support.',
   },
   projects: {
     eyebrow: 'Selected work',
     heading: 'Selected projects and case studies.',
-    description: 'Use verified work to show context, decisions, contribution, and outcomes without exposing confidential details.',
+    description:
+      'Use verified work to show context, decisions, contribution, and outcomes without exposing confidential details.',
     read: 'Read case study',
     challenge: 'Challenge',
     role: 'Role',
@@ -53,7 +56,8 @@ export const en = {
     highlight: 'Highlight',
     emptyCode: 'CASE_STUDIES / IN_REVIEW',
     emptyTitle: 'Detailed case studies are being prepared.',
-    emptyDescription: 'Context, dates, decisions, and outcomes should be added only after verification.',
+    emptyDescription:
+      'Context, dates, decisions, and outcomes should be added only after verification.',
   },
   stack: {
     eyebrow: 'Capabilities',
@@ -76,7 +80,14 @@ export const en = {
   contact: {
     topicsLabel: 'Relevant enquiry topics',
     eyebrow: 'Contact',
-    channelLabels: { email: 'Email', linkedin: 'LinkedIn', github: 'GitHub', telegram: 'Telegram', whatsapp: 'WhatsApp', website: 'Website' },
+    channelLabels: {
+      email: 'Email',
+      linkedin: 'LinkedIn',
+      github: 'GitHub',
+      telegram: 'Telegram',
+      whatsapp: 'WhatsApp',
+      website: 'Website',
+    },
     resume: 'View resume',
     pdf: 'Download PDF',
     form: {
@@ -96,9 +107,39 @@ export const en = {
     },
   },
   resume: {
-    title: 'Resume', back: 'Portfolio', download: 'Download PDF', actions: 'Resume actions', skip: 'Skip to resume', profile: 'Profile', highlights: 'Career highlights', experience: 'Experience', selectedResults: 'Selected results', projects: 'Selected projects', expertise: 'Expertise', education: 'Education', certifications: 'Certifications',
+    title: 'Resume',
+    back: 'Portfolio',
+    download: 'Download PDF',
+    actions: 'Resume actions',
+    skip: 'Skip to resume',
+    profile: 'Profile',
+    highlights: 'Career highlights',
+    experience: 'Experience',
+    selectedResults: 'Selected results',
+    projects: 'Selected projects',
+    expertise: 'Expertise',
+    education: 'Education',
+    certifications: 'Certifications',
   },
-  caseStudy: { eyebrow: 'Case study', back: 'Back to overview', context: 'Context', role: 'Role', challenge: 'Challenge', verifiedResult: 'Verified result', highlight: 'Highlight' },
-  footer: { statement: 'A portfolio built around real work and clear evidence.', navigationLabel: 'Footer links', resume: 'Resume' },
-  notFound: { title: 'Page not found — Portfolio', description: 'The requested page could not be found.', heading: 'That route does not exist.', body: 'The site is healthy; this address is not part of it.', action: 'Return home' },
+  caseStudy: {
+    eyebrow: 'Case study',
+    back: 'Back to overview',
+    context: 'Context',
+    role: 'Role',
+    challenge: 'Challenge',
+    verifiedResult: 'Verified result',
+    highlight: 'Highlight',
+  },
+  footer: {
+    statement: 'A portfolio built around real work and clear evidence.',
+    navigationLabel: 'Footer links',
+    resume: 'Resume',
+  },
+  notFound: {
+    title: 'Page not found — Portfolio',
+    description: 'The requested page could not be found.',
+    heading: 'That route does not exist.',
+    body: 'The site is healthy; this address is not part of it.',
+    action: 'Return home',
+  },
 } as const;

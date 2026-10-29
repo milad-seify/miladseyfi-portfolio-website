@@ -8,10 +8,12 @@ const monthPattern = /^\d{4}-(0[1-9]|1[0-2])$/;
 const placeholderPattern = /\b(todo|tbd|placeholder|to be confirmed|pending verification)\b/i;
 
 const requireText = (value, path) => {
-  if (typeof value !== 'string' || value.trim().length === 0) issues.push(`${path} must be a non-empty string.`);
+  if (typeof value !== 'string' || value.trim().length === 0)
+    issues.push(`${path} must be a non-empty string.`);
 };
 const requireList = (value, path) => {
-  if (!Array.isArray(value) || value.length === 0) issues.push(`${path} must contain at least one item.`);
+  if (!Array.isArray(value) || value.length === 0)
+    issues.push(`${path} must contain at least one item.`);
 };
 const requireUniqueIds = (items, path) => {
   const ids = new Set();
@@ -51,8 +53,15 @@ for (const [index, experience] of resume.experience.entries()) {
   requireText(experience.summary, `${path}.summary`);
   requireList(experience.responsibilities, `${path}.responsibilities`);
   if (!monthPattern.test(experience.startDate)) issues.push(`${path}.startDate must use YYYY-MM.`);
-  if (experience.endDate && !monthPattern.test(experience.endDate)) issues.push(`${path}.endDate must use YYYY-MM.`);
-  if (monthPattern.test(experience.startDate) && experience.endDate && monthPattern.test(experience.endDate) && experience.startDate > experience.endDate) issues.push(`${path} has an end date before its start date.`);
+  if (experience.endDate && !monthPattern.test(experience.endDate))
+    issues.push(`${path}.endDate must use YYYY-MM.`);
+  if (
+    monthPattern.test(experience.startDate) &&
+    experience.endDate &&
+    monthPattern.test(experience.endDate) &&
+    experience.startDate > experience.endDate
+  )
+    issues.push(`${path} has an end date before its start date.`);
 }
 for (const [index, education] of resume.education.entries()) {
   requireText(education.institution, `education[${index}].institution`);
@@ -70,7 +79,8 @@ for (const [index, project] of resume.selectedProjects.entries()) {
   requireList(project.technologies, `selectedProjects[${index}].technologies`);
 }
 
-if (resume.contact.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(resume.contact.email)) issues.push('contact.email is not a valid email address.');
+if (resume.contact.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(resume.contact.email))
+  issues.push('contact.email is not a valid email address.');
 checkUrl(resume.contact.website, 'contact.website');
 checkUrl(resume.contact.linkedin, 'contact.linkedin');
 checkUrl(resume.contact.github, 'contact.github');
@@ -82,8 +92,10 @@ const inspectPlaceholders = (value, path = 'resume') => {
     issues.push(`${path} contains a publishable placeholder.`);
     return;
   }
-  if (Array.isArray(value)) return value.forEach((item, index) => inspectPlaceholders(item, `${path}[${index}]`));
-  if (value && typeof value === 'object') Object.entries(value).forEach(([key, item]) => inspectPlaceholders(item, `${path}.${key}`));
+  if (Array.isArray(value))
+    return value.forEach((item, index) => inspectPlaceholders(item, `${path}[${index}]`));
+  if (value && typeof value === 'object')
+    Object.entries(value).forEach(([key, item]) => inspectPlaceholders(item, `${path}.${key}`));
 };
 inspectPlaceholders(resume);
 
@@ -97,8 +109,15 @@ if (!Array.isArray(linkedInPosts)) {
     requireText(post.id, `${path}.id`);
     if (ids.has(post.id)) issues.push(`${path}.id must be unique.`);
     ids.add(post.id);
-    if (typeof post.embedUrl !== 'string' || !/^https:\/\/www\.linkedin\.com\/embed\/feed\/update\/urn:li:(ugcPost|share):\d+$/.test(post.embedUrl)) issues.push(`${path}.embedUrl must be an official LinkedIn embed URL.`);
-    if (!Number.isInteger(post.embedHeight) || post.embedHeight <= 0) issues.push(`${path}.embedHeight must be a positive integer.`);
+    if (
+      typeof post.embedUrl !== 'string' ||
+      !/^https:\/\/www\.linkedin\.com\/embed\/feed\/update\/urn:li:(ugcPost|share):\d+$/.test(
+        post.embedUrl,
+      )
+    )
+      issues.push(`${path}.embedUrl must be an official LinkedIn embed URL.`);
+    if (!Number.isInteger(post.embedHeight) || post.embedHeight <= 0)
+      issues.push(`${path}.embedHeight must be a positive integer.`);
   }
 }
 
