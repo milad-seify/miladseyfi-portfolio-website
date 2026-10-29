@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: milad-seify/miladseyfi-portfolio-website
+  repo: OWNER/REPOSITORY
   branch: main
   auth_methods: [token]
 
@@ -192,29 +192,18 @@ collections:
           - label: Posts (newest first)
             name: posts
             widget: list
+            required: false
             fields:
               - { label: LinkedIn post ID, name: id, widget: string }
               - { label: Official embed URL, name: embedUrl, widget: string }
               - { label: Embed height (pixels), name: embedHeight, widget: number, value_type: int }
               - { label: Preview image, name: image, widget: image, required: false }
-              - {
-                  label: Image alt text,
-                  name: imageAlt,
-                  widget: string,
-                  required: false,
-                  hint: 'Describe meaningful image content; leave empty if decorative.',
-                }
+              - { label: Image alt text, name: imageAlt, widget: string, required: false, hint: 'Describe meaningful image content; leave empty if decorative.' }
               - { label: Editorial title, name: title, widget: string, required: false }
               - { label: Short excerpt, name: excerpt, widget: text, required: false }
               - { label: Publish date, name: date, widget: datetime, type: date, required: false }
               - { label: Topic, name: topic, widget: string, required: false }
-              - {
-                  label: Canonical LinkedIn post URL,
-                  name: postUrl,
-                  widget: string,
-                  required: false,
-                  hint: 'Use only the verified public LinkedIn post URL.',
-                }
+              - { label: Canonical LinkedIn post URL, name: postUrl, widget: string, required: false, hint: 'Use only the verified public LinkedIn post URL.' }
       - name: projects-fa
         label: Persian project presentation
         file: src/content-data/projects-fa.json
@@ -258,14 +247,7 @@ collections:
       - { label: Highlight, name: highlight, widget: text }
       - { label: Technologies, name: technologies, widget: list }
       - { label: Featured, name: featured, widget: boolean, default: false }
-      - {
-          label: Draft,
-          name: draft,
-          widget: boolean,
-          default: true,
-          required: false,
-          hint: 'On = hidden from the public site. Turn off to publish.',
-        }
+      - { label: Draft, name: draft, widget: boolean, default: true, required: false, hint: 'On = hidden from the public site. Turn off to publish.' }
       - { label: Display order, name: order, widget: number, value_type: int, default: 0 }
       - { label: External URL, name: externalUrl, widget: string, required: false }
       - { label: Case study, name: body, widget: markdown }
@@ -286,12 +268,5 @@ collections:
       - { label: Publish date, name: publishedAt, widget: datetime, required: false }
       - { label: Updated date, name: updatedAt, widget: datetime, required: false }
       - { label: Tags, name: tags, widget: list, required: false }
-      - {
-          label: Draft,
-          name: draft,
-          widget: boolean,
-          default: true,
-          required: false,
-          hint: 'On = hidden from the public site. Turn off to publish.',
-        }
+      - { label: Draft, name: draft, widget: boolean, default: true, required: false, hint: 'On = hidden from the public site. Turn off to publish.' }
       - { label: Article, name: body, widget: markdown }
